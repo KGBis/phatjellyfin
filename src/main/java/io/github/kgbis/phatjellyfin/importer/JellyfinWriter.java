@@ -20,23 +20,19 @@
 package io.github.kgbis.phatjellyfin.importer;
 
 import io.github.kgbis.phatjellyfin.client.JellyfinClient;
-import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.UpdateItem;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.event.Level;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static io.github.kgbis.phatjellyfin.output.Console.ANSI_DEL;
 
@@ -48,26 +44,19 @@ public class JellyfinWriter {
 
 	private final Console console;
 
-	private String customSeparators;
-
 	@Inject
-	public JellyfinWriter(JellyfinClient jellyfinClient, Console console) {
+	public JellyfinWriter(JellyfinClient jellyfinClient, Console console, Helper helper) {
 		this.jellyfinClient = jellyfinClient;
 		this.console = console;
 	}
 
-	public Map<OperationResult<Void>, List<UpdateItem>> write(Map<MusicKey, Pair<String, TrackMetadata>> albumsToUpdate,
-			List<TrackMetadata> tracksToUpdate) throws IOException, InterruptedException {
-		// get custom separators for music library
-		customSeparators = jellyfinClient.getCustomTagSeparatorsFromMusicLibrary();
-
+	public Map<OperationResult<Void>, List<UpdateItem>> write(Map<MusicKey, AlbumToUpdate> matchedItemsV2)
+			throws IOException, InterruptedException {
 		// Gather all tracks and albums to update as a single list of ID+DATA
-		List<Pair<String, UpdateItem>> itemsToUpdate = new ArrayList<>();
-		itemsToUpdate.addAll(buildTracksToUpdate(tracksToUpdate));
-		itemsToUpdate.addAll(buildAlbumsToUpdate(albumsToUpdate));
+		List<UpdateItem> itemsToUpdate = buildDataToUpdate(matchedItemsV2);
 
-		if(log.isEnabledForLevel(Level.INFO)) {
-			itemsToUpdate.forEach(pair -> log.info("Item to update: {}", pair.getRight()));
+		if (log.isEnabledForLevel(Level.INFO)) {
+			itemsToUpdate.forEach(item -> log.info("Item to update: {}", item));
 		}
 
 		// Update all
@@ -76,14 +65,9 @@ public class JellyfinWriter {
 
 		int size = itemsToUpdate.size();
 		for (int i = 0; i < itemsToUpdate.size(); i++) {
-			Pair<String, UpdateItem> pair = itemsToUpdate.get(i);
-			OperationResult<Void> operationResult = jellyfinClient.updateItem(pair.getLeft(), pair.getRight());
-			if (result.containsKey(operationResult)) {
-				result.get(operationResult).add(pair.getRight());
-			}
-			else {
-				result.put(operationResult, new ArrayList<>(List.of(pair.getRight())));
-			}
+			UpdateItem updateItem = itemsToUpdate.get(i);
+			OperationResult<Void> operationResult = jellyfinClient.updateItem(updateItem.getJellyfinId(), updateItem);
+			addResultToMap(result, operationResult, updateItem);
 			console.progress(i + 1, size);
 		}
 		console.print("\r" + ANSI_DEL);
@@ -92,48 +76,37 @@ public class JellyfinWriter {
 		return result;
 	}
 
-	private List<Pair<String, UpdateItem>> buildTracksToUpdate(List<TrackMetadata> tracksToUpdate) {
-		return tracksToUpdate.stream().map(tm -> {
-			List<Artist> artistItems = toArtists(tm.metadata().get(JellyfinMetadata.ARTIST));
-			List<Artist> albumArtists = toArtists(tm.metadata().get(JellyfinMetadata.ALBUM_ARTIST));
-
-			UpdateItem body = UpdateItem.builder()
-				.title(tm.metadata().get(JellyfinMetadata.TITLE))
-				.album(tm.metadata().get(JellyfinMetadata.ALBUM))
-				.trackNumber(tm.track())
-				.albumArtists(albumArtists)
-				.artistItems(artistItems)
-				.build();
-
-			return Pair.of(tm.jellyfinId(), body);
-		}).toList();
-	}
-
-	private List<Pair<String, UpdateItem>> buildAlbumsToUpdate(
-			Map<MusicKey, Pair<String, TrackMetadata>> albumsToUpdate) {
-		return albumsToUpdate.values().stream().map(album -> {
-			String albumId = album.getLeft();
-			TrackMetadata sampleTrack = album.getRight();
-
-			List<Artist> artistItems = toArtists(sampleTrack.metadata().get(JellyfinMetadata.ARTIST));
-			List<Artist> albumArtists = toArtists(sampleTrack.metadata().get(JellyfinMetadata.ALBUM_ARTIST));
-
-			UpdateItem payload = UpdateItem.builder()
-				.title(sampleTrack.metadata().get(JellyfinMetadata.ALBUM))
-				.albumArtists(albumArtists)
-				.artistItems(artistItems)
-				.build();
-			return Pair.of(albumId, payload);
-		}).toList();
-	}
-
-	private List<Artist> toArtists(String value) {
-		if (value == null) {
-			return List.of();
+	private void addResultToMap(Map<OperationResult<Void>, List<UpdateItem>> result,
+			OperationResult<Void> operationResult, UpdateItem updateItem) {
+		if (result.containsKey(operationResult)) {
+			result.get(operationResult).add(updateItem);
 		}
+		else {
+			result.put(operationResult, new ArrayList<>(List.of(updateItem)));
+		}
+	}
 
-		// Trim is needed as the last artist seems to end with '\n'
-		return Arrays.stream(StringUtils.split(value, customSeparators)).map(s -> new Artist(StringUtils.trim(s), null)).toList();
+	private List<UpdateItem> buildDataToUpdate(Map<MusicKey, AlbumToUpdate> matchedItemsV2) {
+		return matchedItemsV2.values().stream().flatMap(album -> {
+			UpdateItem albumToUpdate = UpdateItem.builder()
+				.jellyfinId(album.getJellyfinId())
+				.title(album.getTitle())
+				.albumArtists(album.getAlbumArtists())
+				.artistItems(album.getAlbumArtists())
+				.build();
+			return Stream.concat(Stream.of(albumToUpdate),
+					album.getTracks()
+						.stream()
+						.map(track -> UpdateItem.builder()
+							.jellyfinId(track.getJellyfinId())
+							.title(track.getTitle())
+							.album(track.getAlbum())
+							.trackNumber(track.getNumber())
+							.albumArtists(track.getAlbumArtists())
+							.artistItems(track.getTrackArtists())
+							.build()));
+
+		}).toList();
 	}
 
 }

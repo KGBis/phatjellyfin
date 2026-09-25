@@ -19,6 +19,7 @@
  */
 package io.github.kgbis.phatjellyfin.client.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -37,6 +38,9 @@ import java.util.Map;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpdateItem {
+
+	@JsonIgnore
+	private String jellyfinId;
 
 	@JsonProperty("Name")
 	private String title;

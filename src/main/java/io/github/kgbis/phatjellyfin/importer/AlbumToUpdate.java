@@ -19,10 +19,22 @@
  */
 package io.github.kgbis.phatjellyfin.importer;
 
-import org.apache.commons.lang3.tuple.Pair;
+import io.github.kgbis.phatjellyfin.client.model.Artist;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 
-public record MatchedItems(Map<MusicKey, Pair<String, TrackMetadata>> albums, List<TrackMetadata> tracks) {
+@Data
+@Builder
+public class AlbumToUpdate {
+
+	private final String jellyfinId;
+
+	private final String title;
+
+	private final List<Artist> albumArtists;
+
+	private final List<TrackToUpdate> tracks;
+
 }

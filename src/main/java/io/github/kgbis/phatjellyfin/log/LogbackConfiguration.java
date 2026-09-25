@@ -103,6 +103,8 @@ public class LogbackConfiguration {
 		fileAppender.start();
 
 		// jAudioTagger (too much logs when in DEBUG)
+		// Ideally only ERROR messages as it throws a lot of WARN messages if the MP3 has
+		// incorrect data
 		Logger jAudioTagger = context.getLogger("org.jaudiotagger");
 		if (rootLevel.equals(Level.DEBUG) || rootLevel.equals(Level.TRACE)) {
 			jAudioTagger.setLevel(Level.INFO);

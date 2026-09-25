@@ -79,21 +79,14 @@ public class Importer {
 	 */
 	public void run() throws IOException, InterruptedException {
 		if (musicScanner.scan() && shouldApply()) {
-			Map<MusicKey, List<ScannedFile>> preparedLibrary = musicScanner.prepareScannedLibrary();
-			MatchedItems matchedItems = jellyfinMatcher.matchWithLibrary(preparedLibrary);
+			Map<MusicKey, List<ScannedFile>> scannedData = musicScanner.prepareScannedData();
+			Map<MusicKey, AlbumToUpdate> matchingItems = jellyfinMatcher.matchAgainstJellyfin(scannedData);
 
-			if (noMatches(matchedItems)) {
-				console.println("Found no matching items to update in Jellyfin...\nPhatJellyfin will now exit.");
-				return;
-			}
-			Map<OperationResult<Void>, List<UpdateItem>> writeResult = jellyfinWriter.write(matchedItems.albums(),
-					matchedItems.tracks());
+			log.debug("matched items: {}", matchingItems);
+
+			Map<OperationResult<Void>, List<UpdateItem>> writeResult = jellyfinWriter.write(matchingItems);
 			processWriteResult(writeResult);
 		}
-	}
-
-	private boolean noMatches(MatchedItems matchedItems) {
-		return matchedItems.albums().isEmpty() && matchedItems.tracks().isEmpty();
 	}
 
 	/**

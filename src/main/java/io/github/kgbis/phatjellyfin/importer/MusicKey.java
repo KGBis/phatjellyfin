@@ -19,9 +19,21 @@
  */
 package io.github.kgbis.phatjellyfin.importer;
 
-public record MusicKey(String albumArtist, String album) {
+import io.github.kgbis.phatjellyfin.client.model.Artist;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    public String toDisplayString() {
-        return "album '" + album + "' by artist " + albumArtist + "...";
-    }
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+public class MusicKey {
+
+	private final List<Artist> albumArtists;
+
+	private String album;
+
+	public String toDisplayString() {
+		return "album '" + album + "' by artist " + albumArtists + "...";
+	}
 }

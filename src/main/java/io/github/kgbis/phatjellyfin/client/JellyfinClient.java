@@ -106,7 +106,8 @@ public class JellyfinClient {
 		return httpClient.send(request, JsonBodyHandler.ofJson(SystemInfoStorage.class)).body().libraries();
 	}
 
-	public OperationResult<Void> refreshLibrary() throws IOException, InterruptedException {
+	@SuppressWarnings("UnusedReturnValue")
+    public OperationResult<Void> refreshLibrary() throws IOException, InterruptedException {
 		HttpRequest request = request(REFRESH_LIBRARY, Map.of(), Map.of()).POST(HttpRequest.BodyPublishers.noBody())
 			.build();
 		HttpResponse<Void> response = httpClient.send(request, HttpResponse.BodyHandlers.discarding());

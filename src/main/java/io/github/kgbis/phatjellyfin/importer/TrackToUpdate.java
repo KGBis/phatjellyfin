@@ -17,20 +17,28 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package io.github.kgbis.phatjellyfin.client.model;
+package io.github.kgbis.phatjellyfin.importer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.kgbis.phatjellyfin.client.model.Artist;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
-public class Artist {
+public class TrackToUpdate {
 
-	@JsonProperty("Id")
-	String id;
+	private final String jellyfinId;
 
-	@JsonProperty("Name")
-	String name;
+	private final int number;
+
+	private final String title;
+
+	private final String album;
+
+	private final List<Artist> albumArtists;
+
+	private final List<Artist> trackArtists;
 
 }
