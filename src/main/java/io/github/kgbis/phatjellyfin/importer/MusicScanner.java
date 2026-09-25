@@ -66,12 +66,15 @@ public class MusicScanner {
 
 	private final Console console;
 
+	private final Helper helper;
+
 	private OperationResult<ScanResult> scanResult;
 
 	@Inject
-	public MusicScanner(ConfigManager configManager, Console console) {
+	public MusicScanner(ConfigManager configManager, Console console, Helper helper) {
 		this.configManager = configManager;
 		this.console = console;
+		this.helper = helper;
 	}
 
 	public boolean scan() throws IOException, ConfigException {
@@ -94,10 +97,10 @@ public class MusicScanner {
 
 	}
 
-	public Map<MusicKey, List<ScannedFile>> prepareScannedLibrary() throws IOException {
+	public Map<MusicKey, List<ScannedFile>> prepareScannedData() throws IOException {
 		// Group scanned track files by artist + album
-		Map<MusicKey, List<ScannedFile>> preparedScannedData = prepareScannedData(
-				scanResult.getResult().scannedFiles());
+		List<ScannedFile> scannedFiles = scanResult.getResult().scannedFiles();
+		Map<MusicKey, List<ScannedFile>> preparedScannedData = prepareScannedData(scannedFiles);
 
 		// normalize scanned tracks to get rid of the root folder used in the scanning
 		String rootPath = configManager.current().getRootFolder().toString();
@@ -257,10 +260,10 @@ public class MusicScanner {
 	 */
 	private Map<MusicKey, List<ScannedFile>> prepareScannedData(List<ScannedFile> scannedFiles) {
 		return scannedFiles.stream()
-			.flatMap(sf -> Arrays.stream(StringUtils.split(sf.metadata().get(JellyfinMetadata.ALBUM_ARTIST), '\0'))
-				.map(artist -> Map.entry(new MusicKey(artist, sf.metadata().get(JellyfinMetadata.ALBUM)), sf)))
-			.collect(Collectors.groupingBy(Map.Entry::getKey,
-					Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+			.collect(Collectors
+				.groupingBy(sf -> new MusicKey(helper.toArtists(sf.metadata().get(JellyfinMetadata.ALBUM_ARTIST)),
+						sf.metadata().get(JellyfinMetadata.ALBUM))));
+
 	}
 
 	private void showSummary() throws IOException {
