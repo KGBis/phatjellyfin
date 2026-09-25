@@ -1,0 +1,62 @@
+name: Bump Version by Label
+
+on:
+  pull_request:
+    types: [ labeled ]
+    branches: [ develop ]
+  workflow_dispatch:
+
+jobs:
+  bump-version:
+    # It only runs if the label is one of the following
+    if: contains(fromJSON('["major", "minor", "patch"]'), github.event.label.name)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+
+      - name: Calculate and version increment
+        id: bump
+        run: |
+          LABEL="${{ github.event.label.name }}"
+          
+          if [ "$LABEL" == "major" ]; then
+            # from 1.2.3 to 2.0.0
+            mvn build-helper:parse-version versions:set \
+              -DnewVersion=\${parsedVersion.nextMajorVersion}.0.0 \
+              versions:commit
+          elif [ "$LABEL" == "minor" ]; then
+            # From 1.2.3 to 1.3.0
+            mvn build-helper:parse-version versions:set \
+              -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 \
+              versions:commit
+          elif [ "$LABEL" == "patch" ]; then
+            # From 1.2.3 to 1.2.4 (patch). Use -1 to get a .0 patch
+            mvn build-helper:parse-version versions:set \
+              -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} \
+              versions:commit
+          fi
+          
+          # 2. Get new generated version
+          NEW_VER=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "new version is $NEW_VER"
+          echo "VERSION=$NEW_VER" >> $GITHUB_OUTPUT
+
+          # 3. Update version.txt
+          echo $NEW_VER > src/main/resources/version.txt
+
+      - name: Commit and Push
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "chore: bump version to ${{ steps.bump.outputs.VERSION }} [skip ci]"
+          file_pattern: 'pom.xml src/main/resources/version.txt'
