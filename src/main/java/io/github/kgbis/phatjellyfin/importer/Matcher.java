@@ -27,11 +27,15 @@ import java.util.Locale;
 public interface Matcher {
 
 	static String normalize(String value) {
-		return Normalizer.normalize(value, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+		return value == null ? null
+				: Normalizer.normalize(value, Normalizer.Form.NFD)
+					.replaceAll("\\p{M}", "")
+					.replace("¿", "")
+					.replace("¡", "");
 	}
 
 	default String normalizeToLowercase(String value) {
-		return Matcher.normalize(value).toLowerCase(Locale.ROOT);
+		return value == null ? null : Matcher.normalize(value).toLowerCase(Locale.ROOT);
 	}
 
 	boolean fallbackMatch(Item item, ScannedFile scannedFile);

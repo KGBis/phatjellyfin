@@ -21,6 +21,7 @@ package io.github.kgbis.phatjellyfin.importer;
 
 import io.github.kgbis.phatjellyfin.client.JellyfinClient;
 import io.github.kgbis.phatjellyfin.client.model.Artist;
+import io.github.kgbis.phatjellyfin.client.model.Item;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
@@ -30,18 +31,31 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import static io.github.kgbis.phatjellyfin.client.JellyfinClient.ITEMS_ARTIST_ALBUM_QUERYPARAMS;
 
 @Singleton
-public class Helper {
+public class ArtistHelper {
 
 	private final JellyfinClient jellyfinClient;
 
 	private final Map<String, Artist> artists;
 
 	@Inject
-	public Helper(JellyfinClient jellyfinClient) {
+	public ArtistHelper(JellyfinClient jellyfinClient) {
 		this.jellyfinClient = jellyfinClient;
 		this.artists = new HashMap<>();
+	}
+
+	/**
+	 * Adds an {@linkplain Artist} to this class' map
+	 * @param artist the artist to store
+	 */
+	public void addArtist(Artist artist) {
+		if (artist != null) {
+			artists.putIfAbsent(Matcher.normalize(artist.getName()), artist);
+		}
 	}
 
 	public List<Artist> toArtists(String value) {
@@ -60,13 +74,48 @@ public class Helper {
 		// Trim is needed as the last artist seems to end with '\n'
 		return Arrays.stream(StringUtils.split(value, customSeparators))
 			.map(String::trim)
-			.map(s -> Artist.builder().name(s).build())
+			.map(this::getOrCreateArtist)
 			.toList();
 	}
 
-	public void addArtist(Artist artist) {
-        if(artist != null) {
-			artists.put(Matcher.normalize(artist.getName()), artist);
-		}
-    }
+	/**
+	 * Tries to return the Album Artist from the parameter
+	 * @param artist Album Artist
+	 * @return Optional {@linkplain Item}
+	 * @throws IOException from HTTP Client
+	 * @throws InterruptedException from HTTP Client
+	 */
+	public Optional<Item> findArtist(String artist) throws IOException, InterruptedException {
+		Map<String, String> queryParams = new HashMap<>(ITEMS_ARTIST_ALBUM_QUERYPARAMS);
+		queryParams.put("searchTerm", artist);
+
+		return jellyfinClient.getItems(queryParams)
+			.items()
+			.stream()
+			.filter(item -> "MusicArtist".equals(item.type()))
+			.filter(item -> !item.isFolder())
+			.filter(item -> Matcher.normalize(artist).equals(Matcher.normalize(item.name())))
+			.findFirst();
+	}
+
+	private Artist getOrCreateArtist(String name) {
+		String key = Matcher.normalize(name);
+		return artists.computeIfAbsent(key, k -> {
+			Artist.ArtistBuilder builder = Artist.builder().name(name);
+			try {
+				Optional<Item> optionalItem = findArtist(k);
+				if (optionalItem.isPresent()) {
+					Item item = optionalItem.get();
+                    return builder.id(item.id()).build();
+				}
+				else {
+					return builder.build();
+				}
+			}
+			catch (IOException | InterruptedException e) { // NOSONAR
+				return builder.build();
+			}
+		});
+	}
+
 }

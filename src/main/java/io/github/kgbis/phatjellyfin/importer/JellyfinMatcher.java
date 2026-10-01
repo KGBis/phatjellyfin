@@ -56,18 +56,18 @@ public class JellyfinMatcher {
 
 	private final Matcher matcher;
 
-	private final Helper helper;
+	private final ArtistHelper artistHelper;
 
 	private List<String> libraryPaths; // NOSONAR
 
 	@Inject
 	public JellyfinMatcher(ConfigManager configManager, Console console, JellyfinClient jellyfinClient, Matcher matcher,
-			Helper helper) {
+			ArtistHelper artistHelper) {
 		this.configManager = configManager;
 		this.console = console;
 		this.jellyfinClient = jellyfinClient;
 		this.matcher = matcher;
-		this.helper = helper;
+		this.artistHelper = artistHelper;
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class JellyfinMatcher {
 
 		for (Map.Entry<MusicKey, List<ScannedFile>> entry : preparedLibrary.entrySet()) {
 			// Get tracks from Jellyfin
-			AlbumToUpdate albumToUpdate = getMatchingTracksV3(entry.getKey(), entry.getValue());
+			AlbumToUpdate albumToUpdate = getMatchingAlbumAndTracks(entry.getKey(), entry.getValue());
 
 			if (albumToUpdate != null) {
 				albumsToUpdateMap.put(entry.getKey(), albumToUpdate);
@@ -104,7 +104,7 @@ public class JellyfinMatcher {
 	 * @param scannedFiles List if scanned files
 	 * @return The album with all the matching tracks
 	 */
-	AlbumToUpdate getMatchingTracksV3(MusicKey musicKey, List<ScannedFile> scannedFiles) {
+	AlbumToUpdate getMatchingAlbumAndTracks(MusicKey musicKey, List<ScannedFile> scannedFiles) {
 		try {
 			// Find either album or artist
 			console.printSameLine("Getting Jellyfin tracks for %s".formatted(musicKey.toDisplayString()));
@@ -117,7 +117,6 @@ public class JellyfinMatcher {
 			}
 
 			Item jellyfinAlbum = optionalAlbum.get();
-			log.debug("Found Item '{}' ({})", jellyfinAlbum.name(), jellyfinAlbum.id());
 
 			// fill artists with their ids
 			jellyfinAlbum.artistItems()
@@ -128,7 +127,7 @@ public class JellyfinMatcher {
 					.findFirst()
 					.ifPresent(artist -> {
 						artist.setId(artistItem.getId());
-						helper.addArtist(artist);
+						artistHelper.addArtist(artist);
 					}));
 
 			// get tracks with normalized paths (no library prefix)
@@ -136,18 +135,23 @@ public class JellyfinMatcher {
 
 			// once all normalized match paths to know if the track should be updated
 			List<TrackMetadata> matchingTracks = matchTracks(jellyfinTracks, scannedFiles);
-			log.debug("Matching tracks: {}", matchingTracks.stream()
-				.map(tm -> "Track: %s - Name: %s".formatted(tm.track(), tm.metadata().get(JellyfinMetadata.TITLE))));
+
+			log.debug("Matching tracks:");
+			// noinspection LoggingSimilarMessage
+			matchingTracks.forEach(
+					tm -> log.debug("Track: {} - Name: {}", tm.track(), tm.metadata().get(JellyfinMetadata.TITLE)));
 
 			// transform the list of TrackMetadata to the Album-Tracks structure
 			List<TrackToUpdate> tracksToUpdate = matchingTracks.stream()
 				.map(tm -> TrackToUpdate.builder()
 					.jellyfinId(tm.jellyfinId())
+					.disc(tm.disc())
 					.number(tm.track())
 					.title(tm.metadata().get(JellyfinMetadata.TITLE))
 					.album(tm.metadata().get(JellyfinMetadata.ALBUM))
 					.albumArtists(musicKey.getAlbumArtists())
-					.trackArtists(helper.toArtists(tm.metadata().get(JellyfinMetadata.ARTIST)))
+					.trackArtists(artistHelper.toArtists(tm.metadata().get(JellyfinMetadata.ARTIST)))
+					.year(tm.year())
 					.build())
 				.toList();
 
@@ -158,6 +162,7 @@ public class JellyfinMatcher {
 					.title(sampleTrack.getAlbum())
 					.albumArtists(musicKey.getAlbumArtists())
 					.tracks(tracksToUpdate)
+					.productionYear(sampleTrack.getYear())
 					.build();
 			}
 
@@ -177,20 +182,21 @@ public class JellyfinMatcher {
 	 * @throws InterruptedException from HTTP client
 	 */
 	private Optional<Item> findJellyfinAlbum(MusicKey musicKey) throws IOException, InterruptedException {
-		Optional<Item> album = findAlbumV2(musicKey, null);
+		Optional<Item> album = findAlbum(musicKey, null);
 
 		if (album.isPresent()) {
 			log.info("Album found: {}", album.get().name());
+			album.get().artistItems().forEach(artistHelper::addArtist);
 			return album;
 		}
 
 		for (Artist albumArtist : musicKey.getAlbumArtists()) {
-			Optional<Item> optionalArtist = findArtist(albumArtist.getName());
+			Optional<Item> optionalArtist = artistHelper.findArtist(albumArtist.getName());
 			if (optionalArtist.isPresent()) {
 				Item artist = optionalArtist.get();
 				log.info("Artist found: {}", artist.name());
 				String artistId = artist.id();
-				return findAlbumV2(musicKey, artistId);
+				return findAlbum(musicKey, artistId);
 			}
 		}
 
@@ -205,7 +211,7 @@ public class JellyfinMatcher {
 	 * @throws IOException from HTTP Client
 	 * @throws InterruptedException from HTTP Client
 	 */
-	private Optional<Item> findAlbumV2(MusicKey musicKey, String id) throws IOException, InterruptedException {
+	private Optional<Item> findAlbum(MusicKey musicKey, String id) throws IOException, InterruptedException {
 		log.info("Searching album: artist='{}', album='{}', artistId='{}'", musicKey.getAlbumArtists(),
 				musicKey.getAlbum(), id);
 
@@ -214,7 +220,7 @@ public class JellyfinMatcher {
 			queryParams.put("AlbumArtistIds", id);
 		}
 		else {
-			queryParams.put("searchTerm", musicKey.getAlbum());
+			queryParams.put("searchTerm", Matcher.normalize(musicKey.getAlbum()));
 		}
 
 		return jellyfinClient.getItems(queryParams)
@@ -222,7 +228,7 @@ public class JellyfinMatcher {
 			.stream()
 			.filter(item -> "MusicAlbum".equals(item.type()))
 			.filter(item -> sameAlbum(musicKey, item))
-			.filter(item -> musicKey.getAlbumArtists()
+			.filter(item -> isVariousArtist(musicKey) || musicKey.getAlbumArtists()
 				.stream()
 				.anyMatch(albumArtist -> item.artistItems()
 					.stream()
@@ -240,24 +246,10 @@ public class JellyfinMatcher {
 		return Matcher.normalize(musicKey.getAlbum()).equals(Matcher.normalize(item.name()));
 	}
 
-	/**
-	 * Tries to return the Album Artist from the parameter
-	 * @param artist Album Artist
-	 * @return Optional {@linkplain Item}
-	 * @throws IOException from HTTP Client
-	 * @throws InterruptedException from HTTP Client
-	 */
-	private Optional<Item> findArtist(String artist) throws IOException, InterruptedException {
-		Map<String, String> queryParams = new HashMap<>(ITEMS_ARTIST_ALBUM_QUERYPARAMS);
-		queryParams.put("searchTerm", artist);
-
-		return jellyfinClient.getItems(queryParams)
-			.items()
+	private boolean isVariousArtist(MusicKey musicKey) {
+		return musicKey.getAlbumArtists()
 			.stream()
-			.filter(item -> "MusicArtist".equals(item.type()))
-			.filter(item -> !item.isFolder())
-			.filter(item -> Matcher.normalize(artist).equals(Matcher.normalize(item.name())))
-			.findFirst();
+			.anyMatch(artist -> "Various Artists".equalsIgnoreCase(artist.getName()));
 	}
 
 	/**
@@ -273,7 +265,7 @@ public class JellyfinMatcher {
 		return tracks.stream().map(i -> {
 			for (String path : libraryPaths) {
 				if (i.path().startsWith(path)) {
-					return i.withPath(i.path().substring(path.length()));
+					return i.withPath(Matcher.normalize(i.path().substring(path.length())));
 				}
 			}
 			return musicItem;
@@ -291,7 +283,7 @@ public class JellyfinMatcher {
 		Map<String, String> queryParams = new HashMap<>(ITEMS_TRACKS_QUERYPARAMS);
 		queryParams.put("ParentId", id);
 		List<Item> items = jellyfinClient.getItems(queryParams).items();
-		log.debug("Found {} items in '{}' ({}).", items.size(), items, id);
+		log.debug("Found {} items in search for ParentId '{}'.", items.size(), id);
 		return items;
 	}
 
@@ -307,6 +299,7 @@ public class JellyfinMatcher {
 		normalizedTracks.forEach(track -> {
 			for (ScannedFile sf : normalizedScanned) {
 				if (track.path().endsWith(sf.path())) {
+					log.debug("found '{}' endsWith() '{}", track.path(), sf.path());
 					matchingTracks.add(TrackMetadata.from(track, sf));
 					break;
 				}
@@ -329,6 +322,9 @@ public class JellyfinMatcher {
 		List<Item> unmatchedTracks = normalizedTracks.stream()
 			.filter(track -> !matchedIds.contains(track.id()))
 			.toList();
+
+		log.debug("unmatched tracks: {}", unmatchedTracks.size());
+		unmatchedTracks.forEach(track -> log.debug("Track: {} - Name: {}", track.indexNumber(), track.name()));
 
 		unmatchedTracks.forEach(item -> {
 			for (ScannedFile scannedFile : normalizedScanned) {

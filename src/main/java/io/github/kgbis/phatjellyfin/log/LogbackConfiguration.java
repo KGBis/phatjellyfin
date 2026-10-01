@@ -107,7 +107,7 @@ public class LogbackConfiguration {
 		// incorrect data
 		Logger jAudioTagger = context.getLogger("org.jaudiotagger");
 		if (rootLevel.equals(Level.DEBUG) || rootLevel.equals(Level.TRACE)) {
-			jAudioTagger.setLevel(Level.INFO);
+			jAudioTagger.setLevel(Level.ERROR);
 		}
 
 		// Root logger

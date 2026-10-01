@@ -31,6 +31,8 @@ public class TrackToUpdate {
 
 	private final String jellyfinId;
 
+	private final Integer disc;
+
 	private final int number;
 
 	private final String title;
@@ -40,5 +42,7 @@ public class TrackToUpdate {
 	private final List<Artist> albumArtists;
 
 	private final List<Artist> trackArtists;
+
+	private final Integer year;
 
 }

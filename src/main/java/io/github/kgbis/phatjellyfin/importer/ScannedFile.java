@@ -23,9 +23,10 @@ import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 
 import java.util.Map;
 
-public record ScannedFile(String path, Integer track, Map<JellyfinMetadata, String> metadata) {
+public record ScannedFile(String path, Integer track, Integer disc, Integer year,
+		Map<JellyfinMetadata, String> metadata) {
 
 	public ScannedFile withPath(String path) {
-		return new ScannedFile(path, track, metadata);
+		return new ScannedFile(path, track, disc, year, metadata);
 	}
 }

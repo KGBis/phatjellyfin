@@ -48,6 +48,9 @@ public class UpdateItem {
 	@JsonProperty("Album")
 	private String album;
 
+	@JsonProperty("ParentIndexNumber")
+	private Integer disc;
+
 	@JsonProperty("IndexNumber")
 	private Integer trackNumber;
 
@@ -68,5 +71,8 @@ public class UpdateItem {
 
 	@JsonProperty("ArtistItems")
 	private List<Artist> artistItems;
+
+	@JsonProperty("ProductionYear")
+	private Integer productionYear;
 
 }

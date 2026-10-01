@@ -42,6 +42,8 @@ public record Item(
 
 		@JsonProperty("IndexNumber") Integer indexNumber,
 
+		@JsonProperty("ParentIndexNumber") Integer discNumber,
+
 		@JsonProperty("Album") String album,
 
 		@JsonProperty("AlbumArtist") String albumArtist,
@@ -49,6 +51,8 @@ public record Item(
 		@JsonProperty("AlbumArtists") List<Artist> albumArtists,
 
 		@JsonProperty("ArtistItems") List<Artist> artistItems,
+
+		@JsonProperty("ProductionYear") Integer productionYear,
 
 		@JsonProperty("Path") String path) {
 
@@ -60,10 +64,12 @@ public record Item(
 				type,
 				isFolder,
 				indexNumber,
+				discNumber,
 				album,
 				albumArtist,
 				albumArtists,
 				artistItems,
+				productionYear,
 				path
 		);
 	}

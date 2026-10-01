@@ -43,6 +43,8 @@ import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Year;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -51,6 +53,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,15 +69,17 @@ public class MusicScanner {
 
 	private final Console console;
 
-	private final Helper helper;
+	private final ArtistHelper artistHelper;
+
+	private final Pattern pattern = Pattern.compile("^(\\d{4})");
 
 	private OperationResult<ScanResult> scanResult;
 
 	@Inject
-	public MusicScanner(ConfigManager configManager, Console console, Helper helper) {
+	public MusicScanner(ConfigManager configManager, Console console, ArtistHelper artistHelper) {
 		this.configManager = configManager;
 		this.console = console;
-		this.helper = helper;
+		this.artistHelper = artistHelper;
 	}
 
 	public boolean scan() throws IOException, ConfigException {
@@ -109,10 +114,16 @@ public class MusicScanner {
 			.collect(Collectors.toMap(Map.Entry::getKey, entry -> getNormalizedScanned(rootPath, entry.getValue())));
 	}
 
+	/**
+	 * Change back slashes to forward slashes and normalize the filename
+	 * @param rootPath Path where scan started
+	 * @param scannedFiles list of scanned files
+	 * @return the normalized scanned file
+	 */
 	private @NonNull List<ScannedFile> getNormalizedScanned(String rootPath, List<ScannedFile> scannedFiles) {
 		return scannedFiles.stream()
 			.map(scannedFile -> scannedFile
-				.withPath(scannedFile.path().substring(rootPath.length()).replace('\\', '/')))
+				.withPath(Matcher.normalize(scannedFile.path().substring(rootPath.length()).replace('\\', '/'))))
 			.toList();
 	}
 
@@ -200,15 +211,18 @@ public class MusicScanner {
 			AudioFile file = AudioFileIO.read(path.toFile());
 
 			Integer trackNumber = null;
+			Integer discNumber = null;
+			Integer productionYear = null;
 
 			// It's a MP3
 			if (file.getExt().equals(SupportedFileFormat.MP3.getFilesuffix())) {
-				log.info("Found MP3 file '{}'", path);
 				MP3File f = (MP3File) file;
 				Tag tag = f.getTag();
 
-				// Track number
+				// Track number & disc number
 				trackNumber = tag.getAll(FieldKey.TRACK).stream().findFirst().map(Integer::parseInt).orElse(null);
+				discNumber = tag.getAll(FieldKey.DISC_NO).stream().findFirst().map(Integer::parseInt).orElse(null);
+				productionYear = tag.getAll(FieldKey.YEAR).stream().findFirst().map(this::parseYear).orElse(null);
 
 				// If genre will be used -> tag.getAll(FieldKey.GENRE)
 
@@ -219,10 +233,11 @@ public class MusicScanner {
 			} // end of file tag extraction
 
 			if (scannedMetadata.isEmpty()) {
-				skippableFiles.add(new ScannedFile(path.toString(), null, Map.of()));
+				skippableFiles.add(new ScannedFile(path.toString(), null, null, null, Map.of()));
 			}
 			else {
-				processableFiles.add(new ScannedFile(path.toString(), trackNumber, scannedMetadata));
+				processableFiles
+					.add(new ScannedFile(path.toString(), trackNumber, discNumber, productionYear, scannedMetadata));
 			}
 		}
 		catch (CannotReadException _) {
@@ -234,10 +249,26 @@ public class MusicScanner {
 		}
 	}
 
+	private Integer parseYear(String value) {
+		if (StringUtils.isEmpty(value)) {
+			return null;
+		}
+
+		java.util.regex.Matcher matcher = pattern.matcher(value);
+
+		if (!matcher.find()) {
+			return null;
+		}
+
+		int year = Integer.parseInt(matcher.group(1));
+		int currentYear = Year.now(ZoneId.systemDefault()).getValue();
+
+		return (year > 1231 && year <= currentYear) ? year : null;
+	}
+
 	private void extractMetadata(Tag tag, Map<JellyfinMetadata, String> wantedMetadata,
 			Map<JellyfinMetadata, String> scannedMetadata) {
 		for (TagField field : tag.getFields("TXXX")) {
-			log.debug("Found TXXX field {}", field);
 			if (!field.isBinary() && field instanceof AbstractID3v2Frame id3v2Frame) {
 				String description = id3v2Frame.getBody().getObjectValue("Description").toString();
 				String value = id3v2Frame.getBody().getUserFriendlyValue();
@@ -261,7 +292,7 @@ public class MusicScanner {
 	private Map<MusicKey, List<ScannedFile>> prepareScannedData(List<ScannedFile> scannedFiles) {
 		return scannedFiles.stream()
 			.collect(Collectors
-				.groupingBy(sf -> new MusicKey(helper.toArtists(sf.metadata().get(JellyfinMetadata.ALBUM_ARTIST)),
+				.groupingBy(sf -> new MusicKey(artistHelper.toArtists(sf.metadata().get(JellyfinMetadata.ALBUM_ARTIST)),
 						sf.metadata().get(JellyfinMetadata.ALBUM))));
 
 	}

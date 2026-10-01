@@ -22,6 +22,7 @@ package io.github.kgbis.phatjellyfin.importer;
 import io.github.kgbis.phatjellyfin.client.model.Artist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class MusicKey {
 	private String album;
 
 	public String toDisplayString() {
-		return "album '" + album + "' by artist " + albumArtists + "...";
+		String[] array = albumArtists.stream().map(Artist::getName).toArray(String[]::new);
+		String artists = StringUtils.join(array, ",");
+		return "album '" + album + "' by artist " + artists + "...";
 	}
+
 }

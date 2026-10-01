@@ -37,4 +37,6 @@ public class AlbumToUpdate {
 
 	private final List<TrackToUpdate> tracks;
 
+	private final Integer productionYear;
+
 }
