@@ -60,12 +60,14 @@ public class JellyfinWriterTest {
 		// @formatter:off
 		private List<TrackMetadata> getTracksToUpdate() {
 			return List.of(
-					new TrackMetadata("track01Id", "/artist/album/01 - track one.mp3", 1,
+					new TrackMetadata("track01Id", "/artist/album/01 - track one.mp3",
+							1, null, 2026,
 							Map.of(JellyfinMetadata.TITLE, "Title track 1",
 									JellyfinMetadata.ALBUM, "Album #1",
 									JellyfinMetadata.ALBUM_ARTIST, "Album Artist")
 					),
-					new TrackMetadata("track02Id", "/artist/album/02 - track two.mp3", 1,
+					new TrackMetadata("track02Id", "/artist/album/02 - track two.mp3",
+							1, null, 2026,
 							Map.of(JellyfinMetadata.TITLE, "Title track 2",
 									JellyfinMetadata.ALBUM, "Album #1",
 									JellyfinMetadata.ALBUM_ARTIST, "Album Artist")
@@ -76,7 +78,7 @@ public class JellyfinWriterTest {
 
 		private Map<MusicKey, Pair<String, TrackMetadata>> getAlbumsToUpdate() {
 			String albumId = "12345";
-			TrackMetadata albumMetadata = new TrackMetadata("12345", null, null,
+			TrackMetadata albumMetadata = new TrackMetadata("12345", null, null, null, 2026,
 					Map.of(JellyfinMetadata.ALBUM, "Album #1", JellyfinMetadata.ALBUM_ARTIST, "Album Artist"));
 			MusicKey musicKey = new MusicKey(List.of(Artist.builder().name("Album Artist").build()), "Album #1");
 

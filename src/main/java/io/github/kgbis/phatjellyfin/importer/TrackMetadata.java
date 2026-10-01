@@ -24,13 +24,11 @@ import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 
 import java.util.Map;
 
-public record TrackMetadata(
-        String jellyfinId,
-        String path,
-        Integer track,
-        Map<JellyfinMetadata, String> metadata) {
+public record TrackMetadata(String jellyfinId, String path, Integer track, Integer disc, Integer year,
+		Map<JellyfinMetadata, String> metadata) {
 
-    public static TrackMetadata from(Item item, ScannedFile scannedFile) {
-        return new TrackMetadata(item.id(), item.path(), scannedFile.track(), scannedFile.metadata());
-    }
+	public static TrackMetadata from(Item item, ScannedFile scannedFile) {
+		return new TrackMetadata(item.id(), item.path(), scannedFile.track(), scannedFile.disc(), scannedFile.year(),
+				scannedFile.metadata());
+	}
 }

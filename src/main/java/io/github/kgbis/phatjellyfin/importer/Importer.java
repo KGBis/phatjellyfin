@@ -19,7 +19,6 @@
  */
 package io.github.kgbis.phatjellyfin.importer;
 
-import io.github.kgbis.phatjellyfin.client.JellyfinClient;
 import io.github.kgbis.phatjellyfin.client.model.UpdateItem;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
 import io.github.kgbis.phatjellyfin.output.Console;
@@ -59,19 +58,15 @@ public class Importer {
 
 	private final JellyfinWriter jellyfinWriter;
 
-	private final JellyfinClient jellyfinClient;
-
 	@Inject
 	public Importer(ConfigManager configManager, MessageManager messageManager, Console console,
-			MusicScanner musicScanner, JellyfinMatcher jellyfinMatcher, JellyfinWriter jellyfinWriter,
-			JellyfinClient jellyfinClient) {
+			MusicScanner musicScanner, JellyfinMatcher jellyfinMatcher, JellyfinWriter jellyfinWriter) {
 		this.configManager = configManager;
 		this.messageManager = messageManager;
 		this.console = console;
 		this.musicScanner = musicScanner;
 		this.jellyfinMatcher = jellyfinMatcher;
 		this.jellyfinWriter = jellyfinWriter;
-		this.jellyfinClient = jellyfinClient;
 	}
 
 	/**
@@ -81,8 +76,6 @@ public class Importer {
 		if (musicScanner.scan() && shouldApply()) {
 			Map<MusicKey, List<ScannedFile>> scannedData = musicScanner.prepareScannedData();
 			Map<MusicKey, AlbumToUpdate> matchingItems = jellyfinMatcher.matchAgainstJellyfin(scannedData);
-
-			log.debug("matched items: {}", matchingItems);
 
 			Map<OperationResult<Void>, List<UpdateItem>> writeResult = jellyfinWriter.write(matchingItems);
 			processWriteResult(writeResult);
@@ -118,8 +111,7 @@ public class Importer {
 		return console.confirm("Apply changes to Jellyfin?");
 	}
 
-	private void processWriteResult(Map<OperationResult<Void>, List<UpdateItem>> writeResult)
-			throws IOException, InterruptedException {
+	private void processWriteResult(Map<OperationResult<Void>, List<UpdateItem>> writeResult) {
 		int success = 0;
 		int failures = 0;
 		List<String> failureItems = new ArrayList<>();
@@ -144,21 +136,6 @@ public class Importer {
 
 		log.info("Update result: {}", updateResult);
 		console.println(updateResult);
-
-		refreshLibrary(success);
-	}
-
-	/**
-	 * Refresh library if at least one item was updated
-	 * @param success Number of updated items
-	 * @throws IOException HTTP Client Exception
-	 * @throws InterruptedException HTTP Client Exception
-	 */
-	private void refreshLibrary(int success) throws IOException, InterruptedException {
-		if (success > 0) {
-			console.println("Jellyfin music library will be refreshed...");
-			jellyfinClient.refreshLibrary();
-		}
 	}
 
 	private @NonNull String getFailureString(UpdateItem item) {

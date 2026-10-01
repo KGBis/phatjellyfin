@@ -72,11 +72,7 @@ public class JellyfinClient {
 
 	private static final String ITEMS_UPDATE = ITEMS + "/:itemId";
 
-	private static final String LIBRARY = "Library";
-
-	private static final String VIRTUAL_FOLDERS = LIBRARY + "/VirtualFolders";
-
-	private static final String REFRESH_LIBRARY = LIBRARY + "/Refresh";
+	private static final String VIRTUAL_FOLDERS = "Library/VirtualFolders";
 
 	private final HttpClient httpClient;
 
@@ -106,14 +102,6 @@ public class JellyfinClient {
 		return httpClient.send(request, JsonBodyHandler.ofJson(SystemInfoStorage.class)).body().libraries();
 	}
 
-	@SuppressWarnings("UnusedReturnValue")
-    public OperationResult<Void> refreshLibrary() throws IOException, InterruptedException {
-		HttpRequest request = request(REFRESH_LIBRARY, Map.of(), Map.of()).POST(HttpRequest.BodyPublishers.noBody())
-			.build();
-		HttpResponse<Void> response = httpClient.send(request, HttpResponse.BodyHandlers.discarding());
-		return getResultFromResponse(response);
-	}
-
 	public String getCustomTagSeparatorsFromMusicLibrary() throws IOException, InterruptedException {
 		if (customSeparators != null) {
 			return customSeparators;
@@ -136,11 +124,15 @@ public class JellyfinClient {
 
 	public Items getItems(Map<String, String> queryParams) throws IOException, InterruptedException {
 		HttpRequest request = request(ITEMS, queryParams, Map.of()).GET().build();
-		return httpClient.send(request, JsonBodyHandler.ofJson(Items.class)).body();
+		Items items = httpClient.send(request, JsonBodyHandler.ofJson(Items.class)).body();
+		log.debug("Search with '{}' returned: {} items", queryParams, items.totalRecordCount());
+		return items;
 	}
 
 	public OperationResult<Void> updateItem(String id, UpdateItem payload) throws IOException, InterruptedException {
 		String body = objectMapper.writeValueAsString(payload);
+
+		log.debug("\n{}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payload));
 
 		HttpRequest request = request(ITEMS_UPDATE, Map.of(), Map.of(":itemId", id))
 			.header("Content-Type", "application/json")
@@ -148,7 +140,10 @@ public class JellyfinClient {
 			.build();
 
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		log.info("Update returned status code {}, message {}", response.statusCode(), response.body());
+
+		if (response.statusCode() >= 300) {
+			log.info("Update returned status code {}, message {}", response.statusCode(), response.body());
+		}
 
 		return getResultFromResponse(response);
 	}
@@ -168,8 +163,6 @@ public class JellyfinClient {
 		queryParams.forEach(uriQueryBuilder::queryParam);
 
 		URI uri = uriQueryBuilder.build();
-		log.info("URI: {}", uri);
-
 		HttpRequest.Builder builder = HttpRequest.newBuilder().uri(uri);
 
 		headers.forEach(builder::header);

@@ -45,18 +45,24 @@ public class JellyfinWriter {
 	private final Console console;
 
 	@Inject
-	public JellyfinWriter(JellyfinClient jellyfinClient, Console console, Helper helper) {
+	public JellyfinWriter(JellyfinClient jellyfinClient, Console console) {
 		this.jellyfinClient = jellyfinClient;
 		this.console = console;
 	}
 
-	public Map<OperationResult<Void>, List<UpdateItem>> write(Map<MusicKey, AlbumToUpdate> matchedItemsV2)
+	public Map<OperationResult<Void>, List<UpdateItem>> write(Map<MusicKey, AlbumToUpdate> toUpdateMap)
 			throws IOException, InterruptedException {
 		// Gather all tracks and albums to update as a single list of ID+DATA
-		List<UpdateItem> itemsToUpdate = buildDataToUpdate(matchedItemsV2);
+		List<UpdateItem> itemsToUpdate = buildDataToUpdate(toUpdateMap);
 
 		if (log.isEnabledForLevel(Level.INFO)) {
-			itemsToUpdate.forEach(item -> log.info("Item to update: {}", item));
+			itemsToUpdate.forEach(item -> {
+				if (item.getTrackNumber() != null)
+					log.info("To update album: {}, disc {}, track {} - {}", item.getAlbum(),
+							item.getDisc() == null ? "-" : item.getDisc(), item.getTrackNumber(), item.getTitle());
+				else
+					log.info("To update album: {}", item.getTitle());
+			});
 		}
 
 		// Update all
@@ -72,7 +78,6 @@ public class JellyfinWriter {
 		}
 		console.print("\r" + ANSI_DEL);
 
-		log.debug("Result: {}", result);
 		return result;
 	}
 
@@ -93,6 +98,7 @@ public class JellyfinWriter {
 				.title(album.getTitle())
 				.albumArtists(album.getAlbumArtists())
 				.artistItems(album.getAlbumArtists())
+				.productionYear(album.getProductionYear())
 				.build();
 			return Stream.concat(Stream.of(albumToUpdate),
 					album.getTracks()
@@ -101,9 +107,11 @@ public class JellyfinWriter {
 							.jellyfinId(track.getJellyfinId())
 							.title(track.getTitle())
 							.album(track.getAlbum())
+							.disc(track.getDisc())
 							.trackNumber(track.getNumber())
 							.albumArtists(track.getAlbumArtists())
 							.artistItems(track.getTrackArtists())
+							.productionYear(track.getYear())
 							.build()));
 
 		}).toList();
