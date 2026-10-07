@@ -7,7 +7,7 @@
 
     <groupId>io.github.kgbis</groupId>
     <artifactId>phatjellyfin</artifactId>
-    <version>0.11.0</version>
+    <version>0.11.1</version>
 
     <name>io.github.kgbis.phatjellyfin.PhatJellyfin</name>
     <description>Jellyfin CLI music tag importer</description>
@@ -45,7 +45,7 @@
         <systemTray.version>4.4</systemTray.version>
         <guice.version>7.0.0</guice.version>
         <guava.version>33.5.0-jre</guava.version>
-        <jackson-databind.version>2.22.2</jackson-databind.version>
+        <jackson-databind.version>2.22.3</jackson-databind.version>
         <junit-jupiter.version>6.0.3</junit-jupiter.version>
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <jaudiotagger.version>2.0.33</jaudiotagger.version>
