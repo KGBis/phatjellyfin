@@ -19,6 +19,7 @@
  */
 package io.github.kgbis.phatjellyfin.arguments;
 
+import ch.qos.logback.classic.Level;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.converters.PathConverter;
 import lombok.Getter;
@@ -28,18 +29,26 @@ import java.nio.file.Path;
 @Getter
 public class CliArguments {
 
-    @Parameter(names = {"-h", "--help", "-u", "--usage"}, help = true, description = "Show this usage help")
-    private boolean help;
+	private static final String LEVELS = "Logging levels. OFF, TRACE, DEBUG, INFO, WARN, ERROR";
 
-    @Parameter(names = {"-a", "--apply"}, description = "Apply changes to Jellyfin")
-    private boolean apply = false;
+	@Parameter(names = { "-h", "--help", "-u", "--usage" }, help = true, description = "Show this usage help")
+	private boolean help;
 
-    @Parameter(names = {"-r", "--recursive"}, description = "Scan folder recursively")
-    private boolean recursive = false;
+	@Parameter(names = { "-a", "--apply" }, description = "Apply changes to Jellyfin")
+	private boolean apply = false;
 
-    @Parameter(names = { "-c", "--console" }, description = "Log to console too. Log to file will still be used.")
-    private boolean logToConsole = false;
+	@Parameter(names = { "-r", "--recursive" }, description = "Scan folder recursively")
+	private boolean recursive = false;
 
-    @Parameter(required = true, arity = 1, description = "<folder>", converter = PathConverter.class, validateWith = PathValidator.class)
-    private Path folder;
+	@Parameter(names = { "-c", "--console" }, description = "Log to console too. Log to file will still be used.")
+	private boolean logToConsole = false;
+
+	@Parameter(names = { "-l", "--logLevel" }, arity = 1, description = LEVELS, converter = LogLevelConverter.class,
+			validateWith = LogLevelValidator.class)
+	private Level logLevel = Level.INFO;
+
+	@Parameter(required = true, arity = 1, description = "<folder>", converter = PathConverter.class,
+			validateWith = PathValidator.class)
+	private Path folder;
+
 }
