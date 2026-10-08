@@ -19,7 +19,6 @@
  */
 package io.github.kgbis.phatjellyfin;
 
-import ch.qos.logback.classic.Level;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.github.kgbis.phatjellyfin.arguments.CliArguments;
@@ -27,13 +26,13 @@ import io.github.kgbis.phatjellyfin.arguments.CliParser;
 import io.github.kgbis.phatjellyfin.client.JellyfinClient;
 import io.github.kgbis.phatjellyfin.client.model.Library;
 import io.github.kgbis.phatjellyfin.client.model.SystemInfo;
+import io.github.kgbis.phatjellyfin.config.ConfigException;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
 import io.github.kgbis.phatjellyfin.config.ConfigStorage;
 import io.github.kgbis.phatjellyfin.importer.Importer;
+import io.github.kgbis.phatjellyfin.importer.OperationResult;
 import io.github.kgbis.phatjellyfin.ioc.PhatJellyfinModule;
 import io.github.kgbis.phatjellyfin.log.LogbackConfiguration;
-import io.github.kgbis.phatjellyfin.config.ConfigException;
-import io.github.kgbis.phatjellyfin.importer.OperationResult;
 import io.github.kgbis.phatjellyfin.output.Console;
 import io.github.kgbis.phatjellyfin.output.MessageManager;
 import jakarta.inject.Inject;
@@ -87,7 +86,7 @@ public class PhatJellyfin {
 		});
 
 		// Configure log output to file and console (optional)
-		LogbackConfiguration.configure(Level.DEBUG, cliArguments.isLogToConsole());
+		LogbackConfiguration.configure(cliArguments.getLogLevel(), cliArguments.isLogToConsole());
 
 		// Store parsed arguments
 		configManager.storeArguments(cliArguments);
