@@ -42,6 +42,8 @@ public class ArtistHelper {
 
 	private final Map<String, Artist> artists;
 
+	private String customSeparators;
+
 	@Inject
 	public ArtistHelper(JellyfinClient jellyfinClient) {
 		this.jellyfinClient = jellyfinClient;
@@ -63,16 +65,10 @@ public class ArtistHelper {
 			return List.of();
 		}
 
-		String customSeparators;
-		try {
-			customSeparators = jellyfinClient.getCustomTagSeparatorsFromMusicLibrary();
-		}
-		catch (IOException | InterruptedException e) { // NOSONAR
-			customSeparators = "\0";
-		}
+
 
 		// Trim is needed as the last artist seems to end with '\n'
-		return Arrays.stream(StringUtils.split(value, customSeparators))
+		return Arrays.stream(StringUtils.split(value, getSeparators()))
 			.map(String::trim)
 			.map(this::getOrCreateArtist)
 			.toList();
@@ -93,9 +89,21 @@ public class ArtistHelper {
 			.items()
 			.stream()
 			.filter(item -> "MusicArtist".equals(item.type()))
-			.filter(item -> !item.isFolder())
 			.filter(item -> Matcher.normalize(artist).equals(Matcher.normalize(item.name())))
 			.findFirst();
+	}
+
+	private String getSeparators() {
+		if (customSeparators == null) {
+			try {
+				customSeparators = jellyfinClient.getCustomTagSeparatorsFromMusicLibrary();
+			}
+			catch (IOException | InterruptedException e) { // NOSONAR
+				customSeparators = "\0";
+			}
+		}
+
+		return customSeparators;
 	}
 
 	private Artist getOrCreateArtist(String name) {

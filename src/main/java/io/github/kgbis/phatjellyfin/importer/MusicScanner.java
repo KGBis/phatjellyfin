@@ -25,6 +25,7 @@ import io.github.kgbis.phatjellyfin.config.ConfigManager;
 import io.github.kgbis.phatjellyfin.config.ConfigStorage;
 import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
+import io.github.kgbis.phatjellyfin.output.MessageManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -47,11 +48,13 @@ import java.time.Year;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -59,7 +62,6 @@ import java.util.stream.Stream;
 
 import static io.github.kgbis.phatjellyfin.output.Console.ANSI_DEL;
 import static io.github.kgbis.phatjellyfin.output.MessageManager.SCAN_ERROR_SUMMARY;
-import static io.github.kgbis.phatjellyfin.output.MessageManager.SCAN_SUCCESS_SUMMARY;
 
 @Singleton
 @Slf4j
@@ -69,6 +71,8 @@ public class MusicScanner {
 
 	private final Console console;
 
+	private final MessageManager messageManager;
+
 	private final ArtistHelper artistHelper;
 
 	private final Pattern pattern = Pattern.compile("^(\\d{4})");
@@ -76,19 +80,18 @@ public class MusicScanner {
 	private OperationResult<ScanResult> scanResult;
 
 	@Inject
-	public MusicScanner(ConfigManager configManager, Console console, ArtistHelper artistHelper) {
+	public MusicScanner(ConfigManager configManager, Console console, MessageManager messageManager,
+			ArtistHelper artistHelper) {
 		this.configManager = configManager;
 		this.console = console;
+		this.messageManager = messageManager;
 		this.artistHelper = artistHelper;
 	}
 
 	public boolean scan() throws IOException, ConfigException {
 		log.debug("Using config directory: {}", ConfigStorage.getConfigFile());
 		Config config = configManager.current();
-
 		log.info("Starting music scanner with config: {}", config);
-		String recursive = config.isRecursive() ? " recursively" : "";
-		console.println("Starting scan music files in '%s'%s...".formatted(config.getRootFolder(), recursive));
 
 		// get the scanning result
 		scanResult = scanFiles(config);
@@ -108,27 +111,30 @@ public class MusicScanner {
 		Map<MusicKey, List<ScannedFile>> preparedScannedData = prepareScannedData(scannedFiles);
 
 		// normalize scanned tracks to get rid of the root folder used in the scanning
-		String rootPath = configManager.current().getRootFolder().toString();
+		List<Path> rootFolders = configManager.current().getRootFolders();
 		return preparedScannedData.entrySet()
 			.stream()
-			.collect(Collectors.toMap(Map.Entry::getKey, entry -> getNormalizedScanned(rootPath, entry.getValue())));
+			.collect(Collectors.toMap(Map.Entry::getKey, entry -> getNormalizedScanned(rootFolders, entry.getValue()),
+					(a, _) -> a, TreeMap::new));
 	}
 
 	/**
 	 * Change back slashes to forward slashes and normalize the filename
-	 * @param rootPath Path where scan started
+	 * @param rootFolders Paths where scan started
 	 * @param scannedFiles list of scanned files
 	 * @return the normalized scanned file
 	 */
-	private @NonNull List<ScannedFile> getNormalizedScanned(String rootPath, List<ScannedFile> scannedFiles) {
-		return scannedFiles.stream()
-			.map(scannedFile -> scannedFile
-				.withPath(Matcher.normalize(scannedFile.path().substring(rootPath.length()).replace('\\', '/'))))
-			.toList();
+	private List<ScannedFile> getNormalizedScanned(List<Path> rootFolders, List<ScannedFile> scannedFiles) {
+		return scannedFiles.stream().map(scannedFile -> {
+			Path path = Path.of(scannedFile.path());
+			Path rootFolder = rootFolders.stream().filter(path::startsWith).findFirst().orElseThrow();
+
+			return scannedFile.withPath(Matcher.normalize(rootFolder.relativize(path).toString().replace('\\', '/')));
+		}).sorted(Comparator.comparing(ScannedFile::path)).toList();
 	}
 
 	private OperationResult<ScanResult> scanFiles(Config config) {
-		Path rootFolder = config.getRootFolder();
+		String recursive = config.isRecursive() ? " recursively" : "";
 
 		// status and message (success unless exception is thrown)
 		boolean success = true;
@@ -141,27 +147,31 @@ public class MusicScanner {
 		List<ScannedFile> skippableFiles = new ArrayList<>();
 		List<ScannedError> errorFiles = new ArrayList<>();
 
-		// to finetune the scanning message
-		AtomicReference<String> oldStrPath = new AtomicReference<>("");
+		console.print(messageManager.buildStartScanMessage(config.getRootFolders(), recursive));
 
-		try (Stream<Path> pathStream = config.isRecursive() ? Files.walk(rootFolder) : Files.list(rootFolder)) {
-			pathStream.filter(Files::isRegularFile)
-				.filter(path -> isSupportedExtension(path, supportedExtensions))
-				.forEach(path -> {
-					String strPath = path.getParent() != null ? path.getParent().toString() : path.toString();
-					if (!strPath.equalsIgnoreCase(oldStrPath.get())) {
-						console.print("\r%sScanning music folder '%s'".formatted(ANSI_DEL, strPath));
-						oldStrPath.set(strPath);
-					}
+		for (Path rootFolder : config.getRootFolders()) {
+			// to finetune the scanning message
+			AtomicReference<String> oldStrPath = new AtomicReference<>("");
 
-					processFile(config, path, processableFiles, skippableFiles, errorFiles);
-				});
+			try (Stream<Path> pathStream = config.isRecursive() ? Files.walk(rootFolder) : Files.list(rootFolder)) {
+				pathStream.filter(Files::isRegularFile)
+					.filter(path -> isSupportedExtension(path, supportedExtensions))
+					.forEach(path -> {
+						String strPath = path.getParent() != null ? path.getParent().toString() : path.toString();
+						if (!strPath.equalsIgnoreCase(oldStrPath.get())) {
+							console.print("\r%sScanning music folder '%s'".formatted(ANSI_DEL, strPath));
+							oldStrPath.set(strPath);
+						}
 
-			console.print("\r" + ANSI_DEL);
-		}
-		catch (IOException e) {
-			success = false;
-			errorCause = e.getMessage();
+						processFile(config, path, processableFiles, skippableFiles, errorFiles);
+					});
+
+				console.print("\r" + ANSI_DEL);
+			}
+			catch (IOException e) {
+				success = false;
+				errorCause = e.getMessage();
+			}
 		}
 
 		return new OperationResult<>(success, new ScanResult(processableFiles, skippableFiles, errorFiles), errorCause);
@@ -229,7 +239,9 @@ public class MusicScanner {
 				// The map with the custom tags should be filled if the TXXX frame exists
 				extractMetadata(tag, wantedMetadata, scannedMetadata);
 
-				log.info("Scanned {} metadata fields, content: {}", scannedMetadata.size(), scannedMetadata);
+				if (!scannedMetadata.isEmpty()) {
+					log.debug("Scanned {} metadata fields, content: {}", scannedMetadata.size(), scannedMetadata);
+				}
 			} // end of file tag extraction
 
 			if (scannedMetadata.isEmpty()) {
@@ -305,15 +317,15 @@ public class MusicScanner {
 			log.info("Files to update: {}, Skipped: {}, Failed to read: {}", result.scannedFiles().size(),
 					result.skippedFiles().size(), result.errorFiles().size());
 
-			console.println(SCAN_SUCCESS_SUMMARY.formatted(result.scannedFiles().size(), result.skippedFiles().size(),
-					result.errorFiles().size()));
+			String s = messageManager.buildScanSuccessMessage(result.scannedFiles().size(), result.skippedFiles().size(),	result.errorFiles().size());
+			console.println(s);
 
 			if (result.scannedFiles().isEmpty()) {
 				console.println("No files to update, PhatJellyfin will now exit.");
 			}
 		}
 		else {
-			console.println(SCAN_ERROR_SUMMARY.formatted(config.getRootFolder(), scanResult.getErrorCause()));
+			console.println(SCAN_ERROR_SUMMARY.formatted(config.getRootFolders(), scanResult.getErrorCause()));
 		}
 	}
 

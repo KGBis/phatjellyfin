@@ -20,6 +20,7 @@
 package io.github.kgbis.phatjellyfin.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ import java.util.List;
  * @param startIndex From where (pagination stuff)
  */
 // @formatter:off
+@Builder
 public record Items(
 		@JsonProperty("Items")
 		List<Item> items,

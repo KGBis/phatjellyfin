@@ -1,0 +1,51 @@
+{
+  "Items": [
+    {
+      "Name": "Más Madera",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "ChannelId": null,
+      "RunTimeTicks": 19326358100,
+      "ProductionYear": 1980,
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "8fc7422b59b79b71c7bffac0673bbcf8"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    }
+  ],
+  "TotalRecordCount": 1,
+  "StartIndex": 0
+}

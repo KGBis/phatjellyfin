@@ -1,0 +1,84 @@
+{
+  "Items": [
+    {
+      "Name": "Rosendo",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ChannelId": null,
+      "RunTimeTicks": 175344533385,
+      "IsFolder": true,
+      "Type": "MusicArtist",
+      "ImageTags": {
+        "Logo": "696727f10d201d0ca5f809bce04b6f4d",
+        "Primary": "272afb127e90d937548635d7fbd95803"
+      },
+      "BackdropImageTags": [
+        "e5935aebd9fc1d31e54cd51f297b49c0"
+      ],
+      "ImageBlurHashes": {
+        "Backdrop": {
+          "e5935aebd9fc1d31e54cd51f297b49c0": "WZJ@REPWNM^%%2M|~AEmt8-:t8M{IBNHozt7R-WB=_tQofr=a#t8"
+        },
+        "Logo": {
+          "696727f10d201d0ca5f809bce04b6f4d": "OBP%O.xu9Ft74nxu4n~qt7oft7j[ofay00WBxuM{oft7xu"
+        },
+        "Primary": {
+          "272afb127e90d937548635d7fbd95803": "ebF5D{E2xo-ojY~8NHocs:R*acxaNLNGWYs*s:RnR*s:t3RlWXR+WV"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Agradecidos... Rosendo",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "a695aba5b70fcf10c6b02e48dba564e4",
+      "ChannelId": null,
+      "RunTimeTicks": 29965583670,
+      "ProductionYear": 1997,
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "f101f10b95b61b94849c36d7197aa3fe",
+      "ParentBackdropItemId": "f101f10b95b61b94849c36d7197aa3fe",
+      "ParentBackdropImageTags": [
+        "3d7715411e28852dfee8c5dd2a460c62"
+      ],
+      "Artists": [
+        "Various Artists"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "38d2e6a7633a8ecf200dceba52b053c5"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "918e2547ff4db7e29f1cce1ea58269a4",
+      "ImageBlurHashes": {
+        "Primary": {
+          "38d2e6a7633a8ecf200dceba52b053c5": "V6OM]O=d0L.8IUVErDRkS2xavM#mM{IoaxVs-BRQX9s:"
+        },
+        "Logo": {
+          "918e2547ff4db7e29f1cce1ea58269a4": "OKE36gof01Rkt8j[-:WCWBxuoft7j[ofD%j[t6fRRjWBWC"
+        },
+        "Backdrop": {
+          "3d7715411e28852dfee8c5dd2a460c62": "WbN17T_3%Mayj[t7~qofRjt7ayofofofWBM{xuxu-;t7xuWBWBof"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    }
+  ],
+  "TotalRecordCount": 2,
+  "StartIndex": 0
+}

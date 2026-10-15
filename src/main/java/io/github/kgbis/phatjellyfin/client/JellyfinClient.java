@@ -64,6 +64,10 @@ public class JellyfinClient {
 	);
 	// @formatter:on
 
+	private static final String GET_ITEMS_ERROR_MSG = "retrieving Jellyfin items";
+
+	private static final String UPDATE_ITEMS_ERROR_MSG = "updating Jellyfin items";
+
 	private static final String SYSTEM_INFO = "System/Info";
 
 	private static final String SYSTEM_INFO_STORAGE = SYSTEM_INFO + "/Storage";
@@ -114,7 +118,6 @@ public class JellyfinClient {
 		customSeparators = libraries.stream()
 			.filter(lib -> "music".equalsIgnoreCase(lib.collectionType()))
 			.map(Library::libraryOptions)
-			// .filter(LibraryOptions::useCustomTagsDelimiter)
 			.map(options -> String.join("", options.customTagDelimiters()))
 			.findFirst()
 			.orElse("") + "\0";
@@ -122,13 +125,31 @@ public class JellyfinClient {
 		return customSeparators;
 	}
 
+	/**
+	 * Get Jellyfin {@linkplain Items} with retry policy
+	 * @param queryParams Search arguments
+	 * @return Item object. Can be a zero result response
+	 * @throws IOException if an I/O error occurs when sending or receiving, or the client
+	 * has shut down
+	 * @throws InterruptedException If the operation is interrupted
+	 */
 	public Items getItems(Map<String, String> queryParams) throws IOException, InterruptedException {
 		HttpRequest request = request(ITEMS, queryParams, Map.of()).GET().build();
-		Items items = httpClient.send(request, JsonBodyHandler.ofJson(Items.class)).body();
+		Items items = Retrier.retry(() -> httpClient.send(request, JsonBodyHandler.ofJson(Items.class)).body(),
+				GET_ITEMS_ERROR_MSG);
 		log.debug("Search with '{}' returned: {} items", queryParams, items.totalRecordCount());
 		return items;
 	}
 
+	/**
+	 * Update a Jellyfin item with retry policy
+	 * @param id Jellyfin item id
+	 * @param payload Data to be updated
+	 * @return The result of the operation
+	 * @throws IOException if an I/O error occurs when sending or receiving, or the client
+	 * has shut down
+	 * @throws InterruptedException If the operation is interrupted
+	 */
 	public OperationResult<Void> updateItem(String id, UpdateItem payload) throws IOException, InterruptedException {
 		String body = objectMapper.writeValueAsString(payload);
 
@@ -139,15 +160,20 @@ public class JellyfinClient {
 			.POST(HttpRequest.BodyPublishers.ofString(body))
 			.build();
 
-		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-		if (response.statusCode() >= 300) {
-			log.info("Update returned status code {}, message {}", response.statusCode(), response.body());
-		}
+		HttpResponse<String> response = Retrier
+			.retry(() -> httpClient.send(request, HttpResponse.BodyHandlers.ofString()), UPDATE_ITEMS_ERROR_MSG);
 
 		return getResultFromResponse(response);
 	}
 
+	/**
+	 * Request builder
+	 * @param endpoint Endpoint to be called
+	 * @param queryParams map of query parameters
+	 * @param pathVars Path variables
+	 * @return an {@linkplain HttpRequest.Builder}
+	 * @throws IOException on configuration I/O error
+	 */
 	private HttpRequest.Builder request(String endpoint, Map<String, String> queryParams, Map<String, String> pathVars)
 			throws IOException {
 
@@ -185,6 +211,7 @@ public class JellyfinClient {
 		}
 
 		// in case of error: Build a Result object with the code and message
+		log.debug("Update returned status code {}, message {}", response.statusCode(), response.body());
 		return new OperationResult<>(false, null, "HTTP %s - %s".formatted(response.statusCode(), response.body()));
 	}
 
