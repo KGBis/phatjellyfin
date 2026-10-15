@@ -31,7 +31,9 @@ public interface Matcher {
 				: Normalizer.normalize(value, Normalizer.Form.NFD)
 					.replaceAll("\\p{M}", "")
 					.replace("¿", "")
-					.replace("¡", "");
+					.replace("¡", "")
+					.replaceAll("\\s+", " ")
+					.trim();
 	}
 
 	default String normalizeToLowercase(String value) {

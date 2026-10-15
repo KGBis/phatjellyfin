@@ -1,0 +1,611 @@
+{
+  "Items": [
+    {
+      "Name": "Insisto",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "0e5731d68c16807d6e4832238e79ff4f",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/01 - Insisto.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1990458120,
+      "ProductionYear": 1980,
+      "IndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "fa315935e362d053fd35329ec6b38597"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "fa315935e362d053fd35329ec6b38597": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.66
+    },
+    {
+      "Name": "Donde esta la salvacion?",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d1fe4952459efabd7ee1344d1bb82f80",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/02 - Donde esta la salvacion.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2400600620,
+      "ProductionYear": 1980,
+      "IndexNumber": 2,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "37396915be49be790221a271488d7997"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "37396915be49be790221a271488d7997": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.375
+    },
+    {
+      "Name": "Sin solucion",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d2fa5392577d2ca0cd4195b6d113d6b7",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/03 - Sin solucion.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1870576250,
+      "ProductionYear": 1980,
+      "IndexNumber": 3,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "db7e2683bf8f329e08741c84b3f8dc50"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "db7e2683bf8f329e08741c84b3f8dc50": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.665
+    },
+    {
+      "Name": "No voy mas lejos",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d254daacf413b18b0e28a3abb87af734",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/04 - No voy mas lejos.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1762951870,
+      "ProductionYear": 1980,
+      "IndexNumber": 4,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "bba8c5c94b5c58e51230ebff898fbe37"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "bba8c5c94b5c58e51230ebff898fbe37": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.255
+    },
+    {
+      "Name": "Como debe de ser",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "6688acb31c8b9a2a44d7797b83db5531",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/05 - Como debe de ser.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1408208750,
+      "ProductionYear": 1980,
+      "IndexNumber": 5,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "5cfd60afea2086a51560c8a819e00c48"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "5cfd60afea2086a51560c8a819e00c48": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.89
+    },
+    {
+      "Name": "Si senor, si senor",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "6b72ed034b79faf2990b81af00c11956",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/06 - Si senor, si senor.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1390706870,
+      "ProductionYear": 1980,
+      "IndexNumber": 6,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "4d019d711ba73113742852087cc4fdd5"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "4d019d711ba73113742852087cc4fdd5": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.32
+    },
+    {
+      "Name": "Cucarachas",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "f1da27cf9036d976f360d24f56c01a94",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/07 - Cucarachas.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1700518750,
+      "ProductionYear": 1980,
+      "IndexNumber": 7,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "cebcb04e0927cca556439fd160b7bc71"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "cebcb04e0927cca556439fd160b7bc71": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.325
+    },
+    {
+      "Name": "La noche de que te hable",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "c1923b0e83b541dcbedafe8f82800890",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/08 - La noche de que te hable.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1800568130,
+      "ProductionYear": 1980,
+      "IndexNumber": 8,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "1987e57423dd74b2b246885be82e97dc"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "1987e57423dd74b2b246885be82e97dc": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.64
+    },
+    {
+      "Name": "Calendario",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "ea5bea5c9d5baa6e1cb09f24087f994d",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/09 - Calendario.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2090526870,
+      "ProductionYear": 1980,
+      "IndexNumber": 9,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "2fbad8315b2a45f465c1a860cda82ac9"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "2fbad8315b2a45f465c1a860cda82ac9": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.25
+    },
+    {
+      "Name": "Apagalas",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "f5c26f9578990b4b3c62ac8bedf19e7b",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/10 - Apagalas.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1510608750,
+      "ProductionYear": 1980,
+      "IndexNumber": 10,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "2042a0b9a120e29368fcc0cefc8297b0"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "2042a0b9a120e29368fcc0cefc8297b0": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.075
+    },
+    {
+      "Name": "Lo que acabas de elegir",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "af3258c35642fe6d3a2b706678e361c1",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1980-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Leño/1980 - Más Madera/11 - Lo que acabas de elegir.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1400633120,
+      "ProductionYear": 1980,
+      "IndexNumber": 11,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentBackdropItemId": "36d1552505403784b80b351b10eec01d",
+      "ParentBackdropImageTags": [
+        "44ba0a8219ec5530f827ebdc183bd77c"
+      ],
+      "Artists": [
+        "Leño"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "Album": "Más Madera",
+      "AlbumId": "87e63a1e8df77e2b01fd4e98b4b094b0",
+      "AlbumPrimaryImageTag": "8fc7422b59b79b71c7bffac0673bbcf8",
+      "AlbumArtist": "Leño",
+      "AlbumArtists": [
+        {
+          "Name": "Leño",
+          "Id": "36d1552505403784b80b351b10eec01d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "b2f629c686ef574b1777183887925f1a"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "b2f629c686ef574b1777183887925f1a": "eCB:XONR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D*$_",
+          "8fc7422b59b79b71c7bffac0673bbcf8": "eCB:XPNR0;ks5c%BETEVt7#hDgsz%M-3x]I|-MxVD-OwD#%LS%D%${"
+        },
+        "Backdrop": {
+          "44ba0a8219ec5530f827ebdc183bd77c": "WNGtmD{]E15@KPxVX:E2Vs%2kDI;ElI=jX$%%2V@$|xVbbbwM|jY"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.7
+    }
+  ],
+  "TotalRecordCount": 11,
+  "StartIndex": 0
+}
