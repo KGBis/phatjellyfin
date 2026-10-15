@@ -40,7 +40,7 @@ import java.util.Map;
 public class Config {
 
 	@JsonIgnore
-	private Path rootFolder;
+	private List<Path> rootFolders;
 
 	@JsonIgnore
 	private boolean recursive;

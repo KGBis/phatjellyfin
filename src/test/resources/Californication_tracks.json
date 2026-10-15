@@ -1,0 +1,921 @@
+{
+  "Items": [
+    {
+      "Name": "Around the world",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "14e70cc34a92bd9d3a046c71c3789d06",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/01 - Around the world.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2388197750,
+      "ProductionYear": 1999,
+      "IndexNumber": 1,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "74232c0086e0cd11babcb4e464bd92e6"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "74232c0086e0cd11babcb4e464bd92e6": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.385
+    },
+    {
+      "Name": "Parallel universe",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "9ef52da45ddf4114ee6365e23ecd2a82",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/02 - Parallel universe.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2694353000,
+      "ProductionYear": 1999,
+      "IndexNumber": 2,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "95430168632b80147788bb5b86a28572"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "95430168632b80147788bb5b86a28572": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.295
+    },
+    {
+      "Name": "Scar tissue",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "37ab437528bcb9abce2b5f296d34e452",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/03 - Scar tissue.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2159887750,
+      "ProductionYear": 1999,
+      "IndexNumber": 3,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "af4e8f4af1168ff010e33a5e1080f134"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "af4e8f4af1168ff010e33a5e1080f134": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.375
+    },
+    {
+      "Name": "Otherside",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "250f5c3a3ff800d52a917aa05aa7f80f",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/04 - Otherside.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2554597750,
+      "ProductionYear": 1999,
+      "IndexNumber": 4,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "00bfcfa18e073773aa2bb93e1f1d6731"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "00bfcfa18e073773aa2bb93e1f1d6731": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.12
+    },
+    {
+      "Name": "Get on top",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "49b78e4f4d0c892489b609ee36666a8f",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/05 - Get on top.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1981471250,
+      "ProductionYear": 1999,
+      "IndexNumber": 5,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "8fe9d9e8bd25b718ed04ad8e7a566e84"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "8fe9d9e8bd25b718ed04ad8e7a566e84": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.7
+    },
+    {
+      "Name": "Californication",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "1f0c099de237412138b19c8f14eb0061",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/06 - Californication.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 3298042750,
+      "ProductionYear": 1999,
+      "IndexNumber": 6,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "d0a850e1a044efa82c41d4c5137a040e"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "d0a850e1a044efa82c41d4c5137a040e": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.495
+    },
+    {
+      "Name": "Easily",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "7b640bcc61a0d1eaff88ebd1b0ac8952",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/07 - Easily.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2314010000,
+      "ProductionYear": 1999,
+      "IndexNumber": 7,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "9f7b90696930b73209a31cbcbef80702"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "9f7b90696930b73209a31cbcbef80702": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.28
+    },
+    {
+      "Name": "Porcelain",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "a2ecc37eb0cd21b7c63cdff7afb67ef1",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/08 - Porcelain.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1637700000,
+      "ProductionYear": 1999,
+      "IndexNumber": 8,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "b118435e178594d744421af32057ef6c"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "b118435e178594d744421af32057ef6c": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.09
+    },
+    {
+      "Name": "Emit Remmus",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "0e3133e828c0babebfc716ed2204b14c",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/09 - Emit Remmus.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2402826500,
+      "ProductionYear": 1999,
+      "IndexNumber": 9,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "9022d2d062bcae4a8bdf124b1373df93"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "9022d2d062bcae4a8bdf124b1373df93": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.185
+    },
+    {
+      "Name": "I like dirt",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "5a80d406a31db294fa1028952019ed8b",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/10 - I like dirt.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1577095750,
+      "ProductionYear": 1999,
+      "IndexNumber": 10,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "91f56102170f0c3d0e774f072f5b21fe"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "91f56102170f0c3d0e774f072f5b21fe": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.31
+    },
+    {
+      "Name": "This velvet glove",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "bee36d2df876a5f85486a72c7a225b7b",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/11 - This velvet glove.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2252622250,
+      "ProductionYear": 1999,
+      "IndexNumber": 11,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "775367207cfc454606faf10e5b1a51ca"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "775367207cfc454606faf10e5b1a51ca": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.635
+    },
+    {
+      "Name": "Savior",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "1aefcda9d7d58e60682b801108dfcebe",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/12 - Savior.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2924753000,
+      "ProductionYear": 1999,
+      "IndexNumber": 12,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "2f22a89cd2d4adb5e4638aa70bf8a2ea"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "2f22a89cd2d4adb5e4638aa70bf8a2ea": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.25
+    },
+    {
+      "Name": "Purple stain",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "2040e02583191a3d61f83a4574651202",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/13 - Purple stain.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2534483500,
+      "ProductionYear": 1999,
+      "IndexNumber": 13,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "3aa33f5389493dfd386f72667c7d7d56"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "3aa33f5389493dfd386f72667c7d7d56": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.44
+    },
+    {
+      "Name": "Right on time",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d7dbcd726eab627d569b6df887551884",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/14 - Right on time.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1125961250,
+      "ProductionYear": 1999,
+      "IndexNumber": 14,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "04051aec50205b143c0b666e6d612ea0"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "04051aec50205b143c0b666e6d612ea0": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.315
+    },
+    {
+      "Name": "Road trippin'",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "db188f80217bd18dcd077a20f41d686f",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Red Hot Chili Peppers/1999 - Californication/15 - Road trippin'.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2050434500,
+      "ProductionYear": 1999,
+      "IndexNumber": 15,
+      "ParentIndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "Album": "Californication",
+      "AlbumId": "a54f075977cc66b472eb106dbbc2848c",
+      "AlbumPrimaryImageTag": "2f21012d5852006185ab6f9bd73ac838",
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "5c433c6e53370cd3267d8e46adb6532d"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "5c433c6e53370cd3267d8e46adb6532d": "epHdUGWCXmj[WW2{kCf9a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs",
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.71
+    }
+  ],
+  "TotalRecordCount": 15,
+  "StartIndex": 0
+}

@@ -76,28 +76,29 @@ public class Importer {
 		if (musicScanner.scan() && shouldApply()) {
 			Map<MusicKey, List<ScannedFile>> scannedData = musicScanner.prepareScannedData();
 			Map<MusicKey, AlbumToUpdate> matchingItems = jellyfinMatcher.matchAgainstJellyfin(scannedData);
-
 			Map<OperationResult<Void>, List<UpdateItem>> writeResult = jellyfinWriter.write(matchingItems);
 			processWriteResult(writeResult);
 		}
 	}
 
 	/**
-	 * Checks if the provided argument scan directory exists, is a directory and is
-	 * readable (permissions)
-	 * @param musicFolder Root directory to check
+	 * Checks if the provided arguments "scan directories" exist, they're a directory and
+	 * they're readable (permissions)
+	 * @param musicFolders Root directories to check (1..n)
 	 * @return The result of the operation
 	 */
-	public OperationResult<Void> rootFolderExistsAndReadable(Path musicFolder) {
-		if (!Files.exists(musicFolder)) {
-			return new OperationResult<>(false, null, String.format(PATH_DOES_NOT_EXIST_MESSAGE, musicFolder));
-		}
+	public OperationResult<Void> rootFoldersExistAndReadable(List<Path> musicFolders) {
+		for (Path musicFolder : musicFolders) {
+			if (!Files.exists(musicFolder)) {
+				return new OperationResult<>(false, null, String.format(PATH_DOES_NOT_EXIST_MESSAGE, musicFolder));
+			}
 
-		if (!Files.isDirectory(musicFolder)) {
-			return new OperationResult<>(false, null, String.format(PATH_NOT_A_DIRECTORY_MESSAGE, musicFolder));
-		}
-		if (!Files.isReadable(musicFolder)) {
-			return new OperationResult<>(false, null, String.format(PATH_NOT_READABLE_MESSAGE, musicFolder));
+			if (!Files.isDirectory(musicFolder)) {
+				return new OperationResult<>(false, null, String.format(PATH_NOT_A_DIRECTORY_MESSAGE, musicFolder));
+			}
+			if (!Files.isReadable(musicFolder)) {
+				return new OperationResult<>(false, null, String.format(PATH_NOT_READABLE_MESSAGE, musicFolder));
+			}
 		}
 
 		return new OperationResult<>(true, null, null);

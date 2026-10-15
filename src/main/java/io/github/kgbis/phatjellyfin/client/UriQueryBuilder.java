@@ -22,6 +22,7 @@ package io.github.kgbis.phatjellyfin.client;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class UriQueryBuilder {
     private final StringBuilder url;
@@ -33,13 +34,16 @@ public class UriQueryBuilder {
 
     /**
      * Adds a query param to the URL
-     * @param key Query param name
+     * @param name Query param name
      * @param value Query param value
      */
-    public void queryParam(String key, String value) {
+    public void queryParam(String name, String value) {
+        Objects.requireNonNull(name, "Query parameter name cannot be null");
+        Objects.requireNonNull(value, "Query parameter value cannot be null");
+
         url.append(hasParams ? "&" : "?");
         hasParams = true;
-        url.append(key).append("=").append(URLEncoder.encode(value, StandardCharsets.UTF_8));
+        url.append(name).append("=").append(URLEncoder.encode(value, StandardCharsets.UTF_8));
     }
 
     public URI build() {

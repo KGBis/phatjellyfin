@@ -25,6 +25,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.SneakyThrows;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import static io.github.kgbis.phatjellyfin.Application.APP_CONFIG_FILE;
@@ -78,15 +79,6 @@ public class MessageManager {
 
 	public static final String API_KEY_NOT_CONFIGURED = "not configured";
 
-	public static final String SCAN_SUCCESS_SUMMARY = """
-			Folder scan finished.
-
-			    Scan summary:
-			      Found %s files to update
-			      Found %s files to skip (no custom tags)
-			      Found %s files failed to read
-			""";
-
 	public static final String SCAN_ERROR_SUMMARY = """
 			Folder scan finished for '%s' with error: %s
 
@@ -95,14 +87,36 @@ public class MessageManager {
 
 	public static final String UPDATE_SUMMARY = """
 			Jellyfin Metadata update finished.
-
 			    Update summary:
-			      Updated %s items
-			      Failed %s items
+			      Updated %s item%s
+			      Failed %s item%s
 			    %s
 			""";
 
 	public static final String FAILED_ITEM = "%s, reason: %s";
+
+	private static final String SCAN_SUCCESS_SUMMARY = """
+			Folder scan finished.
+			    Scan summary:
+			      Found %s file%s to update
+			      Found %s file%s to skip (no custom tags)
+			      Found %s file%s failed to read
+			""";
+
+	private static final String MATCHING_SUMMARY = """
+			Library matching finished.
+			    Matching summary:
+			      Matched %s track%s
+			      Matched %s album%s
+			      Unmatched %s track%s
+			      Unmatched %s album%s
+			""";
+
+	private static final String SCAN_FOLDERS = """
+			Folders to scan:
+			%s
+			Starting music scan%s...
+			""";
 
 	private static final String API_KEY_REGEX = "^(.{4}).*(.{4})$";
 
@@ -138,7 +152,7 @@ public class MessageManager {
 	}
 
 	public String buildUpdateResult(int success, int failures, String s) {
-		return UPDATE_SUMMARY.formatted(success, failures, s);
+		return UPDATE_SUMMARY.formatted(success, sOrBlank(success), failures, sOrBlank(failures), s);
 	}
 
 	public String buildFailedUpdates(List<String> failureItems) {
@@ -155,8 +169,33 @@ public class MessageManager {
 		return s.toString();
 	}
 
+	public String buildStartScanMessage(List<Path> rootFolders, String recursive) {
+		StringBuilder s = new StringBuilder();
+		for (Path rootFolder : rootFolders) {
+			s.append(spaces(4)).append(rootFolder.toString()).append("\n");
+		}
+		String folders = s.toString();
+		return SCAN_FOLDERS.formatted(folders, recursive);
+	}
+
+	public String buildMatchingResult(int tracksMatching, int albumsMatching, int tracksNotMatching,
+			int albumsNotMatching) {
+		return MATCHING_SUMMARY.formatted(tracksMatching, sOrBlank(tracksMatching), albumsMatching,
+				sOrBlank(albumsMatching), tracksNotMatching, sOrBlank(tracksNotMatching), albumsNotMatching,
+				sOrBlank(albumsNotMatching));
+	}
+
 	private String spaces(int count) {
 		return " ".repeat(count);
+	}
+
+	private String sOrBlank(int value) {
+		return value == 1 ? "" : "s";
+	}
+
+	public String buildScanSuccessMessage(int scanned, int skipped, int error) {
+		return SCAN_SUCCESS_SUMMARY.formatted(scanned, sOrBlank(scanned), skipped, sOrBlank(skipped), error,
+				sOrBlank(error));
 	}
 
 }

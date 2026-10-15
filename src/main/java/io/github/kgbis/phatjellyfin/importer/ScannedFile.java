@@ -20,9 +20,11 @@
 package io.github.kgbis.phatjellyfin.importer;
 
 import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
+import lombok.Builder;
 
 import java.util.Map;
 
+@Builder
 public record ScannedFile(String path, Integer track, Integer disc, Integer year,
 		Map<JellyfinMetadata, String> metadata) {
 

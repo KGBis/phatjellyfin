@@ -111,7 +111,7 @@ public class ConfigManager {
 		return config.toBuilder()
 			.apply(cliArguments.isApply())
 			.recursive(cliArguments.isRecursive())
-			.rootFolder(cliArguments.getFolder())
+			.rootFolders(cliArguments.getFolders().stream().sorted().toList())
 			.build();
 	}
 

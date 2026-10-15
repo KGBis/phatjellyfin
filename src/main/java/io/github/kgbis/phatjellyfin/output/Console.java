@@ -48,7 +48,6 @@ public class Console {
 
 	private final BufferedReader in;
 
-	// @SuppressWarnings("unused") // Guice
 	@Inject
 	public Console() {
 		this(System.in, System.out); // NOSONAR

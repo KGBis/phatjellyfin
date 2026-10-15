@@ -25,6 +25,7 @@ import com.beust.jcommander.converters.PathConverter;
 import lombok.Getter;
 
 import java.nio.file.Path;
+import java.util.List;
 
 @Getter
 public class CliArguments {
@@ -34,7 +35,7 @@ public class CliArguments {
 	@Parameter(names = { "-h", "--help", "-u", "--usage" }, help = true, description = "Show this usage help")
 	private boolean help;
 
-	@Parameter(names = { "-a", "--apply" }, description = "Apply changes to Jellyfin")
+	@Parameter(names = { "-a", "--apply" }, description = "Apply changes to Jellyfin without asking")
 	private boolean apply = false;
 
 	@Parameter(names = { "-r", "--recursive" }, description = "Scan folder recursively")
@@ -47,8 +48,8 @@ public class CliArguments {
 			validateWith = LogLevelValidator.class)
 	private Level logLevel = Level.INFO;
 
-	@Parameter(required = true, arity = 1, description = "<folder>", converter = PathConverter.class,
+	@Parameter(required = true, description = "<folders>", converter = PathConverter.class,
 			validateWith = PathValidator.class)
-	private Path folder;
+	private List<Path> folders;
 
 }
