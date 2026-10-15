@@ -19,19 +19,31 @@
  */
 package io.github.kgbis.phatjellyfin.importer;
 
+import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.Item;
 import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+
+import java.util.List;
 
 @Singleton
 public class LevenshteinDistanceMatcherImpl implements Matcher {
 
-	private static final double TRACK_THRESHOLD = 0.20; // Permisive with track number
+	private static final double RELAXED_THRESHOLD = 0.20; // Permisive with track number
 
-	private static final double NO_TRACK_THRESHOLD = 0.08; // Strict w/o track number
+	private static final double STRICT_THRESHOLD = 0.17; // Strict w/o track number
+
+	private final ArtistHelper artistHelper;
 
 	private final LevenshteinDistance levenshtein = LevenshteinDistance.getDefaultInstance();
+
+	@Inject
+	public LevenshteinDistanceMatcherImpl(ArtistHelper artistHelper) {
+		this.artistHelper = artistHelper;
+	}
 
 	@Override
 	public boolean fallbackMatch(Item item, ScannedFile scannedFile) {
@@ -39,22 +51,23 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 			return false;
 		}
 
-		double currentThreshold = getCurrentThreshold(item);
-		return albumNameMatches(item, scannedFile, currentThreshold)
+		double currentThreshold = getCurrentThreshold(item, scannedFile);
+		return albumNameMatches(item, scannedFile)
 				&& artistMatches(item, scannedFile, currentThreshold);
 	}
 
 	/**
-	 * Check if there's a match for track number. In really really strange cases could be
-	 * null (no track number). In that case the coming track number from scanned file is
-	 * used.
+	 * Check if there's a match for track number. Any track number could be null (no track
+	 * number either in Jellyfin or in scanned file). In that case we set result as
+	 * {@code true} to let the matching process continue.
 	 * @param itemTrackNum Jellyfin track number
 	 * @param scannedTrackNum Scanned track number for track
-	 * @return true if matches or false if not
+	 * @return true if matches (or any of the niumbers is null, so to continue) or false
+	 * if not
 	 */
 	private boolean trackNumberMatches(Integer itemTrackNum, Integer scannedTrackNum) {
-		// If Jellyfin has not track number, it's a match
-		if (itemTrackNum == null) {
+		// If Jellyfin or scanned file has no track number, let the process continue
+		if (itemTrackNum == null || scannedTrackNum == null) {
 			return true;
 		}
 
@@ -62,16 +75,17 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 	}
 
 	/**
-	 * Check if there's a match for ALBUM name
-	 * @param item Previously unmatched item
+	 * Check if there's a match for ALBUM name. It always uses {@linkplain STRICT_THRESHOLD}
+	 *
+	 * @param item        Previously unmatched item
 	 * @param scannedFile scanned file metadata
 	 * @return true if matches or false if not
 	 */
-	private boolean albumNameMatches(Item item, ScannedFile scannedFile, double threshold) {
+	private boolean albumNameMatches(Item item, ScannedFile scannedFile) {
 		String scannedAlbum = normalizeToLowercase(scannedFile.metadata().get(JellyfinMetadata.ALBUM));
 		String itemAlbum = normalizeToLowercase(item.album());
 
-		return isFuzzyMatch(scannedAlbum, itemAlbum, threshold);
+		return isFuzzyMatch(scannedAlbum, itemAlbum, LevenshteinDistanceMatcherImpl.STRICT_THRESHOLD);
 	}
 
 	/**
@@ -81,16 +95,15 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 	 * @return true if matches or false if not
 	 */
 	private boolean artistMatches(Item item, ScannedFile scannedFile, double threshold) {
-		String scannedAlbumArtist = normalizeToLowercase(scannedFile.metadata().get(JellyfinMetadata.ALBUM_ARTIST));
-		String scannedArtist = normalizeToLowercase(scannedFile.metadata().get(JellyfinMetadata.ARTIST));
+		List<String> scannedAlbumArtists = getArtistList(scannedFile.metadata().get(JellyfinMetadata.ALBUM_ARTIST));
+		List<String> scannedArtists = getArtistList(scannedFile.metadata().get(JellyfinMetadata.ARTIST));
 
 		// Main list: albumArtists
 		if (item.albumArtists() != null) {
 			boolean matchAlbumArtists = item.albumArtists()
 				.stream()
 				.map(artist -> normalizeToLowercase(artist.getName()))
-				.anyMatch(itemArtist -> isFuzzyMatch(itemArtist, scannedArtist, threshold)
-						|| isFuzzyMatch(itemArtist, scannedAlbumArtist, threshold));
+				.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
 			if (matchAlbumArtists)
 				return true;
 		}
@@ -100,8 +113,7 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 			boolean matchArtistItems = item.artistItems()
 				.stream()
 				.map(artist -> normalizeToLowercase(artist.getName()))
-				.anyMatch(itemArtist -> isFuzzyMatch(itemArtist, scannedArtist, threshold)
-						|| isFuzzyMatch(itemArtist, scannedAlbumArtist, threshold));
+				.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
 			if (matchArtistItems)
 				return true;
 		}
@@ -109,12 +121,27 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		// field AlbumArtist
 		if (item.albumArtist() != null) {
 			String itemAlbumArtist = normalizeToLowercase(item.albumArtist());
-			return isFuzzyMatch(itemAlbumArtist, scannedArtist, threshold)
-					|| isFuzzyMatch(itemAlbumArtist, scannedAlbumArtist, threshold);
+			return matchesAnyArtist(threshold, itemAlbumArtist, scannedArtists, scannedAlbumArtists);
 		}
 
 		// No fuzzy match at all
 		return false;
+	}
+
+	private List<String> getArtistList(String fieldValue) {
+		return artistHelper.toArtists(fieldValue)
+			.stream()
+			.map(Artist::getName)
+			.map(this::normalizeToLowercase)
+			.toList();
+	}
+
+	private boolean matchesAnyArtist(double threshold, String itemArtist, List<String> scannedArtists,
+			List<String> scannedAlbumArtists) {
+
+		return scannedArtists.stream().anyMatch(scannedArtist -> isFuzzyMatch(itemArtist, scannedArtist, threshold))
+				|| scannedAlbumArtists.stream()
+					.anyMatch(scannedAlbumArtist -> isFuzzyMatch(itemArtist, scannedAlbumArtist, threshold));
 	}
 
 	/**
@@ -122,10 +149,13 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 	 * true if the difference is less than or equal to the threshold (typo).
 	 */
 	private boolean isFuzzyMatch(String s1, String s2, double threshold) {
-		if (s1 == null || s2 == null)
+		if (StringUtils.isBlank(s1) || StringUtils.isBlank(s2)) {
 			return false;
-		if (s1.equals(s2))
+		}
+
+		if (s1.equals(s2) || matchesIgnoringThe(s1, s2)) {
 			return true;
+		}
 
 		int distance = levenshtein.apply(s1, s2);
 		int maxLength = Math.max(s1.length(), s2.length());
@@ -137,8 +167,13 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		return errorRatio <= threshold;
 	}
 
-	private double getCurrentThreshold(Item item) {
-		return (item.indexNumber() == null) ? NO_TRACK_THRESHOLD : TRACK_THRESHOLD;
+	private boolean matchesIgnoringThe(String artist1, String artist2) {
+		return artist1.startsWith("the ") && artist1.substring(4).equals(artist2)
+				|| artist2.startsWith("the ") && artist2.substring(4).equals(artist1);
+	}
+
+	private double getCurrentThreshold(Item item, ScannedFile scannedFile) {
+		return (item.indexNumber() == null || scannedFile.track() == null) ? STRICT_THRESHOLD : RELAXED_THRESHOLD;
 	}
 
 }

@@ -1,0 +1,130 @@
+{
+  "Items": [
+    {
+      "Name": "Californication",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "a54f075977cc66b472eb106dbbc2848c",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "ChannelId": null,
+      "RunTimeTicks": 33896437000,
+      "ProductionYear": 1999,
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropItemId": "27e70b79fb7938d44f3c20324d288ff6",
+      "ParentBackdropImageTags": [
+        "1bf0990fcb65a2e7eb212a489b2bcda7"
+      ],
+      "Artists": [
+        "Red Hot Chili Peppers"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "AlbumArtist": "Red Hot Chili Peppers",
+      "AlbumArtists": [
+        {
+          "Name": "Red Hot Chili Peppers",
+          "Id": "27e70b79fb7938d44f3c20324d288ff6"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "2f21012d5852006185ab6f9bd73ac838"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "1dfdec535550d3e71765c2720f62142a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "2f21012d5852006185ab6f9bd73ac838": "epHdUGWCb^fkWW2{kCf8a#jYFMofnij]jt=ZWEbuj?bIXPWBkCWBjs"
+        },
+        "Logo": {
+          "1dfdec535550d3e71765c2720f62142a": "OrE1~+oL0yWB=eoLTJj[fQayayjtfkfQKOa|v~jtXmfkVs"
+        },
+        "Backdrop": {
+          "1bf0990fcb65a2e7eb212a489b2bcda7": "WiLNuvoz_N?H%M%M~qWCM{xtRjWB%goeWBozV?WC_4xuoef9aeaz"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Californication Season 2 - Music from the Showtime Series",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "2d7efe90b09cdff9cf272a533db3b9ce",
+      "ChannelId": null,
+      "RunTimeTicks": 28522840830,
+      "ProductionYear": 2009,
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "Artists": [
+        "Various Artists"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "8b9845f33abeca2e2cf9dd76d2bb1a38"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "8b9845f33abeca2e2cf9dd76d2bb1a38": "egCIgyIUp{o~iv_3NbxaozVsxAf+s:oeRkofnhkCj[bbR.azoej]WX"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Temptation (Music from the Showtime Series Californication)",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "ChannelId": null,
+      "RunTimeTicks": 46075036739,
+      "ProductionYear": 2008,
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "Artists": [
+        "Various Artists"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "7a7ef020dd49ad50d9cee4c20503b73d"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    }
+  ],
+  "TotalRecordCount": 3,
+  "StartIndex": 0
+}

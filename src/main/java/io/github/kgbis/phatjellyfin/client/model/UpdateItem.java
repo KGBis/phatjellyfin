@@ -33,10 +33,10 @@ import java.util.Map;
  * Minimum payload needed to update a Jellyfin Item. In this case to update an album or a
  * track.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 @Getter
 @ToString
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpdateItem {
 
 	@JsonIgnore

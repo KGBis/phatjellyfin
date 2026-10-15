@@ -132,7 +132,7 @@ public class PhatJellyfin {
 	 * Checks if folder path exists and we can read from it
 	 */
 	private void checkRootFolder() throws IOException {
-		OperationResult<Void> result = importer.rootFolderExistsAndReadable(configManager.current().getRootFolder());
+		OperationResult<Void> result = importer.rootFoldersExistAndReadable(configManager.current().getRootFolders());
 		if (!result.isSuccess()) {
 			abort(result.getErrorCause());
 		}
