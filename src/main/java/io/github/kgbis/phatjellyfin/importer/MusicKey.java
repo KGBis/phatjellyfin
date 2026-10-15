@@ -28,7 +28,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class MusicKey {
+public class MusicKey implements Comparable<MusicKey> {
 
 	private final List<Artist> albumArtists;
 
@@ -37,7 +37,23 @@ public class MusicKey {
 	public String toDisplayString() {
 		String[] array = albumArtists.stream().map(Artist::getName).toArray(String[]::new);
 		String artists = StringUtils.join(array, ",");
-		return "album '" + album + "' by artist " + artists + "...";
+		return "album '" + album + "' by " + artists + "...";
+	}
+
+	public int compareTo(MusicKey other) {
+		int minSize = Math.min(albumArtists.size(), other.albumArtists.size());
+
+		for (int i = 0; i < minSize; i++) {
+			int result = albumArtists.get(i).getName()
+					.compareToIgnoreCase(other.albumArtists.get(i).getName());
+
+			if (result != 0) {
+				return result;
+			}
+		}
+
+		int result = Integer.compare(albumArtists.size(), other.albumArtists.size());
+		return result != 0 ? result : album.compareToIgnoreCase(other.album);
 	}
 
 }
