@@ -58,10 +58,10 @@ public class JellyfinWriter {
 		if (log.isEnabledForLevel(Level.INFO)) {
 			itemsToUpdate.forEach(item -> {
 				if (item.getTrackNumber() != null)
-					log.info("To update album: {}, disc {}, track {} - {}", item.getAlbum(),
+					log.info("Track to update: {}, disc {}, track {} - {}", item.getAlbum(),
 							item.getDisc() == null ? "-" : item.getDisc(), item.getTrackNumber(), item.getTitle());
 				else
-					log.info("To update album: {}", item.getTitle());
+					log.info("Album to update: {}", item.getTitle());
 			});
 		}
 

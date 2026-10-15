@@ -1,0 +1,43 @@
+{
+  "Items": [
+    {
+      "Name": "Temptation (Music from the Showtime Series Californication)",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "ChannelId": null,
+      "RunTimeTicks": 46075036739,
+      "ProductionYear": 2008,
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "Artists": [
+        "Various Artists"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "7a7ef020dd49ad50d9cee4c20503b73d"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    }
+  ],
+  "TotalRecordCount": 1,
+  "StartIndex": 0
+}

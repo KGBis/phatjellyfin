@@ -25,6 +25,7 @@ import io.github.kgbis.phatjellyfin.client.model.Item;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
 import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
+import io.github.kgbis.phatjellyfin.output.MessageManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -34,11 +35,14 @@ import org.jspecify.annotations.NonNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static io.github.kgbis.phatjellyfin.client.JellyfinClient.ITEMS_ARTIST_ALBUM_QUERYPARAMS;
@@ -52,6 +56,8 @@ public class JellyfinMatcher {
 
 	private final Console console;
 
+	private final MessageManager messageManager;
+
 	private final JellyfinClient jellyfinClient;
 
 	private final Matcher matcher;
@@ -61,10 +67,11 @@ public class JellyfinMatcher {
 	private List<String> libraryPaths; // NOSONAR
 
 	@Inject
-	public JellyfinMatcher(ConfigManager configManager, Console console, JellyfinClient jellyfinClient, Matcher matcher,
-			ArtistHelper artistHelper) {
+	public JellyfinMatcher(ConfigManager configManager, Console console, MessageManager messageManager,
+			JellyfinClient jellyfinClient, Matcher matcher, ArtistHelper artistHelper) {
 		this.configManager = configManager;
 		this.console = console;
+		this.messageManager = messageManager;
 		this.jellyfinClient = jellyfinClient;
 		this.matcher = matcher;
 		this.artistHelper = artistHelper;
@@ -79,22 +86,59 @@ public class JellyfinMatcher {
 			throws IOException {
 		// initialize data structure
 		Map<MusicKey, AlbumToUpdate> albumsToUpdateMap = new HashMap<>();
+		List<UnmatchedAlbumToDiscard> unmatchedAlbumsToDiscard = new ArrayList<>();
 
 		// Jellyfin library paths
 		libraryPaths = configManager.current().getLibraryPaths();
 
 		for (Map.Entry<MusicKey, List<ScannedFile>> entry : preparedLibrary.entrySet()) {
 			// Get tracks from Jellyfin
-			AlbumToUpdate albumToUpdate = getMatchingAlbumAndTracks(entry.getKey(), entry.getValue());
+			AlbumMatchingResult albumToUpdate = getMatchingAlbumAndTracks(entry.getKey(), entry.getValue());
 
-			if (albumToUpdate != null) {
-				albumsToUpdateMap.put(entry.getKey(), albumToUpdate);
+			if (albumToUpdate instanceof AlbumToUpdate toUpdate) {
+				albumsToUpdateMap.put(entry.getKey(), toUpdate);
+			}
+			else {
+				unmatchedAlbumsToDiscard.add((UnmatchedAlbumToDiscard) albumToUpdate);
 			}
 		}
 
 		console.printSameLine("");
+		printMatchingSummary(albumsToUpdateMap, unmatchedAlbumsToDiscard);
 
 		return albumsToUpdateMap;
+	}
+
+	private void printMatchingSummary(Map<MusicKey, AlbumToUpdate> albumsToUpdateMap,
+			List<UnmatchedAlbumToDiscard> unmatchedAlbumsToDiscard) {
+		// Albums not matching
+		int albumsNotMatching = unmatchedAlbumsToDiscard.size();
+
+		// Tracks from albums not matching
+		AtomicInteger atomicTracksNotMatching = new AtomicInteger();
+		unmatchedAlbumsToDiscard.forEach(ua -> {
+			log.warn("Not matching album (name): {}", ua.getMusicKey().getAlbum());
+			atomicTracksNotMatching.getAndAdd(ua.getUnmatchedTracks().size());
+		});
+
+		// Matching albums and possibly unmatched tracks
+		Collection<AlbumToUpdate> values = albumsToUpdateMap.values();
+		int albumsMatching = values.size();
+		AtomicInteger atomicTracksMatching = new AtomicInteger();
+		values.forEach(toUpdate -> {
+			atomicTracksMatching.getAndAdd(toUpdate.getTracks().size());
+			atomicTracksNotMatching.getAndAdd(toUpdate.getUnmatchedTracks().size());
+			toUpdate.getUnmatchedTracks()
+				.forEach(ut -> log.warn("Not matching track {} from {}:", ut.path(),
+						ut.metadata().get(JellyfinMetadata.ALBUM)));
+		});
+
+		// Print the things
+		int tracksNotMatching = atomicTracksNotMatching.get();
+		int tracksMatching = atomicTracksMatching.get();
+		String s = messageManager.buildMatchingResult(tracksMatching, albumsMatching, tracksNotMatching,
+				albumsNotMatching);
+		console.println(s);
 	}
 
 	/**
@@ -104,7 +148,7 @@ public class JellyfinMatcher {
 	 * @param scannedFiles List if scanned files
 	 * @return The album with all the matching tracks
 	 */
-	AlbumToUpdate getMatchingAlbumAndTracks(MusicKey musicKey, List<ScannedFile> scannedFiles) {
+	private AlbumMatchingResult getMatchingAlbumAndTracks(MusicKey musicKey, List<ScannedFile> scannedFiles) {
 		try {
 			// Find either album or artist
 			console.printSameLine("Getting Jellyfin tracks for %s".formatted(musicKey.toDisplayString()));
@@ -113,7 +157,7 @@ public class JellyfinMatcher {
 			// No results
 			if (optionalAlbum.isEmpty()) {
 				log.warn("Album not found: {} - {}", musicKey.getAlbumArtists(), musicKey.getAlbum());
-				return null;
+				return UnmatchedAlbumToDiscard.builder().musicKey(musicKey).unmatchedTracks(scannedFiles).build();
 			}
 
 			Item jellyfinAlbum = optionalAlbum.get();
@@ -131,15 +175,22 @@ public class JellyfinMatcher {
 					}));
 
 			// get tracks with normalized paths (no library prefix)
-			List<Item> jellyfinTracks = getJellyfinTracks(jellyfinAlbum);
+			List<Item> jellyfinTracks = normalizeJellyfinTracks(jellyfinAlbum);
 
 			// once all normalized match paths to know if the track should be updated
 			List<TrackMetadata> matchingTracks = matchTracks(jellyfinTracks, scannedFiles);
 
-			log.debug("Matching tracks:");
-			// noinspection LoggingSimilarMessage
-			matchingTracks.forEach(
-					tm -> log.debug("Track: {} - Name: {}", tm.track(), tm.metadata().get(JellyfinMetadata.TITLE)));
+			// get a list of non-matching (always on the same position -track and disc-)
+			List<ScannedFile> unmatched = new ArrayList<>();
+			if (matchingTracks.size() != scannedFiles.size()) {
+				unmatched.addAll(scannedFiles.stream()
+					.filter(sf -> matchingTracks.stream()
+						.filter(matched -> !(Objects.equals(matched.track(), sf.track())
+								&& Objects.equals(matched.disc(), sf.disc())))
+						.findFirst()
+						.isEmpty())
+					.toList());
+			}
 
 			// transform the list of TrackMetadata to the Album-Tracks structure
 			List<TrackToUpdate> tracksToUpdate = matchingTracks.stream()
@@ -163,10 +214,11 @@ public class JellyfinMatcher {
 					.albumArtists(musicKey.getAlbumArtists())
 					.tracks(tracksToUpdate)
 					.productionYear(sampleTrack.getYear())
+					.unmatchedTracks(unmatched)
 					.build();
 			}
 
-			return null;
+			return UnmatchedAlbumToDiscard.builder().musicKey(musicKey).unmatchedTracks(scannedFiles).build();
 		}
 		catch (IOException | InterruptedException e) { // NOSONAR
 			throw new RuntimeException("Unable to export album: " + musicKey.getAlbum(), e);
@@ -260,8 +312,9 @@ public class JellyfinMatcher {
 	 * @throws IOException from HTTP Client
 	 * @throws InterruptedException from HTTP Client
 	 */
-	private @NonNull List<Item> getJellyfinTracks(Item musicItem) throws IOException, InterruptedException {
+	private @NonNull List<Item> normalizeJellyfinTracks(Item musicItem) throws IOException, InterruptedException {
 		List<Item> tracks = findTracks(musicItem.id());
+		log.debug("Tracks found for album '{}': {}", musicItem.name(), tracks);
 		return tracks.stream().map(i -> {
 			for (String path : libraryPaths) {
 				if (i.path().startsWith(path)) {

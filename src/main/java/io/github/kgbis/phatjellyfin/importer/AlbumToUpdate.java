@@ -27,7 +27,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class AlbumToUpdate {
+public class AlbumToUpdate implements AlbumMatchingResult {
 
 	private final String jellyfinId;
 
@@ -38,5 +38,7 @@ public class AlbumToUpdate {
 	private final List<TrackToUpdate> tracks;
 
 	private final Integer productionYear;
+
+	private List<ScannedFile> unmatchedTracks;
 
 }
