@@ -9,9 +9,9 @@ PhatJellyfin reads custom metadata from your music files and imports it into Jel
 
 ### Why?
 
-Well, I own an old Kenwood car audio head with a Phatnoise cartridge, in fact a SDD, which mimics a CD loader. It's a 
-really cool gadget and, in my humble opinion, far better than a Spotify subscription or a pendrive as it packages a lot 
-of features.
+Well, I own an old Kenwood car audio head with a Phatnoise cartridge, in fact an ultra-ata HDD (A 160Gb Samsung disc in place of the
+original 10Gb HDD shipped originally, which mimics a CD loader. It's a  really cool gadget and, in my humble opinion, far better than
+a Spotify subscription or a pendrive as it packages a lot of features.
 
 The downside is that is a not internationalized device so any non-english character like accented vowels, the spanish _ñ_ 
 or german umlaut is replaced by am ugly blank space. My approach was to replace any of those with the ascii approach, so
