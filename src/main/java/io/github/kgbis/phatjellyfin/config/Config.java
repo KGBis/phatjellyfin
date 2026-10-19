@@ -30,6 +30,7 @@ import lombok.ToString;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder(toBuilder = true)
@@ -40,7 +41,7 @@ import java.util.Map;
 public class Config {
 
 	@JsonIgnore
-	private List<Path> rootFolders;
+	private Set<Path> rootFolders;
 
 	@JsonIgnore
 	private boolean recursive;

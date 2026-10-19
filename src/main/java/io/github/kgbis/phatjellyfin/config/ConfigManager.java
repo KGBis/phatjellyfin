@@ -27,8 +27,12 @@ import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Singleton
 @Slf4j
@@ -70,7 +74,15 @@ public class ConfigManager {
 		return currentConfig;
 	}
 
-	public Config loadConfig() throws IOException {
+	public void addServerLibraries(List<Library> libraries) {
+		List<String> list = libraries.stream()
+			.flatMap(library -> library.folders().stream())
+			.map(Folder::path)
+			.toList();
+		currentConfig = currentConfig.toBuilder().libraryPaths(list).build();
+	}
+
+	private Config loadConfig() throws IOException {
 		Config config;
 		if (configStorage.exists()) {
 			config = configStorage.read();
@@ -79,10 +91,10 @@ public class ConfigManager {
 			config = getDefaultConfig();
 		}
 
-		return addOtherProperties(config);
+		return addCommandLineArgs(config);
 	}
 
-	public Config getDefaultConfig() {
+	private Config getDefaultConfig() {
 		JellyfinServerData serverData = new JellyfinServerData("http://localhost:8096", null);
 
 		// @formatter:off
@@ -99,19 +111,27 @@ public class ConfigManager {
 		return config;
 	}
 
-	public void addServerLibraries(List<Library> libraries) {
-		List<String> list = libraries.stream()
-			.flatMap(library -> library.folders().stream())
-			.map(Folder::path)
-			.toList();
-		currentConfig = currentConfig.toBuilder().libraryPaths(list).build();
-	}
+	private Config addCommandLineArgs(Config config) {
+		Set<Path> rootFolders = cliArguments.getFolders()
+			.stream()
+			.sorted()
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
-	private Config addOtherProperties(Config config) {
+		// Remove children if recursive
+		Set<Path> finalFolders;
+		if (cliArguments.isRecursive()) {
+			finalFolders = rootFolders.stream()
+				.filter(path -> rootFolders.stream().noneMatch(other -> !path.equals(other) && path.startsWith(other)))
+				.collect(Collectors.toCollection(LinkedHashSet::new));
+		}
+		else {
+			finalFolders = new LinkedHashSet<>(rootFolders);
+		}
+
 		return config.toBuilder()
 			.apply(cliArguments.isApply())
 			.recursive(cliArguments.isRecursive())
-			.rootFolders(cliArguments.getFolders().stream().sorted().toList())
+			.rootFolders(finalFolders)
 			.build();
 	}
 

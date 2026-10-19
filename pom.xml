@@ -7,7 +7,7 @@
 
     <groupId>io.github.kgbis</groupId>
     <artifactId>phatjellyfin</artifactId>
-    <version>0.13.0</version>
+    <version>0.99.0</version>
 
     <name>io.github.kgbis.phatjellyfin.PhatJellyfin</name>
     <description>Jellyfin CLI music tag importer</description>
@@ -48,6 +48,8 @@
         <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
         <jaudiotagger.version>2.0.38</jaudiotagger.version>
         <httpcore5.version>5.4.3</httpcore5.version>
+        <junit5-system-exit.version>2.0.3</junit5-system-exit.version>
+        <asm.version>9.11.1</asm.version>
     </properties>
 
     <repositories>
@@ -179,6 +181,26 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.ginsberg</groupId>
+            <artifactId>junit5-system-exit</artifactId>
+            <version>${junit5-system-exit.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.ow2.asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>${asm.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -276,7 +298,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+                    <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar} -javaagent:${com.ginsberg:junit5-system-exit:jar}</argLine>
                 </configuration>
             </plugin>
 
