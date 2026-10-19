@@ -30,33 +30,22 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.SupportedFileFormat;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.mp3.MP3File;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.TagField;
-import org.jaudiotagger.tag.id3.AbstractID3v2Frame;
 import org.jspecify.annotations.NonNull;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Year;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -75,22 +64,24 @@ public class MusicScanner {
 
 	private final ArtistHelper artistHelper;
 
-	private final Pattern pattern = Pattern.compile("^(\\d{4})");
+	private final MusicFileReader musicFileReader;
 
 	private OperationResult<ScanResult> scanResult;
 
 	@Inject
 	public MusicScanner(ConfigManager configManager, Console console, MessageManager messageManager,
-			ArtistHelper artistHelper) {
+			ArtistHelper artistHelper, MusicFileReader musicFileReader) {
 		this.configManager = configManager;
 		this.console = console;
 		this.messageManager = messageManager;
 		this.artistHelper = artistHelper;
+		this.musicFileReader = musicFileReader;
 	}
 
-	public boolean scan() throws IOException, ConfigException {
+	public OperationResult<ScanResult> scan() throws IOException, ConfigException {
 		log.debug("Using config directory: {}", ConfigStorage.getConfigFile());
 		Config config = configManager.current();
+		musicFileReader.setConfiguredMetadata(config.getMetadata());
 		log.info("Starting music scanner with config: {}", config);
 
 		// get the scanning result
@@ -100,9 +91,8 @@ public class MusicScanner {
 		// Show summary (if success)
 		showSummary();
 
-		// return true if success and at least one file to process
-		return scanResult.isSuccess() && !scanResult.getResult().scannedFiles().isEmpty();
-
+		// return the result. It'll be the Importer the one to take care of it
+		return scanResult;
 	}
 
 	public Map<MusicKey, List<ScannedFile>> prepareScannedData() throws IOException {
@@ -111,7 +101,7 @@ public class MusicScanner {
 		Map<MusicKey, List<ScannedFile>> preparedScannedData = prepareScannedData(scannedFiles);
 
 		// normalize scanned tracks to get rid of the root folder used in the scanning
-		List<Path> rootFolders = configManager.current().getRootFolders();
+		Set<Path> rootFolders = configManager.current().getRootFolders();
 		return preparedScannedData.entrySet()
 			.stream()
 			.collect(Collectors.toMap(Map.Entry::getKey, entry -> getNormalizedScanned(rootFolders, entry.getValue()),
@@ -124,7 +114,7 @@ public class MusicScanner {
 	 * @param scannedFiles list of scanned files
 	 * @return the normalized scanned file
 	 */
-	private List<ScannedFile> getNormalizedScanned(List<Path> rootFolders, List<ScannedFile> scannedFiles) {
+	private List<ScannedFile> getNormalizedScanned(Collection<Path> rootFolders, List<ScannedFile> scannedFiles) {
 		return scannedFiles.stream().map(scannedFile -> {
 			Path path = Path.of(scannedFile.path());
 			Path rootFolder = rootFolders.stream().filter(path::startsWith).findFirst().orElseThrow();
@@ -143,38 +133,52 @@ public class MusicScanner {
 		// jAudioTagger supported extensions
 		Set<String> supportedExtensions = getSupportedExtensions();
 
-		List<ScannedFile> processableFiles = new ArrayList<>();
-		List<ScannedFile> skippableFiles = new ArrayList<>();
-		List<ScannedError> errorFiles = new ArrayList<>();
-
 		console.print(messageManager.buildStartScanMessage(config.getRootFolders(), recursive));
 
-		for (Path rootFolder : config.getRootFolders()) {
-			// to finetune the scanning message
-			AtomicReference<String> oldStrPath = new AtomicReference<>("");
+		// to finetune the scanning message
+		AtomicReference<String> oldStrPath = new AtomicReference<>("");
 
-			try (Stream<Path> pathStream = config.isRecursive() ? Files.walk(rootFolder) : Files.list(rootFolder)) {
-				pathStream.filter(Files::isRegularFile)
-					.filter(path -> isSupportedExtension(path, supportedExtensions))
-					.forEach(path -> {
-						String strPath = path.getParent() != null ? path.getParent().toString() : path.toString();
-						if (!strPath.equalsIgnoreCase(oldStrPath.get())) {
-							console.print("\r%sScanning music folder '%s'".formatted(ANSI_DEL, strPath));
-							oldStrPath.set(strPath);
-						}
+		try (Stream<Path> pathStream = getAllPathsStream(config)) {
+			pathStream.filter(Files::isRegularFile)
+				.filter(path -> isSupportedExtension(path, supportedExtensions))
+				.forEach(path -> {
+					printScanningProgress(path, oldStrPath);
+					musicFileReader.processFile(path);
+				});
 
-						processFile(config, path, processableFiles, skippableFiles, errorFiles);
-					});
-
-				console.print("\r" + ANSI_DEL);
-			}
-			catch (IOException e) {
-				success = false;
-				errorCause = e.getMessage();
-			}
+			console.print("\r" + ANSI_DEL);
+		}
+		catch (UncheckedIOException e) {
+			success = false;
+			errorCause = e.getMessage();
 		}
 
-		return new OperationResult<>(success, new ScanResult(processableFiles, skippableFiles, errorFiles), errorCause);
+		return new OperationResult<>(success, new ScanResult(musicFileReader.getProcessableFiles(),
+				musicFileReader.getSkippableFiles(), musicFileReader.getErrorFiles()), errorCause);
+	}
+
+	private Stream<Path> getAllPathsStream(Config config) {
+		return config.getRootFolders().stream().flatMap(path -> {
+			try {
+				if (config.isRecursive()) {
+					return Files.walk(path);
+				}
+				else {
+					return Files.list(path);
+				}
+			}
+			catch (IOException e) {
+				throw new UncheckedIOException(e);
+			}
+		});
+	}
+
+	private void printScanningProgress(Path path, AtomicReference<String> oldStrPath) {
+		String strPath = path.getParent() != null ? path.getParent().toString() : path.toString();
+		if (!strPath.equalsIgnoreCase(oldStrPath.get())) {
+			console.print("\r%sScanning music folder '%s'".formatted(ANSI_DEL, strPath));
+			oldStrPath.set(strPath);
+		}
 	}
 
 	/**
@@ -201,102 +205,6 @@ public class MusicScanner {
 	}
 
 	/**
-	 * Process a file with jAudioTagger and try to extract the wanted tags.
-	 * <p>
-	 * {@linkplain CannotReadException} usually means the format / content is not
-	 * supported, like a text file or so on, so those are igonred
-	 * </p>
-	 * @param config Current configuration
-	 * @param path The file to process
-	 * @param processableFiles List of files that HAVE the wanted metadata
-	 * @param skippableFiles List of files that DO NOT HAVE the wanted metadata
-	 * @param errorFiles List of files that could not be read / scanned
-	 */
-	private void processFile(Config config, Path path, List<ScannedFile> processableFiles,
-			List<ScannedFile> skippableFiles, List<ScannedError> errorFiles) {
-		Map<JellyfinMetadata, String> wantedMetadata = config.getMetadata();
-		Map<JellyfinMetadata, String> scannedMetadata = new EnumMap<>(JellyfinMetadata.class);
-
-		try {
-			AudioFile file = AudioFileIO.read(path.toFile());
-
-			Integer trackNumber = null;
-			Integer discNumber = null;
-			Integer productionYear = null;
-
-			// It's a MP3
-			if (file.getExt().equals(SupportedFileFormat.MP3.getFilesuffix())) {
-				MP3File f = (MP3File) file;
-				Tag tag = f.getTag();
-
-				// Track number & disc number
-				trackNumber = tag.getAll(FieldKey.TRACK).stream().findFirst().map(Integer::parseInt).orElse(null);
-				discNumber = tag.getAll(FieldKey.DISC_NO).stream().findFirst().map(Integer::parseInt).orElse(null);
-				productionYear = tag.getAll(FieldKey.YEAR).stream().findFirst().map(this::parseYear).orElse(null);
-
-				// If genre will be used -> tag.getAll(FieldKey.GENRE)
-
-				// The map with the custom tags should be filled if the TXXX frame exists
-				extractMetadata(tag, wantedMetadata, scannedMetadata);
-
-				if (!scannedMetadata.isEmpty()) {
-					log.debug("Scanned {} metadata fields, content: {}", scannedMetadata.size(), scannedMetadata);
-				}
-			} // end of file tag extraction
-
-			if (scannedMetadata.isEmpty()) {
-				skippableFiles.add(new ScannedFile(path.toString(), null, null, null, Map.of()));
-			}
-			else {
-				processableFiles
-					.add(new ScannedFile(path.toString(), trackNumber, discNumber, productionYear, scannedMetadata));
-			}
-		}
-		catch (CannotReadException _) {
-			log.debug("Audio file cannot be read: {}", path);
-		}
-		catch (Exception e) {
-			log.error("Error reading file: {}", path, e);
-			errorFiles.add(new ScannedError(path, e.getMessage(), e));
-		}
-	}
-
-	private Integer parseYear(String value) {
-		if (StringUtils.isEmpty(value)) {
-			return null;
-		}
-
-		java.util.regex.Matcher matcher = pattern.matcher(value);
-
-		if (!matcher.find()) {
-			return null;
-		}
-
-		int year = Integer.parseInt(matcher.group(1));
-		int currentYear = Year.now(ZoneId.systemDefault()).getValue();
-
-		return (year > 1231 && year <= currentYear) ? year : null;
-	}
-
-	private void extractMetadata(Tag tag, Map<JellyfinMetadata, String> wantedMetadata,
-			Map<JellyfinMetadata, String> scannedMetadata) {
-		for (TagField field : tag.getFields("TXXX")) {
-			if (!field.isBinary() && field instanceof AbstractID3v2Frame id3v2Frame) {
-				String description = id3v2Frame.getBody().getObjectValue("Description").toString();
-				String value = id3v2Frame.getBody().getUserFriendlyValue();
-
-				for (Map.Entry<JellyfinMetadata, String> entry : wantedMetadata.entrySet()) {
-					// In the wanted metadata map we find the field in TXXX
-					if (entry.getValue().equals(description)) {
-						scannedMetadata.put(entry.getKey(), value);
-						break;
-					}
-				}
-			}
-		}
-	}
-
-	/**
 	 * Group scanned track files by {@linkplain MusicKey} (ALBUM_ARTIST + ALBUM)
 	 * @param scannedFiles Locally scanned files
 	 * @return Grouping map
@@ -317,7 +225,8 @@ public class MusicScanner {
 			log.info("Files to update: {}, Skipped: {}, Failed to read: {}", result.scannedFiles().size(),
 					result.skippedFiles().size(), result.errorFiles().size());
 
-			String s = messageManager.buildScanSuccessMessage(result.scannedFiles().size(), result.skippedFiles().size(),	result.errorFiles().size());
+			String s = messageManager.buildScanSuccessMessage(result.scannedFiles().size(),
+					result.skippedFiles().size(), result.errorFiles().size());
 			console.println(s);
 
 			if (result.scannedFiles().isEmpty()) {

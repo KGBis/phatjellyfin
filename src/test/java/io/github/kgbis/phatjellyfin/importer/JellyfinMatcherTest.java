@@ -144,7 +144,7 @@ class JellyfinMatcherTest {
 	}
 
 	private Items loadItems(String filename) throws IOException {
-		return mapper.readValue(getClass().getResourceAsStream("/" + filename), Items.class);
+		return mapper.readValue(getClass().getResourceAsStream("/json/" + filename), Items.class);
 	}
 
 	private Map<MusicKey, List<ScannedFile>> getMasMaderaPreparedlibrary() {

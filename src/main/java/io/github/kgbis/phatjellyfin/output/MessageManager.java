@@ -26,6 +26,7 @@ import jakarta.inject.Singleton;
 import lombok.SneakyThrows;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 import static io.github.kgbis.phatjellyfin.Application.APP_CONFIG_FILE;
@@ -169,7 +170,7 @@ public class MessageManager {
 		return s.toString();
 	}
 
-	public String buildStartScanMessage(List<Path> rootFolders, String recursive) {
+	public String buildStartScanMessage(Collection<Path> rootFolders, String recursive) {
 		StringBuilder s = new StringBuilder();
 		for (Path rootFolder : rootFolders) {
 			s.append(spaces(4)).append(rootFolder.toString()).append("\n");
