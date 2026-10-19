@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +74,7 @@ public class Importer {
 	 * Importer entry point
 	 */
 	public void run() throws IOException, InterruptedException {
-		if (musicScanner.scan() && shouldApply()) {
+		if (scanSuccessful(musicScanner.scan()) && shouldApply()) {
 			Map<MusicKey, List<ScannedFile>> scannedData = musicScanner.prepareScannedData();
 			Map<MusicKey, AlbumToUpdate> matchingItems = jellyfinMatcher.matchAgainstJellyfin(scannedData);
 			Map<OperationResult<Void>, List<UpdateItem>> writeResult = jellyfinWriter.write(matchingItems);
@@ -87,7 +88,7 @@ public class Importer {
 	 * @param musicFolders Root directories to check (1..n)
 	 * @return The result of the operation
 	 */
-	public OperationResult<Void> rootFoldersExistAndReadable(List<Path> musicFolders) {
+	public OperationResult<Void> rootFoldersExistAndReadable(Collection<Path> musicFolders) {
 		for (Path musicFolder : musicFolders) {
 			if (!Files.exists(musicFolder)) {
 				return new OperationResult<>(false, null, String.format(PATH_DOES_NOT_EXIST_MESSAGE, musicFolder));
@@ -104,6 +105,21 @@ public class Importer {
 		return new OperationResult<>(true, null, null);
 	}
 
+	/**
+	 * Checks if the scan process was successful
+	 * @param scanResult The library/libraries scan result
+	 * @return true if success and at least one file to process
+	 */
+	private boolean scanSuccessful(OperationResult<ScanResult> scanResult) {
+		return scanResult.isSuccess() && !scanResult.getResult().scannedFiles().isEmpty();
+	}
+
+	/**
+	 * If program arguments didn't include {@code --apply} ask for confirmation to apply
+	 * changes
+	 * @return if program will continue or stop
+	 * @throws IOException on {@linkplain ConfigManager} I/O error
+	 */
 	private boolean shouldApply() throws IOException {
 		if (configManager.current().isApply()) {
 			return true;

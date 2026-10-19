@@ -97,7 +97,7 @@ public class PhatJellyfin {
 		console.println(LOGO);
 
 		try {
-			checkRootFolder();
+			checkRootFolders();
 			showConfig();
 			checkJellyfinServer();
 			importer.run();
@@ -131,7 +131,7 @@ public class PhatJellyfin {
 	/**
 	 * Checks if folder path exists and we can read from it
 	 */
-	private void checkRootFolder() throws IOException {
+	private void checkRootFolders() throws IOException {
 		OperationResult<Void> result = importer.rootFoldersExistAndReadable(configManager.current().getRootFolders());
 		if (!result.isSuccess()) {
 			abort(result.getErrorCause());
