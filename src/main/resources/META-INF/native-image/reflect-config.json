@@ -1,8 +1,5 @@
 [
   {
-    "type": "boolean"
-  },
-  {
     "type": "ch.qos.logback.classic.BasicConfigurator",
     "methods": [
       {
