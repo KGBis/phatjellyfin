@@ -76,6 +76,14 @@ public class PhatJellyfin {
 	}
 
 	public void initialize(String[] args) {
+		System.out.println("file.encoding = " + System.getProperty("file.encoding"));
+		System.out.println("native.encoding = " + System.getProperty("native.encoding"));
+		System.out.println("sun.jnu.encoding = " + System.getProperty("sun.jnu.encoding"));
+
+		for (int i = 0; i < args.length; i++) {
+			System.out.printf("args[%d] = [%s]%n", i, args[i]);
+		}
+
 		// start stopwatch
 		stopWatch = StopWatch.createStarted();
 
