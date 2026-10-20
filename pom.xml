@@ -209,7 +209,7 @@
         <finalName>${project.artifactId}-${project.version}</finalName>
 
         <plugins>
-            <!-- Compile to Java 21 -->
+            <!-- Compile to Java 25 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -335,6 +335,9 @@
                         <configuration>
                             <imageName>phatjellyfin</imageName>
                             <mainClass>${main.class}</mainClass>
+                            <metadataRepository>
+                                <enabled>true</enabled>
+                            </metadataRepository>
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
                             </buildArgs>
