@@ -1,0 +1,275 @@
+{
+  "Items": [
+    {
+      "Name": "Canciones para Normales y Mero Dementes",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "63d372ef8851f70eebc04c42584bf853",
+      "PremiereDate": "2001-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Rosendo/2001 - Canciones para Normales y Mero Dementes",
+      "ChannelId": null,
+      "RunTimeTicks": 23955014999,
+      "ProductionYear": 2001,
+      "ProviderIds": {
+        "MusicBrainzAlbum": "6f2ed2d8-1a04-4bad-8adf-62872ebdb6ba",
+        "MusicBrainzReleaseGroup": "f67e94a5-e4af-3ada-852a-78d349ae92b7"
+      },
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropImageTags": [
+        "e5935aebd9fc1d31e54cd51f297b49c0"
+      ],
+      "Artists": [
+        "Rosendo"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "AlbumArtist": "Rosendo",
+      "AlbumArtists": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "e2e660e54a51dba1aa73791420caed31"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "696727f10d201d0ca5f809bce04b6f4d",
+      "ImageBlurHashes": {
+        "Primary": {
+          "e2e660e54a51dba1aa73791420caed31": "VNLXV;.80KRjX9%Max.8oyt79ERi?aaext?abHxst7RP"
+        },
+        "Logo": {
+          "696727f10d201d0ca5f809bce04b6f4d": "OBP%O.xu9Ft74nxu4n~qt7oft7j[ofay00WBxuM{oft7xu"
+        },
+        "Backdrop": {
+          "e5935aebd9fc1d31e54cd51f297b49c0": "WZJ@REPWNM^%%2M|~AEmt8-:t8M{IBNHozt7R-WB=_tQofr=a#t8"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Directo",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "eccb1c2be6e4cdae0869ccc84ea3f89f",
+      "PremiereDate": "1989-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Rosendo/1989 - Directo",
+      "ChannelId": null,
+      "RunTimeTicks": 42588995918,
+      "ProductionYear": 1989,
+      "ProviderIds": {
+        "MusicBrainzAlbum": "21ac854d-4f6f-4069-9d5a-326462010a2a",
+        "MusicBrainzReleaseGroup": "3344cc03-4dcd-3edf-b912-eb0d19d9b61c"
+      },
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropImageTags": [
+        "e5935aebd9fc1d31e54cd51f297b49c0"
+      ],
+      "Artists": [
+        "Rosendo"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "AlbumArtist": "Rosendo",
+      "AlbumArtists": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "43a29ec17db6fc780c24f5c883348a9a"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "696727f10d201d0ca5f809bce04b6f4d",
+      "ImageBlurHashes": {
+        "Primary": {
+          "43a29ec17db6fc780c24f5c883348a9a": "eECOC2OEIoRkNL0|snShs:xE0ynit8kBt3}tW=I:ahWXxuj[R*R*ah"
+        },
+        "Logo": {
+          "696727f10d201d0ca5f809bce04b6f4d": "OBP%O.xu9Ft74nxu4n~qt7oft7j[ofay00WBxuM{oft7xu"
+        },
+        "Backdrop": {
+          "e5935aebd9fc1d31e54cd51f297b49c0": "WZJ@REPWNM^%%2M|~AEmt8-:t8M{IBNHozt7R-WB=_tQofr=a#t8"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Siempre Hay Una Historia... en Directo",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "12c180d287731bdd55a2c7e190c454a8",
+      "PremiereDate": "1999-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Rosendo/1999 - Siempre Hay Una Historia... en Directo",
+      "ChannelId": null,
+      "RunTimeTicks": 41116473470,
+      "ProductionYear": 1999,
+      "ProviderIds": {},
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropImageTags": [
+        "e5935aebd9fc1d31e54cd51f297b49c0"
+      ],
+      "Artists": [
+        "Rosendo"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "AlbumArtist": "Rosendo",
+      "AlbumArtists": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "1e1e340ab3959e3a2c20174ca5f49676"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "696727f10d201d0ca5f809bce04b6f4d",
+      "ImageBlurHashes": {
+        "Primary": {
+          "1e1e340ab3959e3a2c20174ca5f49676": "VHGuO7?aId-ot60tIvg5M|Rmtot6xTRkM{?anznMt6Ri"
+        },
+        "Logo": {
+          "696727f10d201d0ca5f809bce04b6f4d": "OBP%O.xu9Ft74nxu4n~qt7oft7j[ofay00WBxuM{oft7xu"
+        },
+        "Backdrop": {
+          "e5935aebd9fc1d31e54cd51f297b49c0": "WZJ@REPWNM^%%2M|~AEmt8-:t8M{IBNHozt7R-WB=_tQofr=a#t8"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Un Palo al Agua: 20 Grandes Canciones (1985-1988)",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "2f9c8b8e39f087e4d1fa64fa6d4c37cf",
+      "PremiereDate": "1988-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Rosendo/1988 - Un Palo al Agua 20 Grandes Canciones (1985-1988)",
+      "ChannelId": null,
+      "RunTimeTicks": 44396408168,
+      "ProductionYear": 1988,
+      "ProviderIds": {},
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropImageTags": [
+        "e5935aebd9fc1d31e54cd51f297b49c0"
+      ],
+      "Artists": [
+        "Rosendo"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "AlbumArtist": "Rosendo",
+      "AlbumArtists": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "384c7d923cc3817024d009ac318e611e"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "696727f10d201d0ca5f809bce04b6f4d",
+      "ImageBlurHashes": {
+        "Primary": {
+          "384c7d923cc3817024d009ac318e611e": "eGEVE9-o0K0LIp%1ELRkxaxa4:9t-p-oWVv~sAxutQNGt6WVoLxasp"
+        },
+        "Logo": {
+          "696727f10d201d0ca5f809bce04b6f4d": "OBP%O.xu9Ft74nxu4n~qt7oft7j[ofay00WBxuM{oft7xu"
+        },
+        "Backdrop": {
+          "e5935aebd9fc1d31e54cd51f297b49c0": "WZJ@REPWNM^%%2M|~AEmt8-:t8M{IBNHozt7R-WB=_tQofr=a#t8"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    },
+    {
+      "Name": "Veo, Veo... Mamoneo",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "b5463b49b506f685d09b5d325ad121e4",
+      "PremiereDate": "2002-01-01T00:00:00.0000000Z",
+      "Path": "/media/music/Rosendo/2002 - Veo, Veo... Mamoneo",
+      "ChannelId": null,
+      "RunTimeTicks": 23287640830,
+      "ProductionYear": 2002,
+      "ProviderIds": {
+        "MusicBrainzAlbum": "cb3593b1-47d9-4de5-8191-9571d31985d9",
+        "MusicBrainzReleaseGroup": "27755fdf-8ec5-3e36-b68a-c6bedae05473"
+      },
+      "IsFolder": true,
+      "Type": "MusicAlbum",
+      "ParentLogoItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropItemId": "b3bda9010f31c4cc1f78a47b09f7cf5d",
+      "ParentBackdropImageTags": [
+        "e5935aebd9fc1d31e54cd51f297b49c0"
+      ],
+      "Artists": [
+        "Rosendo"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "AlbumArtist": "Rosendo",
+      "AlbumArtists": [
+        {
+          "Name": "Rosendo",
+          "Id": "b3bda9010f31c4cc1f78a47b09f7cf5d"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "ef2b4941d90803986e7a3a897dba074d"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "696727f10d201d0ca5f809bce04b6f4d",
+      "ImageBlurHashes": {
+        "Primary": {
+          "ef2b4941d90803986e7a3a897dba074d": "eXF.^{]nEzNu,?|_$PJRju$PJ8E#Nuw{o1S2NuNuo1S2=Kw{S2S2S2"
+        },
+        "Logo": {
+          "696727f10d201d0ca5f809bce04b6f4d": "OBP%O.xu9Ft74nxu4n~qt7oft7j[ofay00WBxuM{oft7xu"
+        },
+        "Backdrop": {
+          "e5935aebd9fc1d31e54cd51f297b49c0": "WZJ@REPWNM^%%2M|~AEmt8-:t8M{IBNHozt7R-WB=_tQofr=a#t8"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Unknown"
+    }
+  ],
+  "TotalRecordCount": 5,
+  "StartIndex": 0
+}

@@ -1,0 +1,951 @@
+{
+  "Items": [
+    {
+      "Name": "You can't always get what you want",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "c4f132602f7eb0a12a6626af366e38d9",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/01 - You can't always get what you want.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2925975510,
+      "ProductionYear": 2008,
+      "IndexNumber": 1,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "The Rolling Stones"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "The Rolling Stones",
+          "Id": "7bc3e70421f1a6c37455fc82eaeff0fa"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "5cd67948294024f68851cf5d9e21558e"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "5cd67948294024f68851cf5d9e21558e": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.54
+    },
+    {
+      "Name": "Mojo",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "b98cad8bf08224334d054b3ec1707c36",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/02 - Mojo.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2221714290,
+      "ProductionYear": 2008,
+      "IndexNumber": 2,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Peeping Tom"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Peeping Tom",
+          "Id": "69acc60d996728e5fdefcecc6a61aef9"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "400b914d3a24370904135f235ba8b35f"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "400b914d3a24370904135f235ba8b35f": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.525
+    },
+    {
+      "Name": "Rocket man",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d56f224bb74c3248c4f1312750f3333a",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/03 - Rocket man.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 3013485710,
+      "ProductionYear": 2008,
+      "IndexNumber": 3,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "My Morning Jacket"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "My Morning Jacket",
+          "Id": "3768b77002f503a0512be892897d5fcb"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "279afb2ac43ffb9ee738e8e944d513d1"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "279afb2ac43ffb9ee738e8e944d513d1": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.74
+    },
+    {
+      "Name": "L.A. Woman",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "cfd37f4a1885b1e6e9aa7bd77d04cf5e",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/04 - L.A. Woman.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2615640820,
+      "ProductionYear": 2008,
+      "IndexNumber": 4,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "The Doors",
+        "Paul Oakenfold"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "The Doors",
+          "Id": "cd1c8ef51c7bb9aa16b35b846fe18510"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "7dcd53764699f93bc5937b100c0cf627"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "7dcd53764699f93bc5937b100c0cf627": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.33
+    },
+    {
+      "Name": "Light of day",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d78246f00ff764ca956056fe095057fe",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/05 - Light of day.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2970906120,
+      "ProductionYear": 2008,
+      "IndexNumber": 5,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Tommy Stinson"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Tommy Stinson",
+          "Id": "5da4a53fd0c0055e590192a38cbe20cb"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "64598e767c9691877f16ff040eb54d1e"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "64598e767c9691877f16ff040eb54d1e": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.32
+    },
+    {
+      "Name": "If you see her, say hello",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "5dd3a6e5a8bca0e39422693d02b13ce9",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/06 - If you see her, say hello.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2881306120,
+      "ProductionYear": 2008,
+      "IndexNumber": 6,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Bob Dylan"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Bob Dylan",
+          "Id": "aa65988eae10f183f185cb101ed11b6c"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "a7a495854d1fb36243f764a18fbb9fb7"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "a7a495854d1fb36243f764a18fbb9fb7": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.585
+    },
+    {
+      "Name": "Little round mirrors",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d8a624ced3198c19adc5e646b641aa55",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/07 - Little round mirrors.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 3158726530,
+      "ProductionYear": 2008,
+      "IndexNumber": 7,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Harvey Danger"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Harvey Danger",
+          "Id": "36bd49f8b46c146b1c6ceb94a071fcea"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "9a8b538f9791ce826e308cd6240fe266"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "9a8b538f9791ce826e308cd6240fe266": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.085
+    },
+    {
+      "Name": "Don't let us get sick",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "5b2bb96c6eeff46501cf24acc7214009",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/08 - Don't let us get sick.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1423934690,
+      "ProductionYear": 2008,
+      "IndexNumber": 8,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Madeleine Martin"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Madeleine Martin",
+          "Id": "37ef1f81e2556e20a83d2253e1381465"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "24ac8b2b095f363c31483cf36154673c"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "24ac8b2b095f363c31483cf36154673c": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.055
+    },
+    {
+      "Name": "Paranoid",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "2aea4bd33a40d4aeb5f1d59b3986fbe5",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/09 - Paranoid.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2069681630,
+      "ProductionYear": 2008,
+      "IndexNumber": 9,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Gus Black"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Gus Black",
+          "Id": "c0433b5049d3ba19d6be87dab1b13193"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "fd8e7c04a416c2a6501c3d0584fe6842"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "fd8e7c04a416c2a6501c3d0584fe6842": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.49
+    },
+    {
+      "Name": "A girl like you",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "dbdc91049fb6cbfe20b42e07cf4c3e60",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/10 - A girl like you.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2246269390,
+      "ProductionYear": 2008,
+      "IndexNumber": 10,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Mexican Institute of Sound"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Mexican Institute of Sound",
+          "Id": "9fdd8e7014169b51974513fb98330368"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "f17813ce52da663836c52cd154f1ff7c"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "f17813ce52da663836c52cd154f1ff7c": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.545
+    },
+    {
+      "Name": "Mohammed's radio",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "1dd1f237885696ff39f7c9df49d046cf",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/11 - Mohammed's radio.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2920489799,
+      "ProductionYear": 2008,
+      "IndexNumber": 11,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Warren Zevon"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Warren Zevon",
+          "Id": "b04fc1ef70ac269a7e081feb5362eab1"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "1b534448c97d59d488eb15b35978b406"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "1b534448c97d59d488eb15b35978b406": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.575
+    },
+    {
+      "Name": "Surrender",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "d8f84525f306b321504913fa200381e3",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/12 - Surrender.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1171591840,
+      "ProductionYear": 2008,
+      "IndexNumber": 12,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Madeleine Martin"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Madeleine Martin",
+          "Id": "37ef1f81e2556e20a83d2253e1381465"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "909c0260c58e77ed1883ef089f7ed866"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "909c0260c58e77ed1883ef089f7ed866": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.555
+    },
+    {
+      "Name": "That kind of man",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "1881b741040391cb65ab16ca9223a023",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/13 - That kind of man.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2208391840,
+      "ProductionYear": 2008,
+      "IndexNumber": 13,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "The Heavy"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "The Heavy",
+          "Id": "187f55e8f7b63eaadc8379f7eed83bf0"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "a677524e266baa82dfa40edd32faa8ff"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "a677524e266baa82dfa40edd32faa8ff": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.185
+    },
+    {
+      "Name": "Keep on",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "88184d090ef0c630d244f732928070b7",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/14 - Keep on.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2675722450,
+      "ProductionYear": 2008,
+      "IndexNumber": 14,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Champion"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Champion",
+          "Id": "56afd5d4db6d9ddd72af3baca97591cb"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "c9526c2b3179e3438253d9e35e92b63a"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "c9526c2b3179e3438253d9e35e92b63a": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.955
+    },
+    {
+      "Name": "Reconsider me",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "8ae3a1a401204b4e7495bb9e74b66a1b",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/15 - Reconsider me.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1542008160,
+      "ProductionYear": 2008,
+      "IndexNumber": 15,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Steve Earle",
+        "Reckless Kelly"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Steve Earle",
+          "Id": "5f30f4a2f3f19ab7fb739024838b89b1"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "da46c76f8caf0c8a28eabcdf1e494078"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "da46c76f8caf0c8a28eabcdf1e494078": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.7
+    },
+    {
+      "Name": "Only women bleed",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "77ea4371d0f431add12332843cf4c8fd",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/16 - Only women bleed.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1136326530,
+      "ProductionYear": 2008,
+      "IndexNumber": 16,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Madeleine Martin"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Madeleine Martin",
+          "Id": "37ef1f81e2556e20a83d2253e1381465"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "0778a1bf8047336be499e8f21c3b6a32"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "0778a1bf8047336be499e8f21c3b6a32": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.38
+    },
+    {
+      "Name": "High flying bird",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "6f6d4cbc5279cd31b31183bd40e77b66",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/17 - High flying bird.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 2533093880,
+      "ProductionYear": 2008,
+      "IndexNumber": 17,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Elton John"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Elton John",
+          "Id": "88d60cd4dde118381180f606aa5a28ba"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "83c289b4dbf4a6dd88c9dbead0f90ac4"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "83c289b4dbf4a6dd88c9dbead0f90ac4": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.125
+    },
+    {
+      "Name": "You can't always get what you want",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "52e183bea3d1bf1048bed45ca835e720",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/18 - You can't always get what you want.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 3908440820,
+      "ProductionYear": 2008,
+      "IndexNumber": 18,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Tommy Stinson",
+        "Friends for Done to Death"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Tommy Stinson",
+          "Id": "5da4a53fd0c0055e590192a38cbe20cb"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "d68bccc41aecc533176a74837f76f006"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "d68bccc41aecc533176a74837f76f006": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.51
+    },
+    {
+      "Name": "Hank's theme",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "1c51b72a7db85d0a6348ce6021142541",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/19 - Hank's theme.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 1999673470,
+      "ProductionYear": 2008,
+      "IndexNumber": 19,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Tyler Bates",
+        "Tree Adams"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Tyler Bates",
+          "Id": "a3aaa725267898a8770e72f10a4d0470"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "195cf04c502704580e1b74b728d32c3e"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "195cf04c502704580e1b74b728d32c3e": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -1.515
+    },
+    {
+      "Name": "Main title theme from Californication",
+      "ServerId": "41f1b4dbf34e4a64af203b9cf914f8af",
+      "Id": "e1eab18895b744a91f3d1fa9cb4a56c4",
+      "HasLyrics": false,
+      "Container": "mp3",
+      "Path": "/media/music/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/20 - Main title theme from Californication.mp3",
+      "ChannelId": null,
+      "RunTimeTicks": 451657140,
+      "ProductionYear": 2008,
+      "IndexNumber": 20,
+      "ProviderIds": {},
+      "IsFolder": false,
+      "Type": "Audio",
+      "Artists": [
+        "Tyler Bates",
+        "Tree Adams"
+      ],
+      "ArtistItems": [
+        {
+          "Name": "Tyler Bates",
+          "Id": "a3aaa725267898a8770e72f10a4d0470"
+        }
+      ],
+      "Album": "Temptation (Music from the Showtime Series Californication)",
+      "AlbumId": "ee86cdca669f63dbfd3801fa4d1bd33d",
+      "AlbumPrimaryImageTag": "7a7ef020dd49ad50d9cee4c20503b73d",
+      "AlbumArtist": "Various Artists",
+      "AlbumArtists": [
+        {
+          "Name": "Various Artists",
+          "Id": "f101f10b95b61b94849c36d7197aa3fe"
+        }
+      ],
+      "ImageTags": {
+        "Primary": "19d83b09e14da994a0815e71d49dffa1"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "19d83b09e14da994a0815e71d49dffa1": "epK^vxS3.9xaxu?^k9xuofjFSeaJi^RkNGWCR%RPR+oJ?Hj?R*ofay",
+          "7a7ef020dd49ad50d9cee4c20503b73d": "epK^vxS3.9xaxu?^k9xuofjFSLaJi^RkNGWCR%RPR+oJ?Hj?R*ofay"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Audio",
+      "NormalizationGain": -0.815
+    }
+  ],
+  "TotalRecordCount": 20,
+  "StartIndex": 0
+}
