@@ -340,6 +340,8 @@
                             </metadataRepository>
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
+                                <buildArg>-Dfile.encoding=UTF-8</buildArg>
+                                <buildArg>-H:+AddAllCharsets</buildArg>
                             </buildArgs>
                         </configuration>
                     </plugin>
