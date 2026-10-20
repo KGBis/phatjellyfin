@@ -1,6 +1,6 @@
 [
   {
-    "type": "ch.qos.logback.classic.BasicConfigurator",
+    "name": "ch.qos.logback.classic.BasicConfigurator",
     "methods": [
       {
         "name": "<init>",
@@ -9,10 +9,10 @@
     ]
   },
   {
-    "type": "ch.qos.logback.classic.spi.LogbackServiceProvider"
+    "name": "ch.qos.logback.classic.spi.LogbackServiceProvider"
   },
   {
-    "type": "ch.qos.logback.classic.util.DefaultJoranConfigurator",
+    "name": "ch.qos.logback.classic.util.DefaultJoranConfigurator",
     "methods": [
       {
         "name": "<init>",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "type": "com.beust.jcommander.converters.BooleanConverter",
+    "name": "com.beust.jcommander.converters.BooleanConverter",
     "methods": [
       {
         "name": "<init>",
@@ -32,7 +32,7 @@
     ]
   },
   {
-    "type": "com.beust.jcommander.converters.CommaParameterSplitter",
+    "name": "com.beust.jcommander.converters.CommaParameterSplitter",
     "methods": [
       {
         "name": "<init>",
@@ -41,7 +41,7 @@
     ]
   },
   {
-    "type": "com.beust.jcommander.converters.PathConverter",
+    "name": "com.beust.jcommander.converters.PathConverter",
     "methods": [
       {
         "name": "<init>",
@@ -52,7 +52,7 @@
     ]
   },
   {
-    "type": "com.beust.jcommander.validators.NoValidator",
+    "name": "com.beust.jcommander.validators.NoValidator",
     "methods": [
       {
         "name": "<init>",
@@ -61,7 +61,7 @@
     ]
   },
   {
-    "type": "com.beust.jcommander.validators.NoValueValidator",
+    "name": "com.beust.jcommander.validators.NoValueValidator",
     "methods": [
       {
         "name": "<init>",
@@ -70,7 +70,7 @@
     ]
   },
   {
-    "type": "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+    "name": "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
     "methods": [
       {
         "name": "<init>",
@@ -79,7 +79,7 @@
     ]
   },
   {
-    "type": "com.google.common.util.concurrent.AbstractFutureState",
+    "name": "com.google.common.util.concurrent.AbstractFutureState",
     "fields": [
       {
         "name": "listenersField"
@@ -93,7 +93,7 @@
     ]
   },
   {
-    "type": "com.google.common.util.concurrent.AbstractFutureState$Waiter",
+    "name": "com.google.common.util.concurrent.AbstractFutureState$Waiter",
     "fields": [
       {
         "name": "next"
@@ -104,22 +104,22 @@
     ]
   },
   {
-    "type": "com.google.inject.AbstractModule"
+    "name": "com.google.inject.AbstractModule"
   },
   {
-    "type": "com.google.inject.KotlinSupportImpl"
+    "name": "com.google.inject.KotlinSupportImpl"
   },
   {
-    "type": "com.google.inject.internal.Annotations"
+    "name": "com.google.inject.internal.Annotations"
   },
   {
-    "type": "com.google.inject.internal.InjectorShell$RootModule"
+    "name": "com.google.inject.internal.InjectorShell$RootModule"
   },
   {
-    "type": "com.google.inject.util.Modules$EmptyModule"
+    "name": "com.google.inject.util.Modules$EmptyModule"
   },
   {
-    "type": "com.sun.crypto.provider.AESCipher$General",
+    "name": "com.sun.crypto.provider.AESCipher$General",
     "methods": [
       {
         "name": "<init>",
@@ -128,7 +128,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.ARCFOURCipher",
+    "name": "com.sun.crypto.provider.ARCFOURCipher",
     "methods": [
       {
         "name": "<init>",
@@ -137,7 +137,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.ChaCha20Cipher$ChaCha20Poly1305",
+    "name": "com.sun.crypto.provider.ChaCha20Cipher$ChaCha20Poly1305",
     "methods": [
       {
         "name": "<init>",
@@ -146,7 +146,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.DESCipher",
+    "name": "com.sun.crypto.provider.DESCipher",
     "methods": [
       {
         "name": "<init>",
@@ -155,7 +155,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.DESedeCipher",
+    "name": "com.sun.crypto.provider.DESedeCipher",
     "methods": [
       {
         "name": "<init>",
@@ -164,7 +164,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.DHParameters",
+    "name": "com.sun.crypto.provider.DHParameters",
     "methods": [
       {
         "name": "<init>",
@@ -173,7 +173,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.GaloisCounterMode$AESGCM",
+    "name": "com.sun.crypto.provider.GaloisCounterMode$AESGCM",
     "methods": [
       {
         "name": "<init>",
@@ -182,7 +182,7 @@
     ]
   },
   {
-    "type": "com.sun.crypto.provider.TlsMasterSecretGenerator",
+    "name": "com.sun.crypto.provider.TlsMasterSecretGenerator",
     "methods": [
       {
         "name": "<init>",
@@ -191,7 +191,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.PhatJellyfin",
+    "name": "io.github.kgbis.phatjellyfin.PhatJellyfin",
     "jniAccessible": true,
     "methods": [
       {
@@ -214,7 +214,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.arguments.CliArguments",
+    "name": "io.github.kgbis.phatjellyfin.arguments.CliArguments",
     "fields": [
       {
         "name": "apply"
@@ -237,7 +237,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.arguments.CliParser",
+    "name": "io.github.kgbis.phatjellyfin.arguments.CliParser",
     "methods": [
       {
         "name": "<init>",
@@ -248,7 +248,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.arguments.PathValidator",
+    "name": "io.github.kgbis.phatjellyfin.arguments.PathValidator",
     "methods": [
       {
         "name": "<init>",
@@ -257,7 +257,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.JellyfinClient",
+    "name": "io.github.kgbis.phatjellyfin.client.JellyfinClient",
     "methods": [
       {
         "name": "<init>",
@@ -268,7 +268,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.Artist",
+    "name": "io.github.kgbis.phatjellyfin.client.model.Artist",
     "methods": [
       {
         "name": "<init>",
@@ -297,10 +297,10 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.Artist[]"
+    "name": "io.github.kgbis.phatjellyfin.client.model.Artist[]"
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.Folder",
+    "name": "io.github.kgbis.phatjellyfin.client.model.Folder",
     "methods": [
       {
         "name": "<init>",
@@ -313,7 +313,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.Item",
+    "name": "io.github.kgbis.phatjellyfin.client.model.Item",
     "methods": [
       {
         "name": "<init>",
@@ -336,7 +336,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.Items",
+    "name": "io.github.kgbis.phatjellyfin.client.model.Items",
     "methods": [
       {
         "name": "<init>",
@@ -349,7 +349,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.Library",
+    "name": "io.github.kgbis.phatjellyfin.client.model.Library",
     "methods": [
       {
         "name": "<init>",
@@ -364,7 +364,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.LibraryOptions",
+    "name": "io.github.kgbis.phatjellyfin.client.model.LibraryOptions",
     "methods": [
       {
         "name": "<init>",
@@ -376,7 +376,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.SystemInfo",
+    "name": "io.github.kgbis.phatjellyfin.client.model.SystemInfo",
     "methods": [
       {
         "name": "<init>",
@@ -389,7 +389,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.SystemInfoStorage",
+    "name": "io.github.kgbis.phatjellyfin.client.model.SystemInfoStorage",
     "methods": [
       {
         "name": "<init>",
@@ -400,7 +400,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.client.model.UpdateItem",
+    "name": "io.github.kgbis.phatjellyfin.client.model.UpdateItem",
     "methods": [
       {
         "name": "getAlbum",
@@ -445,7 +445,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.config.Config",
+    "name": "io.github.kgbis.phatjellyfin.config.Config",
     "fields": [
       {
         "name": "metadata"
@@ -462,7 +462,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.config.ConfigManager",
+    "name": "io.github.kgbis.phatjellyfin.config.ConfigManager",
     "methods": [
       {
         "name": "<init>",
@@ -473,7 +473,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.config.ConfigStorageImpl",
+    "name": "io.github.kgbis.phatjellyfin.config.ConfigStorageImpl",
     "methods": [
       {
         "name": "<init>",
@@ -482,10 +482,10 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.config.JellyfinMetadata"
+    "name": "io.github.kgbis.phatjellyfin.config.JellyfinMetadata"
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.config.JellyfinServerData",
+    "name": "io.github.kgbis.phatjellyfin.config.JellyfinServerData",
     "methods": [
       {
         "name": "<init>",
@@ -497,7 +497,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.ArtistHelper",
+    "name": "io.github.kgbis.phatjellyfin.importer.ArtistHelper",
     "methods": [
       {
         "name": "<init>",
@@ -508,7 +508,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.Importer",
+    "name": "io.github.kgbis.phatjellyfin.importer.Importer",
     "methods": [
       {
         "name": "<init>",
@@ -524,7 +524,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.JellyfinMatcher",
+    "name": "io.github.kgbis.phatjellyfin.importer.JellyfinMatcher",
     "methods": [
       {
         "name": "<init>",
@@ -540,7 +540,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.JellyfinWriter",
+    "name": "io.github.kgbis.phatjellyfin.importer.JellyfinWriter",
     "methods": [
       {
         "name": "<init>",
@@ -552,7 +552,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.LevenshteinDistanceMatcherImpl",
+    "name": "io.github.kgbis.phatjellyfin.importer.LevenshteinDistanceMatcherImpl",
     "methods": [
       {
         "name": "<init>",
@@ -563,7 +563,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.MusicFileReader",
+    "name": "io.github.kgbis.phatjellyfin.importer.MusicFileReader",
     "methods": [
       {
         "name": "<init>",
@@ -572,7 +572,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.importer.MusicScanner",
+    "name": "io.github.kgbis.phatjellyfin.importer.MusicScanner",
     "methods": [
       {
         "name": "<init>",
@@ -587,10 +587,10 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.ioc.PhatJellyfinModule"
+    "name": "io.github.kgbis.phatjellyfin.ioc.PhatJellyfinModule"
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.output.Console",
+    "name": "io.github.kgbis.phatjellyfin.output.Console",
     "methods": [
       {
         "name": "<init>",
@@ -599,7 +599,7 @@
     ]
   },
   {
-    "type": "io.github.kgbis.phatjellyfin.output.MessageManager",
+    "name": "io.github.kgbis.phatjellyfin.output.MessageManager",
     "methods": [
       {
         "name": "<init>",
@@ -610,10 +610,10 @@
     ]
   },
   {
-    "type": "java.io.Serializable"
+    "name": "java.io.Serializable"
   },
   {
-    "type": "java.lang.Boolean",
+    "name": "java.lang.Boolean",
     "jniAccessible": true,
     "methods": [
       {
@@ -625,10 +625,10 @@
     ]
   },
   {
-    "type": "java.lang.Byte"
+    "name": "java.lang.Byte"
   },
   {
-    "type": "java.lang.Class",
+    "name": "java.lang.Class",
     "methods": [
       {
         "name": "getRecordComponents",
@@ -641,37 +641,37 @@
     ]
   },
   {
-    "type": "java.lang.Double"
+    "name": "java.lang.Double"
   },
   {
-    "type": "java.lang.Float"
+    "name": "java.lang.Float"
   },
   {
-    "type": "java.lang.Integer"
+    "name": "java.lang.Integer"
   },
   {
-    "type": "java.lang.Iterable"
+    "name": "java.lang.Iterable"
   },
   {
-    "type": "java.lang.Long"
+    "name": "java.lang.Long"
   },
   {
-    "type": "java.lang.Object[]"
+    "name": "java.lang.Object[]"
   },
   {
-    "type": "java.lang.Record"
+    "name": "java.lang.Record"
   },
   {
-    "type": "java.lang.Short"
+    "name": "java.lang.Short"
   },
   {
-    "type": "java.lang.String[]"
+    "name": "java.lang.String[]"
   },
   {
-    "type": "java.lang.invoke.VarHandle"
+    "name": "java.lang.invoke.VarHandle"
   },
   {
-    "type": "java.lang.reflect.RecordComponent",
+    "name": "java.lang.reflect.RecordComponent",
     "methods": [
       {
         "name": "getName",
@@ -684,49 +684,49 @@
     ]
   },
   {
-    "type": "java.nio.ByteBuffer"
+    "name": "java.nio.ByteBuffer"
   },
   {
-    "type": "java.security.AlgorithmParametersSpi"
+    "name": "java.security.AlgorithmParametersSpi"
   },
   {
-    "type": "java.security.KeyStoreSpi"
+    "name": "java.security.KeyStoreSpi"
   },
   {
-    "type": "java.util.AbstractCollection"
+    "name": "java.util.AbstractCollection"
   },
   {
-    "type": "java.util.AbstractMap"
+    "name": "java.util.AbstractMap"
   },
   {
-    "type": "java.util.Collection"
+    "name": "java.util.Collection"
   },
   {
-    "type": "java.util.ImmutableCollections$AbstractImmutableCollection"
+    "name": "java.util.ImmutableCollections$AbstractImmutableCollection"
   },
   {
-    "type": "java.util.ImmutableCollections$AbstractImmutableList"
+    "name": "java.util.ImmutableCollections$AbstractImmutableList"
   },
   {
-    "type": "java.util.ImmutableCollections$AbstractImmutableMap"
+    "name": "java.util.ImmutableCollections$AbstractImmutableMap"
   },
   {
-    "type": "java.util.ImmutableCollections$ListN"
+    "name": "java.util.ImmutableCollections$ListN"
   },
   {
-    "type": "java.util.ImmutableCollections$MapN"
+    "name": "java.util.ImmutableCollections$MapN"
   },
   {
-    "type": "java.util.List"
+    "name": "java.util.List"
   },
   {
-    "type": "java.util.Map"
+    "name": "java.util.Map"
   },
   {
-    "type": "java.util.RandomAccess"
+    "name": "java.util.RandomAccess"
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.ContentBrandingReader",
+    "name": "org.jaudiotagger.audio.asf.io.ContentBrandingReader",
     "methods": [
       {
         "name": "<init>",
@@ -735,7 +735,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.ContentDescriptionReader",
+    "name": "org.jaudiotagger.audio.asf.io.ContentDescriptionReader",
     "methods": [
       {
         "name": "<init>",
@@ -744,7 +744,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.EncodingChunkReader",
+    "name": "org.jaudiotagger.audio.asf.io.EncodingChunkReader",
     "methods": [
       {
         "name": "<init>",
@@ -753,7 +753,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.EncryptionChunkReader",
+    "name": "org.jaudiotagger.audio.asf.io.EncryptionChunkReader",
     "methods": [
       {
         "name": "<init>",
@@ -762,7 +762,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.FileHeaderReader",
+    "name": "org.jaudiotagger.audio.asf.io.FileHeaderReader",
     "methods": [
       {
         "name": "<init>",
@@ -771,7 +771,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.LanguageListReader",
+    "name": "org.jaudiotagger.audio.asf.io.LanguageListReader",
     "methods": [
       {
         "name": "<init>",
@@ -780,7 +780,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.MetadataReader",
+    "name": "org.jaudiotagger.audio.asf.io.MetadataReader",
     "methods": [
       {
         "name": "<init>",
@@ -789,7 +789,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.StreamBitratePropertiesReader",
+    "name": "org.jaudiotagger.audio.asf.io.StreamBitratePropertiesReader",
     "methods": [
       {
         "name": "<init>",
@@ -798,7 +798,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.audio.asf.io.StreamChunkReader",
+    "name": "org.jaudiotagger.audio.asf.io.StreamChunkReader",
     "methods": [
       {
         "name": "<init>",
@@ -807,7 +807,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.ByteArraySizeTerminated",
+    "name": "org.jaudiotagger.tag.datatype.ByteArraySizeTerminated",
     "methods": [
       {
         "name": "<init>",
@@ -818,7 +818,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.NumberHashMap",
+    "name": "org.jaudiotagger.tag.datatype.NumberHashMap",
     "methods": [
       {
         "name": "<init>",
@@ -829,7 +829,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.PartOfSet",
+    "name": "org.jaudiotagger.tag.datatype.PartOfSet",
     "methods": [
       {
         "name": "<init>",
@@ -840,7 +840,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.StringHashMap",
+    "name": "org.jaudiotagger.tag.datatype.StringHashMap",
     "methods": [
       {
         "name": "<init>",
@@ -851,7 +851,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.StringNullTerminated",
+    "name": "org.jaudiotagger.tag.datatype.StringNullTerminated",
     "methods": [
       {
         "name": "<init>",
@@ -862,7 +862,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.TCONString",
+    "name": "org.jaudiotagger.tag.datatype.TCONString",
     "methods": [
       {
         "name": "<init>",
@@ -873,7 +873,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.TextEncodedStringNullTerminated",
+    "name": "org.jaudiotagger.tag.datatype.TextEncodedStringNullTerminated",
     "methods": [
       {
         "name": "<init>",
@@ -884,7 +884,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.datatype.TextEncodedStringSizeTerminated",
+    "name": "org.jaudiotagger.tag.datatype.TextEncodedStringSizeTerminated",
     "methods": [
       {
         "name": "<init>",
@@ -895,7 +895,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC",
     "methods": [
       {
         "name": "<init>",
@@ -913,7 +913,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyCOMM",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyCOMM",
     "methods": [
       {
         "name": "<init>",
@@ -931,7 +931,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTALB",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTALB",
     "methods": [
       {
         "name": "<init>",
@@ -949,7 +949,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTCON",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTCON",
     "methods": [
       {
         "name": "<init>",
@@ -967,7 +967,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTDRC",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTDRC",
     "methods": [
       {
         "name": "<init>",
@@ -978,7 +978,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTIT2",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTIT2",
     "methods": [
       {
         "name": "<init>",
@@ -996,7 +996,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE1",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE1",
     "methods": [
       {
         "name": "<init>",
@@ -1014,7 +1014,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE2",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE2",
     "methods": [
       {
         "name": "<init>",
@@ -1032,7 +1032,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTRCK",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTRCK",
     "methods": [
       {
         "name": "<init>",
@@ -1050,7 +1050,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTXXX",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTXXX",
     "methods": [
       {
         "name": "<init>",
@@ -1068,7 +1068,7 @@
     ]
   },
   {
-    "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTYER",
+    "name": "org.jaudiotagger.tag.id3.framebody.FrameBodyTYER",
     "methods": [
       {
         "name": "<init>",
@@ -1080,7 +1080,7 @@
     ]
   },
   {
-    "type": "sun.launcher.LauncherHelper",
+    "name": "sun.launcher.LauncherHelper",
     "jniAccessible": true,
     "fields": [
       {
@@ -1098,7 +1098,7 @@
     ]
   },
   {
-    "type": "sun.security.pkcs12.PKCS12KeyStore",
+    "name": "sun.security.pkcs12.PKCS12KeyStore",
     "methods": [
       {
         "name": "<init>",
@@ -1107,7 +1107,7 @@
     ]
   },
   {
-    "type": "sun.security.pkcs12.PKCS12KeyStore$DualFormatPKCS12",
+    "name": "sun.security.pkcs12.PKCS12KeyStore$DualFormatPKCS12",
     "methods": [
       {
         "name": "<init>",
@@ -1116,7 +1116,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.DRBG",
+    "name": "sun.security.provider.DRBG",
     "methods": [
       {
         "name": "<init>",
@@ -1127,7 +1127,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.DSA$SHA224withDSA",
+    "name": "sun.security.provider.DSA$SHA224withDSA",
     "methods": [
       {
         "name": "<init>",
@@ -1136,7 +1136,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.DSA$SHA256withDSA",
+    "name": "sun.security.provider.DSA$SHA256withDSA",
     "methods": [
       {
         "name": "<init>",
@@ -1145,7 +1145,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.SHA",
+    "name": "sun.security.provider.SHA",
     "methods": [
       {
         "name": "<init>",
@@ -1154,7 +1154,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.SHA2$SHA224",
+    "name": "sun.security.provider.SHA2$SHA224",
     "methods": [
       {
         "name": "<init>",
@@ -1163,7 +1163,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.SHA2$SHA256",
+    "name": "sun.security.provider.SHA2$SHA256",
     "methods": [
       {
         "name": "<init>",
@@ -1172,7 +1172,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.SHA5$SHA384",
+    "name": "sun.security.provider.SHA5$SHA384",
     "methods": [
       {
         "name": "<init>",
@@ -1181,7 +1181,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.SHA5$SHA512",
+    "name": "sun.security.provider.SHA5$SHA512",
     "methods": [
       {
         "name": "<init>",
@@ -1190,7 +1190,7 @@
     ]
   },
   {
-    "type": "sun.security.provider.X509Factory",
+    "name": "sun.security.provider.X509Factory",
     "methods": [
       {
         "name": "<init>",
@@ -1199,7 +1199,7 @@
     ]
   },
   {
-    "type": "sun.security.rsa.PSSParameters",
+    "name": "sun.security.rsa.PSSParameters",
     "methods": [
       {
         "name": "<init>",
@@ -1208,7 +1208,7 @@
     ]
   },
   {
-    "type": "sun.security.rsa.RSAKeyFactory$Legacy",
+    "name": "sun.security.rsa.RSAKeyFactory$Legacy",
     "methods": [
       {
         "name": "<init>",
@@ -1217,7 +1217,7 @@
     ]
   },
   {
-    "type": "sun.security.rsa.RSAPSSSignature",
+    "name": "sun.security.rsa.RSAPSSSignature",
     "methods": [
       {
         "name": "<init>",
@@ -1226,7 +1226,7 @@
     ]
   },
   {
-    "type": "sun.security.rsa.RSASignature$SHA224withRSA",
+    "name": "sun.security.rsa.RSASignature$SHA224withRSA",
     "methods": [
       {
         "name": "<init>",
@@ -1235,7 +1235,7 @@
     ]
   },
   {
-    "type": "sun.security.ssl.KeyManagerFactoryImpl$SunX509",
+    "name": "sun.security.ssl.KeyManagerFactoryImpl$SunX509",
     "methods": [
       {
         "name": "<init>",
@@ -1244,7 +1244,7 @@
     ]
   },
   {
-    "type": "sun.security.ssl.SSLContextImpl$DefaultSSLContext",
+    "name": "sun.security.ssl.SSLContextImpl$DefaultSSLContext",
     "methods": [
       {
         "name": "<init>",
@@ -1253,7 +1253,7 @@
     ]
   },
   {
-    "type": "sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
+    "name": "sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
     "methods": [
       {
         "name": "<init>",
@@ -1262,7 +1262,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.AuthorityInfoAccessExtension",
+    "name": "sun.security.x509.AuthorityInfoAccessExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1274,7 +1274,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.AuthorityKeyIdentifierExtension",
+    "name": "sun.security.x509.AuthorityKeyIdentifierExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1286,7 +1286,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.BasicConstraintsExtension",
+    "name": "sun.security.x509.BasicConstraintsExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1298,7 +1298,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.CRLDistributionPointsExtension",
+    "name": "sun.security.x509.CRLDistributionPointsExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1310,7 +1310,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.CertificatePoliciesExtension",
+    "name": "sun.security.x509.CertificatePoliciesExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1322,7 +1322,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.ExtendedKeyUsageExtension",
+    "name": "sun.security.x509.ExtendedKeyUsageExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1334,7 +1334,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.KeyUsageExtension",
+    "name": "sun.security.x509.KeyUsageExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1346,7 +1346,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.NetscapeCertTypeExtension",
+    "name": "sun.security.x509.NetscapeCertTypeExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1358,7 +1358,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.PrivateKeyUsageExtension",
+    "name": "sun.security.x509.PrivateKeyUsageExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1370,7 +1370,7 @@
     ]
   },
   {
-    "type": "sun.security.x509.SubjectKeyIdentifierExtension",
+    "name": "sun.security.x509.SubjectKeyIdentifierExtension",
     "methods": [
       {
         "name": "<init>",
@@ -1382,15 +1382,15 @@
     ]
   },
   {
-    "type": "sun.text.resources.cldr.FormatData"
+    "name": "sun.text.resources.cldr.FormatData"
   },
   {
-    "type": "sun.text.resources.cldr.FormatData_en"
+    "name": "sun.text.resources.cldr.FormatData_en"
   },
   {
-    "type": "sun.text.resources.cldr.FormatData_en_US"
+    "name": "sun.text.resources.cldr.FormatData_en_US"
   },
   {
-    "type": "sun.util.resources.cldr.CalendarData"
+    "name": "sun.util.resources.cldr.CalendarData"
   }
 ]
