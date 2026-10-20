@@ -1,0 +1,1440 @@
+{
+  "reflection": [
+    {
+      "type": "boolean"
+    },
+    {
+      "type": "ch.qos.logback.classic.BasicConfigurator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "ch.qos.logback.classic.spi.LogbackServiceProvider"
+    },
+    {
+      "type": "ch.qos.logback.classic.util.DefaultJoranConfigurator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.beust.jcommander.converters.BooleanConverter",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "com.beust.jcommander.converters.CommaParameterSplitter",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.beust.jcommander.converters.PathConverter",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "com.beust.jcommander.validators.NoValidator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.beust.jcommander.validators.NoValueValidator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.google.common.util.concurrent.AbstractFutureState",
+      "fields": [
+        {
+          "name": "listenersField"
+        },
+        {
+          "name": "valueField"
+        },
+        {
+          "name": "waitersField"
+        }
+      ]
+    },
+    {
+      "type": "com.google.common.util.concurrent.AbstractFutureState$Waiter",
+      "fields": [
+        {
+          "name": "next"
+        },
+        {
+          "name": "thread"
+        }
+      ]
+    },
+    {
+      "type": "com.google.inject.AbstractModule"
+    },
+    {
+      "type": "com.google.inject.KotlinSupportImpl"
+    },
+    {
+      "type": "com.google.inject.internal.Annotations"
+    },
+    {
+      "type": "com.google.inject.internal.InjectorShell$RootModule"
+    },
+    {
+      "type": "com.google.inject.util.Modules$EmptyModule"
+    },
+    {
+      "type": "com.sun.crypto.provider.AESCipher$General",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.ARCFOURCipher",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.ChaCha20Cipher$ChaCha20Poly1305",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.DESCipher",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.DESedeCipher",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.DHParameters",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.GaloisCounterMode$AESGCM",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.TlsMasterSecretGenerator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.PhatJellyfin",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.output.Console",
+            "io.github.kgbis.phatjellyfin.output.MessageManager",
+            "io.github.kgbis.phatjellyfin.arguments.CliParser",
+            "io.github.kgbis.phatjellyfin.config.ConfigManager",
+            "io.github.kgbis.phatjellyfin.importer.Importer",
+            "io.github.kgbis.phatjellyfin.client.JellyfinClient"
+          ]
+        },
+        {
+          "name": "main",
+          "parameterTypes": [
+            "java.lang.String[]"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.arguments.CliArguments",
+      "fields": [
+        {
+          "name": "apply"
+        },
+        {
+          "name": "folders"
+        },
+        {
+          "name": "help"
+        },
+        {
+          "name": "logLevel"
+        },
+        {
+          "name": "logToConsole"
+        },
+        {
+          "name": "recursive"
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.arguments.CliParser",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.output.Console"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.arguments.PathValidator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.JellyfinClient",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.config.ConfigManager"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.Artist",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "getId",
+          "parameterTypes": []
+        },
+        {
+          "name": "getName",
+          "parameterTypes": []
+        },
+        {
+          "name": "setId",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "setName",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.Artist[]"
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.Folder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.Item",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "boolean",
+            "java.lang.Integer",
+            "java.lang.Integer",
+            "java.lang.String",
+            "java.lang.String",
+            "java.util.List",
+            "java.util.List",
+            "java.lang.Integer",
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.Items",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List",
+            "int",
+            "int"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.Library",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.util.List",
+            "java.lang.String",
+            "io.github.kgbis.phatjellyfin.client.model.LibraryOptions"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.LibraryOptions",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "boolean",
+            "java.util.List"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.SystemInfo",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.SystemInfoStorage",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.client.model.UpdateItem",
+      "methods": [
+        {
+          "name": "getAlbum",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAlbumArtists",
+          "parameterTypes": []
+        },
+        {
+          "name": "getArtistItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDisc",
+          "parameterTypes": []
+        },
+        {
+          "name": "getGenres",
+          "parameterTypes": []
+        },
+        {
+          "name": "getProductionYear",
+          "parameterTypes": []
+        },
+        {
+          "name": "getProviderIds",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTags",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTitle",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTrackNumber",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.config.Config",
+      "fields": [
+        {
+          "name": "metadata"
+        },
+        {
+          "name": "serverData"
+        }
+      ],
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.config.ConfigManager",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.config.ConfigStorage"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.config.ConfigStorageImpl",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.config.JellyfinMetadata"
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.config.JellyfinServerData",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.ArtistHelper",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.client.JellyfinClient"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.Importer",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.config.ConfigManager",
+            "io.github.kgbis.phatjellyfin.output.MessageManager",
+            "io.github.kgbis.phatjellyfin.output.Console",
+            "io.github.kgbis.phatjellyfin.importer.MusicScanner",
+            "io.github.kgbis.phatjellyfin.importer.JellyfinMatcher",
+            "io.github.kgbis.phatjellyfin.importer.JellyfinWriter"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.JellyfinMatcher",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.config.ConfigManager",
+            "io.github.kgbis.phatjellyfin.output.Console",
+            "io.github.kgbis.phatjellyfin.output.MessageManager",
+            "io.github.kgbis.phatjellyfin.client.JellyfinClient",
+            "io.github.kgbis.phatjellyfin.importer.Matcher",
+            "io.github.kgbis.phatjellyfin.importer.ArtistHelper"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.JellyfinWriter",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.client.JellyfinClient",
+            "io.github.kgbis.phatjellyfin.output.Console"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.LevenshteinDistanceMatcherImpl",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.importer.ArtistHelper"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.MusicFileReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.importer.MusicScanner",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.config.ConfigManager",
+            "io.github.kgbis.phatjellyfin.output.Console",
+            "io.github.kgbis.phatjellyfin.output.MessageManager",
+            "io.github.kgbis.phatjellyfin.importer.ArtistHelper",
+            "io.github.kgbis.phatjellyfin.importer.MusicFileReader"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.ioc.PhatJellyfinModule"
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.output.Console",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.kgbis.phatjellyfin.output.MessageManager",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.github.kgbis.phatjellyfin.config.ConfigManager"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "java.io.Serializable"
+    },
+    {
+      "type": "java.lang.Boolean",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "getBoolean",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "java.lang.Byte"
+    },
+    {
+      "type": "java.lang.Class",
+      "methods": [
+        {
+          "name": "getRecordComponents",
+          "parameterTypes": []
+        },
+        {
+          "name": "isRecord",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "java.lang.Double"
+    },
+    {
+      "type": "java.lang.Float"
+    },
+    {
+      "type": "java.lang.Integer"
+    },
+    {
+      "type": "java.lang.Iterable"
+    },
+    {
+      "type": "java.lang.Long"
+    },
+    {
+      "type": "java.lang.Object[]"
+    },
+    {
+      "type": "java.lang.Record"
+    },
+    {
+      "type": "java.lang.Short"
+    },
+    {
+      "type": "java.lang.String[]"
+    },
+    {
+      "type": "java.lang.invoke.VarHandle"
+    },
+    {
+      "type": "java.lang.reflect.RecordComponent",
+      "methods": [
+        {
+          "name": "getName",
+          "parameterTypes": []
+        },
+        {
+          "name": "getType",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "java.nio.ByteBuffer"
+    },
+    {
+      "type": "java.security.AlgorithmParametersSpi"
+    },
+    {
+      "type": "java.security.KeyStoreSpi"
+    },
+    {
+      "type": "java.util.AbstractCollection"
+    },
+    {
+      "type": "java.util.AbstractMap"
+    },
+    {
+      "type": "java.util.Collection"
+    },
+    {
+      "type": "java.util.ImmutableCollections$AbstractImmutableCollection"
+    },
+    {
+      "type": "java.util.ImmutableCollections$AbstractImmutableList"
+    },
+    {
+      "type": "java.util.ImmutableCollections$AbstractImmutableMap"
+    },
+    {
+      "type": "java.util.ImmutableCollections$ListN"
+    },
+    {
+      "type": "java.util.ImmutableCollections$MapN"
+    },
+    {
+      "type": "java.util.List"
+    },
+    {
+      "type": "java.util.Map"
+    },
+    {
+      "type": "java.util.RandomAccess"
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.ContentBrandingReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.ContentDescriptionReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.EncodingChunkReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.EncryptionChunkReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.FileHeaderReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.LanguageListReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.MetadataReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.StreamBitratePropertiesReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.audio.asf.io.StreamChunkReader",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.ByteArraySizeTerminated",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.ByteArraySizeTerminated"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.NumberHashMap",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.NumberHashMap"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.PartOfSet",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.PartOfSet"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.StringHashMap",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.StringHashMap"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.StringNullTerminated",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.StringNullTerminated"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.TCONString",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.TCONString"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.TextEncodedStringNullTerminated",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.TextEncodedStringNullTerminated"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.datatype.TextEncodedStringSizeTerminated",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.datatype.TextEncodedStringSizeTerminated"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyCOMM",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyCOMM"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTALB",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTALB"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTCON",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTCON"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTDRC",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTYER"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTIT2",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTIT2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE1",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE1"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE2",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTPE2"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTRCK",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTRCK"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTXXX",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jaudiotagger.tag.id3.framebody.FrameBodyTXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.jaudiotagger.tag.id3.framebody.FrameBodyTYER",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.nio.ByteBuffer",
+            "int"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.launcher.LauncherHelper",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "isStaticMain"
+        },
+        {
+          "name": "noArgMain"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getApplicationClass",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.pkcs12.PKCS12KeyStore",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.pkcs12.PKCS12KeyStore$DualFormatPKCS12",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.DRBG",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.security.SecureRandomParameters"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.DSA$SHA224withDSA",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.DSA$SHA256withDSA",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA2$SHA224",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA2$SHA256",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA5$SHA384",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA5$SHA512",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.X509Factory",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.rsa.PSSParameters",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.rsa.RSAKeyFactory$Legacy",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.rsa.RSAPSSSignature",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.rsa.RSASignature$SHA224withRSA",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.ssl.KeyManagerFactoryImpl$SunX509",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.ssl.SSLContextImpl$DefaultSSLContext",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.AuthorityInfoAccessExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.AuthorityKeyIdentifierExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.BasicConstraintsExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.CRLDistributionPointsExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.CertificatePoliciesExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.ExtendedKeyUsageExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.KeyUsageExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.NetscapeCertTypeExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.PrivateKeyUsageExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.x509.SubjectKeyIdentifierExtension",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.Boolean",
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData"
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData_en"
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData_en_US"
+    },
+    {
+      "type": "sun.util.resources.cldr.CalendarData"
+    }
+  ],
+  "resources": [
+    {
+      "glob": "META-INF/services/ch.qos.logback.classic.spi.Configurator"
+    },
+    {
+      "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
+    },
+    {
+      "glob": "META-INF/services/java.net.spi.URLStreamHandlerProvider"
+    },
+    {
+      "glob": "META-INF/services/java.nio.channels.spi.SelectorProvider"
+    },
+    {
+      "glob": "META-INF/services/java.time.zone.ZoneRulesProvider"
+    },
+    {
+      "glob": "META-INF/services/org.slf4j.spi.SLF4JServiceProvider"
+    },
+    {
+      "glob": "ch/qos/logback/classic/logback-classic-version.properties"
+    },
+    {
+      "glob": "ch/qos/logback/core/logback-core-version.properties"
+    },
+    {
+      "glob": "logback-test.xml"
+    },
+    {
+      "glob": "logback.xml"
+    },
+    {
+      "glob": "version.txt"
+    },
+    {
+      "module": "java.base",
+      "glob": "jdk/internal/icu/impl/data/icudt76b/nfc.nrm"
+    }
+  ]
+}
