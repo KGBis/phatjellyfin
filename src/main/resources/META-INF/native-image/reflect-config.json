@@ -1,5 +1,16 @@
 [
   {
+    "name": "java.lang.Boolean",
+    "methods": [
+      {
+        "name": "parseBoolean",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  },
+  {
     "name": "ch.qos.logback.classic.BasicConfigurator",
     "methods": [
       {
