@@ -1,41 +1,41 @@
 {
   "resources": [
     {
-      "glob": "META-INF/services/ch.qos.logback.classic.spi.Configurator"
+      "pattern": "META-INF/services/ch.qos.logback.classic.spi.Configurator"
     },
     {
-      "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
+      "pattern": "META-INF/services/java.net.spi.InetAddressResolverProvider"
     },
     {
-      "glob": "META-INF/services/java.net.spi.URLStreamHandlerProvider"
+      "pattern": "META-INF/services/java.net.spi.URLStreamHandlerProvider"
     },
     {
-      "glob": "META-INF/services/java.nio.channels.spi.SelectorProvider"
+      "pattern": "META-INF/services/java.nio.channels.spi.SelectorProvider"
     },
     {
-      "glob": "META-INF/services/java.time.zone.ZoneRulesProvider"
+      "pattern": "META-INF/services/java.time.zone.ZoneRulesProvider"
     },
     {
-      "glob": "META-INF/services/org.slf4j.spi.SLF4JServiceProvider"
+      "pattern": "META-INF/services/org.slf4j.spi.SLF4JServiceProvider"
     },
     {
-      "glob": "ch/qos/logback/classic/logback-classic-version.properties"
+      "pattern": "ch/qos/logback/classic/logback-classic-version.properties"
     },
     {
-      "glob": "ch/qos/logback/core/logback-core-version.properties"
+      "pattern": "ch/qos/logback/core/logback-core-version.properties"
     },
     {
-      "glob": "logback-test.xml"
+      "pattern": "logback-test.xml"
     },
     {
-      "glob": "logback.xml"
+      "pattern": "logback.xml"
     },
     {
-      "glob": "version.txt"
+      "pattern": "version.txt"
     },
     {
       "module": "java.base",
-      "glob": "jdk/internal/icu/impl/data/icudt76b/nfc.nrm"
+      "pattern": "jdk/internal/icu/impl/data/icudt76b/nfc.nrm"
     }
   ]
 }
