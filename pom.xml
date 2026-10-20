@@ -7,13 +7,15 @@
 
     <groupId>io.github.kgbis</groupId>
     <artifactId>phatjellyfin</artifactId>
-    <version>0.99.0</version>
+    <version>0.100.0</version>
 
     <name>io.github.kgbis.phatjellyfin.PhatJellyfin</name>
     <description>Jellyfin CLI music tag importer</description>
     <url>https://github.com/KGBis/phatjellyfin</url>
 
     <properties>
+        <!-- main class -->
+        <main.class>io.github.kgbis.phatjellyfin.PhatJellyfin</main.class>
         <!-- Java -->
         <java.version>25</java.version>
         <maven.compiler.source>25</maven.compiler.source>
@@ -231,7 +233,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.github.kgbis.phatjellyfin.PhatJellyfin</mainClass>
+                            <mainClass>${main.class}</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
@@ -255,7 +257,7 @@
 
                     <archive>
                         <manifest>
-                            <mainClass>io.github.kgbis.phatjellyfin.PhatJellyfin</mainClass>
+                            <mainClass>${main.class}</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
@@ -310,5 +312,37 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <version>1.1.14</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <imageName>phatjellyfin</imageName>
+                            <mainClass>${main.class}</mainClass>
+                            <buildArgs>
+                                <buildArg>--no-fallback</buildArg>
+                            </buildArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
