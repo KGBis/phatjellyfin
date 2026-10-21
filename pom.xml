@@ -341,12 +341,12 @@
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
                                 <buildArg>-Dfile.encoding=UTF-8</buildArg>
-                                <buildArg>-Dsun.jnu.encoding=UTF-8</buildArg>
-                                <buildArg>-Dsun.stdin.encoding=UTF-8</buildArg>
-                                <buildArg>-Dsun.stderr.encoding=UTF-8</buildArg>
-                                <buildArg>-Dsun.stdout.encoding=UTF-8</buildArg>
+                                <buildArg>-Dstdin.encoding=UTF-8</buildArg>
+                                <buildArg>-Dstderr.encoding=UTF-8</buildArg>
+                                <buildArg>-Dstdout.encoding=UTF-8</buildArg>
+                                <buildArg>-J-Dstdin.encoding=UTF-8</buildArg>
                                 <buildArg>-J-Dstdout.encoding=UTF-8</buildArg>
-                                <buildArg>-H:+AddAllCharsets</buildArg>
+                                <!--<buildArg>-H:+AddAllCharsets</buildArg>-->
                             </buildArgs>
                         </configuration>
                     </plugin>
