@@ -77,8 +77,9 @@ public class PhatJellyfin {
 
 	public void initialize(String[] args) {
 		System.out.println("file.encoding = " + System.getProperty("file.encoding"));
-		System.out.println("native.encoding = " + System.getProperty("native.encoding"));
-		System.out.println("sun.jnu.encoding = " + System.getProperty("sun.jnu.encoding"));
+		System.out.println("stdin.encoding = " + System.getProperty("stdin.encoding"));
+		System.out.println("stdout.encoding = " + System.getProperty("stdout.encoding"));
+		System.out.println("stderr.encoding = " + System.getProperty("stderr.encoding"));
 
 		for (int i = 0; i < args.length; i++) {
 			System.out.printf("args[%d] = [%s]%n", i, args[i]);
