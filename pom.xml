@@ -344,9 +344,9 @@
                                 <buildArg>-Dstdin.encoding=UTF-8</buildArg>
                                 <buildArg>-Dstderr.encoding=UTF-8</buildArg>
                                 <buildArg>-Dstdout.encoding=UTF-8</buildArg>
-                                <buildArg>-J-Dstdin.encoding=UTF-8</buildArg>
+                                <!--<buildArg>-J-Dstdin.encoding=UTF-8</buildArg>
                                 <buildArg>-J-Dstdout.encoding=UTF-8</buildArg>
-                                <buildArg>-J-Dstderr.encoding=UTF-8</buildArg>
+                                <buildArg>-J-Dstderr.encoding=UTF-8</buildArg>-->
                                 <!--<buildArg>-H:+AddAllCharsets</buildArg>-->
                             </buildArgs>
                         </configuration>
