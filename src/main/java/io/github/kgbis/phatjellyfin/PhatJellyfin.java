@@ -85,6 +85,18 @@ public class PhatJellyfin {
 			System.out.printf("args[%d] = [%s]%n", i, args[i]);
 		}
 
+		System.out.println("************");
+
+		for (int i = 0; i < args.length; i++) {
+			System.out.printf("args[%d] = [%s]%n", i, args[i]);
+			System.out.printf("args[%d] code points = ", i);
+
+			args[i].codePoints()
+					.forEach(cp -> System.out.printf("U+%04X ", cp));
+
+			System.out.println();
+		}
+
 		// start stopwatch
 		stopWatch = StopWatch.createStarted();
 
