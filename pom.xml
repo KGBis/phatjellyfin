@@ -340,15 +340,15 @@
                             </metadataRepository>
                             <buildArgs>
                                 <buildArg>--no-fallback</buildArg>
-                                <buildArg>-Dfile.encoding=UTF-8</buildArg>
+                                <!--<buildArg>-Dfile.encoding=UTF-8</buildArg>
                                 <buildArg>-Dnative.encoding=UTF-8</buildArg>
                                 <buildArg>-Dsun.jnu.encoding=UTF-8</buildArg>
                                 <buildArg>-Dsun.stderr.encoding=UTF-8</buildArg>
                                 <buildArg>-Dsun.stdout.encoding=UTF-8</buildArg>
                                 <buildArg>-J-Dnative.encoding=UTF-8</buildArg>
-                                <buildArg>-J-Dstderr.encoding=UTF-8</buildArg>
+                                <buildArg>-J-Dstderr.encoding=UTF-8</buildArg>-->
                                 <buildArg>-J-Dstdout.encoding=UTF-8</buildArg>
-                                <buildArg>-H:+AddAllCharsets</buildArg>
+                                <!--<buildArg>-H:+AddAllCharsets</buildArg>-->
                             </buildArgs>
                         </configuration>
                     </plugin>
