@@ -5,6 +5,9 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch: # To trigger the build manually from the GitHub website
 
+permissions:
+  contents: write
+
 jobs:
   # Job 1: Gather pom.xml version and create single Release
   create-release:
@@ -135,8 +138,6 @@ jobs:
           else
             zip -r "$GITHUB_WORKSPACE/$RELEASE_PATH/${ARTIFACT}-${APP_VERSION}-${RUNNER_OS}.zip" "$ARTIFACT"
           fi
-          
-          mv "$INSTALLERS_APP_PATH"/* "$RELEASE_PATH"/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
