@@ -38,7 +38,7 @@ public class CliArguments {
 	@Parameter(names = { "-a", "--apply" }, description = "Apply changes to Jellyfin without asking")
 	private boolean apply = false;
 
-	@Parameter(names = { "-r", "--recursive" }, description = "Scan folder recursively")
+	@Parameter(names = { "-r", "--recursive" }, description = "Scan folder(s) recursively")
 	private boolean recursive = false;
 
 	@Parameter(names = { "-c", "--console" }, description = "Log to console too. Log to file will still be used.")

@@ -26,6 +26,13 @@ import lombok.NoArgsConstructor;
 public class Application {
 
     public static final String APP_NAME = "phatjellyfin";
+
+    // log files
+    public static final String LOG_DIR = "logs";
+    public static final String LOG_FILE_NAME = APP_NAME + ".log";
+    public static final String GZ_FILE_NAME = LOG_FILE_NAME + "-%d{yyyy-MM-dd}.gz";
+
+    // config file
     public static final String APP_CONFIG_FILE = APP_NAME + ".cfg.json";
 
 }

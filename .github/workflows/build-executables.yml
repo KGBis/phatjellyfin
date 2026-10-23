@@ -1,0 +1,154 @@
+name: Build Executables
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # To trigger the build manually from the GitHub website
+
+jobs:
+  # Job 1: Gather pom.xml version and create single Release
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      artifact: ${{ steps.artifact.outputs.artifact }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get project version
+        id: version
+        run: |
+          echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+
+      - name: Get project artifactId
+        id: artifact
+        run: |
+          echo "artifact=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_OUTPUT
+
+      - name: Get project main class
+        id: mainclass
+        run: |
+          echo "mainclass=$(mvn help:evaluate -Dexpression=main.class -q -DforceStdout)" >> $GITHUB_OUTPUT
+
+      - name: Create or update GitHub release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: "${{ steps.artifact.outputs.artifact }} v${{ steps.version.outputs.version }}"
+          body: "Release of PhatJellyfin version ${{ steps.version.outputs.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Job 2: Build executables for each OS
+  build-executables:
+    env:
+      DIST_PATH: dist
+      DIST_APP_PATH: dist/app
+      INSTALLERS_PATH: installers
+      INSTALLERS_APP_PATH: installers/app
+      RELEASE_PATH: release
+      PACKAGING_PATH: .packaging
+      ICONS_PATH: .packaging/icons
+    needs: create-release
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 25
+          cache: maven
+
+      - name: Cache Maven packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      - name: Copy jar to distribution folder
+        shell: bash
+        run: |
+          rm -rf "$DIST_PATH"
+          mkdir -p "$DIST_APP_PATH"
+          cp target/${{ needs.create-release.outputs.artifact }}.jar "$DIST_APP_PATH"/
+
+      - name: Generate executable with jPackage
+        shell: bash
+        run: |
+          set -e
+
+          # Artifact name
+          ARTIFACT=${{ needs.create-release.outputs.artifact }}
+
+          # jar name
+          JAR_NAME="$ARTIFACT.jar"
+
+          # default version (from pom.xml)
+          APP_VERSION="${{ needs.create-release.outputs.version }}"
+          
+          # Common flags for jpackage
+          MAIN_FLAGS=(
+            --type app-image
+            --name $ARTIFACT
+            --input $DIST_APP_PATH
+            --main-class io.github.kgbis.phatjellyfin.PhatJellyfin
+            --main-jar $JAR_NAME
+            --dest $INSTALLERS_APP_PATH
+            --app-version $APP_VERSION
+            --copyright "Copyright © 2026 Enrique García (KGBis)"
+            --vendor "Enrique García (KGBis)"
+          )
+          
+          # Windows flags 
+          EXTRA_FLAGS=()
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            EXTRA_FLAGS=(
+              --win-console
+            )
+          fi
+          
+          mkdir -p $INSTALLERS_PATH
+          
+          jpackage "${MAIN_FLAGS[@]}" "${EXTRA_FLAGS[@]}"
+          
+          # create release directory
+          mkdir -p "$RELEASE_PATH"
+          
+          # Create portable ZIP from the jpackage app-image
+          cd "$INSTALLERS_APP_PATH"
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            7z a -r "$GITHUB_WORKSPACE/$RELEASE_PATH/${ARTIFACT}-${APP_VERSION}-${RUNNER_OS}.7z" "$ARTIFACT"
+          else
+            zip -r "$GITHUB_WORKSPACE/$RELEASE_PATH/${ARTIFACT}-${APP_VERSION}-${RUNNER_OS}.zip" "$ARTIFACT"
+          fi
+          
+          mv "$INSTALLERS_APP_PATH"/* "$RELEASE_PATH"/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ needs.create-release.outputs.artifact }}-${{ matrix.os }}
+          path: ${{ env.RELEASE_PATH }}/*
+
+      - name: Upload assets to release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ needs.create-release.outputs.version }}
+          files: ${{ env.RELEASE_PATH }}/*
+          overwrite_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

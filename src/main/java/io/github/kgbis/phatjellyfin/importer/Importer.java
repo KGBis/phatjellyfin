@@ -27,6 +27,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.jspecify.annotations.NonNull;
 
 import java.io.IOException;
@@ -59,6 +60,8 @@ public class Importer {
 
 	private final JellyfinWriter jellyfinWriter;
 
+	private StopWatch stopWatch;
+
 	@Inject
 	public Importer(ConfigManager configManager, MessageManager messageManager, Console console,
 			MusicScanner musicScanner, JellyfinMatcher jellyfinMatcher, JellyfinWriter jellyfinWriter) {
@@ -73,7 +76,8 @@ public class Importer {
 	/**
 	 * Importer entry point
 	 */
-	public void run() throws IOException, InterruptedException {
+	public void run(StopWatch stopWatch) throws IOException, InterruptedException {
+		this.stopWatch = stopWatch;
 		if (scanSuccessful(musicScanner.scan()) && shouldApply()) {
 			Map<MusicKey, List<ScannedFile>> scannedData = musicScanner.prepareScannedData();
 			Map<MusicKey, AlbumToUpdate> matchingItems = jellyfinMatcher.matchAgainstJellyfin(scannedData);
@@ -125,7 +129,14 @@ public class Importer {
 			return true;
 		}
 
-		return console.confirm("Apply changes to Jellyfin?");
+		// To pause chrono. No reason to keep counting while waiting for user interaction
+		stopWatch.suspend();
+		try {
+			return console.confirm("Apply changes to Jellyfin?");
+		}
+		finally {
+			stopWatch.resume();
+		}
 	}
 
 	private void processWriteResult(Map<OperationResult<Void>, List<UpdateItem>> writeResult) {
