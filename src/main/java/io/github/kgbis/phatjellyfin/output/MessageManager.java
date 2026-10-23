@@ -29,8 +29,6 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 
-import static io.github.kgbis.phatjellyfin.Application.APP_CONFIG_FILE;
-
 @Singleton
 public class MessageManager {
 
@@ -148,8 +146,8 @@ public class MessageManager {
 		return CONFIG_MESSAGE.formatted(config.getServerData().url(), apiKey, metadata);
 	}
 
-	public String buildNoConfigMessage() {
-		return NO_CONFIG_MESSAGE.formatted(buildConfigMessage(), APP_CONFIG_FILE);
+	public String buildNoConfigMessage(String configFilePath) {
+		return NO_CONFIG_MESSAGE.formatted(buildConfigMessage(), configFilePath);
 	}
 
 	public String buildUpdateResult(int success, int failures, String s) {

@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static io.github.kgbis.phatjellyfin.Application.LOG_DIR;
+
 @Singleton
 @Slf4j
 public class ConfigManager {
@@ -47,6 +49,15 @@ public class ConfigManager {
 	@Inject
 	public ConfigManager(ConfigStorage configStorage) {
 		this.configStorage = configStorage;
+	}
+
+	public Path getConfigFile() {
+		log.debug("Config file path: {}", configStorage.getConfigFile());
+		return configStorage.getConfigFile();
+	}
+
+	public Path getLogFile() {
+		return configStorage.getConfigFile().getParent().resolve(LOG_DIR);
 	}
 
 	public void storeArguments(CliArguments cliArguments) {

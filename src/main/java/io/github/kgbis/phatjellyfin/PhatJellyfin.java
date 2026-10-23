@@ -28,7 +28,6 @@ import io.github.kgbis.phatjellyfin.client.model.Library;
 import io.github.kgbis.phatjellyfin.client.model.SystemInfo;
 import io.github.kgbis.phatjellyfin.config.ConfigException;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
-import io.github.kgbis.phatjellyfin.config.ConfigStorage;
 import io.github.kgbis.phatjellyfin.importer.Importer;
 import io.github.kgbis.phatjellyfin.importer.OperationResult;
 import io.github.kgbis.phatjellyfin.ioc.PhatJellyfinModule;
@@ -58,6 +57,8 @@ public class PhatJellyfin {
 
 	private final ConfigManager configManager;
 
+	private final LogbackConfiguration logbackConfiguration;
+
 	private final Importer importer;
 
 	private final JellyfinClient jellyfinClient;
@@ -66,24 +67,18 @@ public class PhatJellyfin {
 
 	@Inject
 	public PhatJellyfin(Console console, MessageManager messageManager, CliParser cliParser,
-			ConfigManager configManager, Importer importer, JellyfinClient jellyfinClient) {
+			ConfigManager configManager, LogbackConfiguration logbackConfiguration, Importer importer,
+			JellyfinClient jellyfinClient) {
 		this.console = console;
 		this.messageManager = messageManager;
 		this.cliParser = cliParser;
 		this.configManager = configManager;
+		this.logbackConfiguration = logbackConfiguration;
 		this.importer = importer;
 		this.jellyfinClient = jellyfinClient;
 	}
 
 	public void initialize(String[] args) {
-		System.out.println("file.encoding = " + System.getProperty("file.encoding"));
-		System.out.println("native.encoding = " + System.getProperty("native.encoding"));
-		System.out.println("sun.jnu.encoding = " + System.getProperty("sun.jnu.encoding"));
-
-		for (int i = 0; i < args.length; i++) {
-			System.out.printf("args[%d] = [%s]%n", i, args[i]);
-		}
-
 		// start stopwatch
 		stopWatch = StopWatch.createStarted();
 
@@ -94,7 +89,7 @@ public class PhatJellyfin {
 		});
 
 		// Configure log output to file and console (optional)
-		LogbackConfiguration.configure(cliArguments.getLogLevel(), cliArguments.isLogToConsole());
+		logbackConfiguration.configure(cliArguments.getLogLevel(), cliArguments.isLogToConsole());
 
 		// Store parsed arguments
 		configManager.storeArguments(cliArguments);
@@ -108,11 +103,11 @@ public class PhatJellyfin {
 			checkRootFolders();
 			showConfig();
 			checkJellyfinServer();
-			importer.run();
+			importer.run(stopWatch);
 		}
 		catch (IOException | InterruptedException e) { // NOSONAR
 			log.error(e.getMessage());
-			abort("Unable to read configuration file: " + ConfigStorage.getConfigFile());
+			abort("Unable to read configuration file: " + configManager.getConfigFile());
 		}
 		catch (ConfigException e) {
 			log.warn(e.getMessage());
@@ -160,7 +155,7 @@ public class PhatJellyfin {
 	}
 
 	private void showConfigAndExit() {
-		console.printAndStopWatch(messageManager.buildNoConfigMessage(), stopWatch);
+		console.printAndStopWatch(messageManager.buildNoConfigMessage(configManager.getConfigFile().toString()), stopWatch);
 		System.exit(0);
 	}
 
