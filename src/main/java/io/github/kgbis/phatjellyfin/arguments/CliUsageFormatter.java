@@ -36,111 +36,123 @@ import static io.github.kgbis.phatjellyfin.output.MessageManager.LOGO;
 @Slf4j
 public class CliUsageFormatter extends UnixStyleUsageFormatter {
 
-    private static final String MAIN_PARAMETER_HELP = "Source directory. Quote the path if it contains spaces.";
+	private static final String MAIN_PARAMETER_HELP = "Source folders. Quote the paths if they contain spaces.";
 
-    private final JCommander commander;
+	private static final String MAIN_PARAMETER_HELP_EXAMPLE = "i.e. \"C:\\Music\\Some Artist\" <- double quotes for Windows cmd";
 
-    private final Console console;
+	private static final String[] MAIN_PARAMETER_ARRAY = { MAIN_PARAMETER_HELP, MAIN_PARAMETER_HELP_EXAMPLE };
 
-    public CliUsageFormatter(JCommander commander, Console console) {
-        super(commander);
-        this.commander = commander;
-        this.console = console;
-    }
+	private final JCommander commander;
 
-    public void error(ParameterException exception) {
-        StringBuilder sb = new StringBuilder();
-        usage(sb, exception.getMessage(), "");
-        console.println(sb.toString());
-    }
+	private final Console console;
 
-    /**
-     * Stores the usage in the argument string builder, with the argument indentation. This works by appending
-     * each portion of the help in the following order. Their outputs can be modified by overriding them in a
-     * subclass of this class.
-     *
-     * <ul>
-     *     <li>Main line - {@link #appendMainLine(StringBuilder, String, boolean, boolean, int, String)}</li>
-     *     <li>Parameters - {@link #appendAllParametersDetails(StringBuilder, int, String, List)}</li>
-     *     <li>Commands - {@link #appendCommands(StringBuilder, int, int, String)}</li>
-     * </ul>
-     */
-    public void usage(StringBuilder out, String error, String indent) {
-        if (commander.getDescriptions() == null) {
-            commander.createDescriptions();
-        }
-        boolean hasCommands = !commander.getCommands().isEmpty();
-        boolean hasOptions = !commander.getDescriptions().isEmpty();
+	public CliUsageFormatter(JCommander commander, Console console) {
+		super(commander);
+		this.commander = commander;
+		this.console = console;
+	}
 
-        // Indentation constants
-        final int descriptionIndent = 6;
-        final int indentCount = indent.length() + descriptionIndent;
+	public void error(ParameterException exception) {
+		StringBuilder sb = new StringBuilder();
+		usage(sb, exception.getMessage(), "");
+		console.println(sb.toString());
+	}
 
-        // Append first line (aka main line) of the usage
-        appendMainLine(out, error, hasOptions, hasCommands, indentCount, indent);
+	/**
+	 * Stores the usage in the argument string builder, with the argument indentation.
+	 * This works by appending each portion of the help in the following order. Their
+	 * outputs can be modified by overriding them in a subclass of this class.
+	 *
+	 * <ul>
+	 * <li>Main line -
+	 * {@link #appendMainLine(StringBuilder, String, boolean, boolean, int, String)}</li>
+	 * <li>Parameters -
+	 * {@link #appendAllParametersDetails(StringBuilder, int, String, List)}</li>
+	 * <li>Commands - {@link #appendCommands(StringBuilder, int, int, String)}</li>
+	 * </ul>
+	 */
+	public void usage(StringBuilder out, String error, String indent) {
+		if (commander.getDescriptions() == null) {
+			commander.createDescriptions();
+		}
+		boolean hasCommands = !commander.getCommands().isEmpty();
+		boolean hasOptions = !commander.getDescriptions().isEmpty();
 
-        List<ParameterDescription> sortedParameters = Lists.newArrayList();
+		// Indentation constants
+		final int descriptionIndent = 6;
+		final int indentCount = indent.length() + descriptionIndent;
 
-        for (ParameterDescription pd : commander.getFields().values()) {
-            if (!pd.getParameter().hidden()) {
-                sortedParameters.add(pd);
-            }
-        }
+		// Append first line (aka main line) of the usage
+		appendMainLine(out, error, hasOptions, hasCommands, indentCount, indent);
 
-        // Sort the options
-        sortedParameters.sort(commander.getParameterDescriptionComparator());
+		List<ParameterDescription> sortedParameters = Lists.newArrayList();
 
-        // Append all the parameter names and descriptions
-        appendAllParametersDetails(out, indentCount, indent, sortedParameters);
+		for (ParameterDescription pd : commander.getFields().values()) {
+			if (!pd.getParameter().hidden()) {
+				sortedParameters.add(pd);
+			}
+		}
 
-        // Append commands if they were specified
-        if (hasCommands) {
-            appendCommands(out, indentCount, descriptionIndent, indent);
-        }
-    }
+		// Sort the options
+		sortedParameters.sort(commander.getParameterDescriptionComparator());
 
-    public void appendMainLine(StringBuilder out, String error, boolean hasOptions, boolean hasCommands, int indentCount, String indent) {
-        out.append(LOGO).append("\n");
-        if (StringUtils.isNotBlank(error)) {
-            out.append(Console.RED)
-                    .append("ERROR: ")
-                    .append(error)
-                    .append(Console.RESET)
-                    .append("\n\n");
-        }
-        super.appendMainLine(out, hasOptions, hasCommands, indentCount, indent);
+		// Append all the parameter names and descriptions
+		appendAllParametersDetails(out, indentCount, indent, sortedParameters);
 
-        if (commander.getMainParameter() != null && commander.getMainParameterDescription() != null) {
-            appendMainParameter(out, indent);
-        }
-    }
+		// Append commands if they were specified
+		if (hasCommands) {
+			appendCommands(out, indentCount, descriptionIndent, indent);
+		}
+	}
 
-    @Override
-    public void appendMainLine(StringBuilder out, boolean hasOptions, boolean hasCommands, int indentCount, String indent) {
-        appendMainLine(out, null, hasOptions, hasCommands, indentCount, indent);
-    }
+	public void appendMainLine(StringBuilder out, String error, boolean hasOptions, boolean hasCommands,
+			int indentCount, String indent) {
+		out.append(LOGO).append("\n");
+		if (StringUtils.isNotBlank(error)) {
+			out.append(Console.RED).append("ERROR: ").append(error).append(Console.RESET).append("\n\n");
+		}
+		super.appendMainLine(out, hasOptions, hasCommands, indentCount, indent);
 
-    private void appendMainParameter(StringBuilder out, String indent) {
-        // Calculate prefix indent
-        int prefixIndent = 0;
+		if (commander.getMainParameter() != null && commander.getMainParameterDescription() != null) {
+			appendMainParameter(out, indent);
+		}
+	}
 
-        for (ParameterDescription pd : commander.getParameters()) {
-            WrappedParameter parameter = pd.getParameter();
-            String prefix = (parameter.required() ? "* " : "  ") + pd.getNames();
+	@Override
+	public void appendMainLine(StringBuilder out, boolean hasOptions, boolean hasCommands, int indentCount,
+			String indent) {
+		appendMainLine(out, null, hasOptions, hasCommands, indentCount, indent);
+	}
 
-            if (prefix.length() > prefixIndent) {
-                prefixIndent = prefix.length();
-            }
-        }
+	private void appendMainParameter(StringBuilder out, String indent) {
+		// Calculate prefix indent
+		int prefixIndent = 0;
 
-        // Append the main parameter as "argument"
-        String argDescriptionIndented = commander.getMainParameterDescription();
-        out.append(indent).append("\n  Argument:\n");
-        out.append(indent)
-                .append("    ")
-                .append(argDescriptionIndented)
-                .append(s(prefixIndent - argDescriptionIndented.length() - 1))
-                .append(MAIN_PARAMETER_HELP)
-                .append("\n\n");
-    }
+		// Calculate longest argument to indent
+		for (ParameterDescription pd : commander.getParameters()) {
+			WrappedParameter parameter = pd.getParameter();
+			String prefix = (parameter.required() ? "* " : "  ") + pd.getNames();
+
+			if (prefix.length() > prefixIndent) {
+				prefixIndent = prefix.length();
+			}
+		}
+
+		// Add 2 to indent
+		indent = indent.concat(s(2));
+
+		// Append the main parameter as "argument"
+		String argDescriptionIndented = commander.getMainParameterDescription();
+		out.append("\n").append(indent).append("Argument:\n");
+		for (int i = 0; i < MAIN_PARAMETER_ARRAY.length; i++) {
+			out.append(indent)
+				.append(indent)
+				.append(i == 0 ? argDescriptionIndented : s(argDescriptionIndented.length()))
+				.append(s(prefixIndent - argDescriptionIndented.length() - 1))
+				.append(MAIN_PARAMETER_ARRAY[i])
+				.append("\n");
+		}
+		out.append("\n");
+	}
+
 }

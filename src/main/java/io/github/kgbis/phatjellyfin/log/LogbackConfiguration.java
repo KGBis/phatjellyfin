@@ -27,11 +27,10 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import io.github.kgbis.phatjellyfin.config.ConfigManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.SystemProperties;
-import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -43,34 +42,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static io.github.kgbis.phatjellyfin.Application.APP_NAME;
+import static io.github.kgbis.phatjellyfin.Application.GZ_FILE_NAME;
+import static io.github.kgbis.phatjellyfin.Application.LOG_FILE_NAME;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Singleton
 @Slf4j
 public class LogbackConfiguration {
 
-	/* Log paths */
-	private static final String WIN_LOG_FOLDER = "LOCALAPPDATA";
-
-	private static final String LINUX_LOG_FOLDER = ".cache";
-
-	private static final String MACOS_LIB_FOLDER = "Library";
-
-	private static final String MACOS_LOG_FOLDER = "Logs";
-
-	private static final String LOG_FILE_NAME = APP_NAME + ".log";
-
-	private static final String GZ_FILE_NAME = LOG_FILE_NAME + "-%d{yyyy-MM-dd}.gz";
-
 	private static final String LOGGING_PATTERN = "%date{ISO8601} %-26(%-5p [%t]) %logger{1} - %m%n";
 
-	private static final String UNSUPPORTED = "Unsupported OS: %s";
+	private final ConfigManager configManager;
 
-	private static final String USER_HOME = System.getProperty("user.home");
+	private String version;
 
-	private static String version;
+	@Inject
+	public LogbackConfiguration(ConfigManager configManager) {
+		this.configManager = configManager;
+	}
 
-	public static void configure(Level rootLevel, boolean logToConsole) {
-		Path logDir = getOSLogDirectory();
+	public void configure(Level rootLevel, boolean logToConsole) {
+		Path logDir = configManager.getLogFile();
+		createDir(logDir);
 
 		// Logger context
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -88,7 +80,7 @@ public class LogbackConfiguration {
 		rollingPolicy.setContext(context);
 		rollingPolicy.setParent(fileAppender);
 		rollingPolicy.setFileNamePattern(gz);
-		rollingPolicy.setMaxHistory(30);
+		rollingPolicy.setMaxHistory(7);
 		rollingPolicy.start();
 
 		fileAppender.setRollingPolicy(rollingPolicy);
@@ -121,7 +113,7 @@ public class LogbackConfiguration {
 		root.setLevel(rootLevel);
 	}
 
-	private static ConsoleAppender<ILoggingEvent> consoleAppender(LoggerContext context) {
+	private ConsoleAppender<ILoggingEvent> consoleAppender(LoggerContext context) {
 		// Console appender
 		ConsoleAppender<ILoggingEvent> console = new ConsoleAppender<>();
 		console.setTarget("System.err");
@@ -137,7 +129,16 @@ public class LogbackConfiguration {
 		return console;
 	}
 
-	private static String getVersion() {
+	private void createDir(Path path) {
+		try {
+			Files.createDirectories(path);
+		}
+		catch (IOException e) {
+			throw new UncheckedIOException("Cannot create directory " + path, e);
+		}
+	}
+
+	private String getVersion() {
 		if (version == null) {
 			try (InputStream in = LogbackConfiguration.class.getClassLoader().getResourceAsStream("version.txt")) {
 				if (in == null) {
@@ -153,35 +154,6 @@ public class LogbackConfiguration {
 		}
 
 		return version;
-	}
-
-	private static Path getOSLogDirectory() {
-		Path logDir;
-		if (SystemUtils.IS_OS_WINDOWS) {
-			String logFolder = System.getenv(WIN_LOG_FOLDER);
-			logDir = Path.of(logFolder != null ? logFolder : USER_HOME, APP_NAME, "logs");
-		}
-		else if (SystemUtils.IS_OS_MAC) {
-			logDir = Path.of(USER_HOME, MACOS_LIB_FOLDER, MACOS_LOG_FOLDER, APP_NAME);
-		}
-		else if (SystemUtils.IS_OS_LINUX) {
-			logDir = Path.of(USER_HOME, LINUX_LOG_FOLDER, APP_NAME, "logs");
-		}
-		else {
-			throw new UnsupportedOperationException(String.format(UNSUPPORTED, SystemProperties.getOsName()));
-		}
-
-		createDir(logDir);
-		return logDir;
-	}
-
-	private static void createDir(Path path) {
-		try {
-			Files.createDirectories(path);
-		}
-		catch (IOException e) {
-			throw new UncheckedIOException("Cannot create directory " + path, e);
-		}
 	}
 
 }

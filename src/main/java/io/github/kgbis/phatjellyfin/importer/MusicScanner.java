@@ -22,7 +22,6 @@ package io.github.kgbis.phatjellyfin.importer;
 import io.github.kgbis.phatjellyfin.config.Config;
 import io.github.kgbis.phatjellyfin.config.ConfigException;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
-import io.github.kgbis.phatjellyfin.config.ConfigStorage;
 import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
 import io.github.kgbis.phatjellyfin.output.MessageManager;
@@ -79,7 +78,7 @@ public class MusicScanner {
 	}
 
 	public OperationResult<ScanResult> scan() throws IOException, ConfigException {
-		log.debug("Using config directory: {}", ConfigStorage.getConfigFile());
+		log.debug("Using config directory: {}", configManager.getConfigFile());
 		Config config = configManager.current();
 		musicFileReader.setConfiguredMetadata(config.getMetadata());
 		log.info("Starting music scanner with config: {}", config);

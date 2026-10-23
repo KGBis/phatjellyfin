@@ -21,20 +21,15 @@ package io.github.kgbis.phatjellyfin.config;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static io.github.kgbis.phatjellyfin.Application.APP_CONFIG_FILE;
 
 public interface ConfigStorage {
 
-    static Path getConfigFile() {
-        return Paths.get(APP_CONFIG_FILE).toAbsolutePath();
-    }
+	boolean exists();
 
-    boolean exists();
+	Config read() throws IOException;
 
-    Config read() throws IOException;
+	void write(Config config);
 
-    void write(Config config);
+	Path getConfigFile();
 
 }
