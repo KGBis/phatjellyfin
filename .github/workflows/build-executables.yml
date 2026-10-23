@@ -5,6 +5,9 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch: # To trigger the build manually from the GitHub website
 
+permissions:
+  contents: write
+
 jobs:
   # Job 1: Gather pom.xml version and create single Release
   create-release:
