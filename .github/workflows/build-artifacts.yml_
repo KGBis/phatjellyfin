@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         # Compile for Linux and Windows in parallel
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest] # ubuntu-latest,
 
     steps:
       - name: Checkout repository
@@ -43,14 +43,14 @@ jobs:
       # 4. Upload the resulting binaries as downloadable GitHub artifacts
       - name: Upload Linux Executable
         if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: phatjellyfin-linux
           path: target/phatjellyfin
 
       - name: Upload Windows Executable
         if: matrix.os == 'windows-latest'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: phatjellyfin-windows
           path: target/phatjellyfin.exe
