@@ -34,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -44,6 +43,7 @@ import java.nio.file.Paths;
 import static io.github.kgbis.phatjellyfin.Application.APP_NAME;
 import static io.github.kgbis.phatjellyfin.Application.GZ_FILE_NAME;
 import static io.github.kgbis.phatjellyfin.Application.LOG_FILE_NAME;
+import static io.github.kgbis.phatjellyfin.Application.getVersion;
 
 @Singleton
 @Slf4j
@@ -52,8 +52,6 @@ public class LogbackConfiguration {
 	private static final String LOGGING_PATTERN = "%date{ISO8601} %-26(%-5p [%t]) %logger{1} - %m%n";
 
 	private final ConfigManager configManager;
-
-	private String version;
 
 	@Inject
 	public LogbackConfiguration(ConfigManager configManager) {
@@ -116,7 +114,6 @@ public class LogbackConfiguration {
 	private ConsoleAppender<ILoggingEvent> consoleAppender(LoggerContext context) {
 		// Console appender
 		ConsoleAppender<ILoggingEvent> console = new ConsoleAppender<>();
-		console.setTarget("System.err");
 		console.setContext(context);
 		PatternLayoutEncoder consoleEncoder = new PatternLayoutEncoder();
 		consoleEncoder.setContext(context);
@@ -136,24 +133,6 @@ public class LogbackConfiguration {
 		catch (IOException e) {
 			throw new UncheckedIOException("Cannot create directory " + path, e);
 		}
-	}
-
-	private String getVersion() {
-		if (version == null) {
-			try (InputStream in = LogbackConfiguration.class.getClassLoader().getResourceAsStream("version.txt")) {
-				if (in == null) {
-					version = "unknown";
-				}
-				else {
-					version = new String(in.readAllBytes()).trim();
-				}
-			}
-			catch (IOException _) {
-				version = "unknown";
-			}
-		}
-
-		return version;
 	}
 
 }

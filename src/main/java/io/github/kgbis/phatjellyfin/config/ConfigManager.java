@@ -110,10 +110,10 @@ public class ConfigManager {
 
 		// @formatter:off
 		Map<JellyfinMetadata, String> metadata = Map.of(
-				JellyfinMetadata.TITLE,        "TITLE",
-				JellyfinMetadata.ARTIST,       "ARTIST",
-				JellyfinMetadata.ALBUM,        "ALBUM",
-				JellyfinMetadata.ALBUM_ARTIST, "ALBUMARTIST");
+				JellyfinMetadata.TITLE,        "JF_TITLE",
+				JellyfinMetadata.ARTIST,       "JF_ARTIST",
+				JellyfinMetadata.ALBUM,        "JF_ALBUM",
+				JellyfinMetadata.ALBUM_ARTIST, "JF_ALBUMARTIST");
 		// @formatter:on
 
 		Config config = Config.createNewDefault(serverData, metadata);

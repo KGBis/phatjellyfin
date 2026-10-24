@@ -42,7 +42,6 @@ import org.apache.commons.lang3.time.StopWatch;
 import java.io.IOException;
 import java.util.List;
 
-import static io.github.kgbis.phatjellyfin.output.MessageManager.LOGO;
 import static io.github.kgbis.phatjellyfin.output.MessageManager.SERVER_INFO_MESSAGE;
 
 @Singleton
@@ -88,8 +87,8 @@ public class PhatJellyfin {
 			System.exit(0);
 		});
 
-		// Configure log output to file and console (optional)
-		logbackConfiguration.configure(cliArguments.getLogLevel(), cliArguments.isLogToConsole());
+		// Configure log output
+		logbackConfiguration.configure(cliArguments.getLogLevel(), false);
 
 		// Store parsed arguments
 		configManager.storeArguments(cliArguments);
@@ -97,7 +96,7 @@ public class PhatJellyfin {
 
 	private void start() {
 		// print logo on console
-		console.println(LOGO);
+		console.println(messageManager.buildLogo());
 
 		try {
 			checkRootFolders();
@@ -155,7 +154,8 @@ public class PhatJellyfin {
 	}
 
 	private void showConfigAndExit() {
-		console.printAndStopWatch(messageManager.buildNoConfigMessage(configManager.getConfigFile().toString()), stopWatch);
+		console.printAndStopWatch(messageManager.buildNoConfigMessage(configManager.getConfigFile().toString()),
+				stopWatch);
 		System.exit(0);
 	}
 

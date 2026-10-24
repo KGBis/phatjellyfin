@@ -19,6 +19,7 @@
  */
 package io.github.kgbis.phatjellyfin.output;
 
+import io.github.kgbis.phatjellyfin.Application;
 import io.github.kgbis.phatjellyfin.config.Config;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
 import jakarta.inject.Inject;
@@ -28,6 +29,8 @@ import lombok.SneakyThrows;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+
+import static io.github.kgbis.phatjellyfin.Application.UNKNOWN_VERSION;
 
 @Singleton
 public class MessageManager {
@@ -40,6 +43,7 @@ public class MessageManager {
 			/ ___/| | | | (_| | |_/\\_/ /  __/ | | |_| |  _| | | | |
 			\\/    |_| |_|\\__,_|\\__\\___/ \\___|_|_|\\__, |_| |_|_| |_|
 			Because your Jellyfin deserves proper|___/ metadata too\s
+			%s
 			""";
 
 	// Metadata configuration line template
@@ -94,6 +98,8 @@ public class MessageManager {
 
 	public static final String FAILED_ITEM = "%s, reason: %s";
 
+	public static final String API_KEY_REGEX = "^(.{4}).*(.{4})$";
+
 	private static final String SCAN_SUCCESS_SUMMARY = """
 			Folder scan finished.
 			    Scan summary:
@@ -117,13 +123,25 @@ public class MessageManager {
 			Starting music scan%s...
 			""";
 
-	private static final String API_KEY_REGEX = "^(.{4}).*(.{4})$";
-
 	private final ConfigManager configManager;
 
 	@Inject
 	public MessageManager(ConfigManager configManager) {
 		this.configManager = configManager;
+	}
+
+	public String buildLogo() {
+		String appversion = Application.getVersion();
+		String line;
+		if (appversion.equals(UNKNOWN_VERSION)) {
+			line = "";
+		}
+		else {
+			appversion = "v" + appversion;
+			line = spaces(55 - appversion.length()) + appversion;
+		}
+
+		return LOGO.formatted(line);
 	}
 
 	@SneakyThrows
