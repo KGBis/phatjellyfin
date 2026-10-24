@@ -7,7 +7,7 @@
 
     <groupId>io.github.kgbis</groupId>
     <artifactId>phatjellyfin</artifactId>
-    <version>0.103.0</version>
+    <version>1.0.0</version>
 
     <name>io.github.kgbis.phatjellyfin.PhatJellyfin</name>
     <description>Jellyfin CLI music tag importer</description>
@@ -312,48 +312,5 @@
 
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>native</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId>
-                        <version>1.1.14</version>
-                        <extensions>true</extensions>
-                        <executions>
-                            <execution>
-                                <id>build-native</id>
-                                <goals>
-                                    <goal>compile</goal>
-                                </goals>
-                                <phase>package</phase>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <imageName>phatjellyfin</imageName>
-                            <mainClass>${main.class}</mainClass>
-                            <metadataRepository>
-                                <enabled>true</enabled>
-                            </metadataRepository>
-                            <buildArgs>
-                                <buildArg>--no-fallback</buildArg>
-                                <buildArg>-Dfile.encoding=UTF-8</buildArg>
-                                <!--<buildArg>-Dstdin.encoding=UTF-8</buildArg>
-                                <buildArg>-Dstderr.encoding=UTF-8</buildArg>
-                                <buildArg>-Dstdout.encoding=UTF-8</buildArg>-->
-                                <!--<buildArg>-J-Dstdin.encoding=UTF-8</buildArg>
-                                <buildArg>-J-Dstdout.encoding=UTF-8</buildArg>
-                                <buildArg>-J-Dstderr.encoding=UTF-8</buildArg>-->
-                                <!--<buildArg>-H:+AddAllCharsets</buildArg>-->
-                            </buildArgs>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>

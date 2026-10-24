@@ -113,8 +113,7 @@ public class ConfigManager {
 				JellyfinMetadata.TITLE,        "TITLE",
 				JellyfinMetadata.ARTIST,       "ARTIST",
 				JellyfinMetadata.ALBUM,        "ALBUM",
-				JellyfinMetadata.ALBUM_ARTIST, "ALBUMARTIST"//,
-				/*JellyfinMetadata.GENRE,        "GENRE"*/);
+				JellyfinMetadata.ALBUM_ARTIST, "ALBUMARTIST");
 		// @formatter:on
 
 		Config config = Config.createNewDefault(serverData, metadata);
