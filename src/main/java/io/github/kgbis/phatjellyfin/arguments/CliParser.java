@@ -22,6 +22,7 @@ package io.github.kgbis.phatjellyfin.arguments;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import io.github.kgbis.phatjellyfin.output.Console;
+import io.github.kgbis.phatjellyfin.output.MessageManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +37,12 @@ public class CliParser {
 
     private final Console console;
 
+    private final MessageManager messageManager;
+
     @Inject
-    public CliParser(Console console) {
+    public CliParser(Console console, MessageManager messageManager) {
         this.console = console;
+        this.messageManager = messageManager;
     }
 
     public CliArguments parseCommandLine(String[] args, Consumer<JCommander> onHelp) {
@@ -49,7 +53,7 @@ public class CliParser {
                 .addObject(cliArguments)
                 .build();
 
-        CliUsageFormatter usageFormatter = new CliUsageFormatter(jCommander, console);
+        CliUsageFormatter usageFormatter = new CliUsageFormatter(jCommander, console, messageManager);
 
         jCommander.setCaseSensitiveOptions(false);
         jCommander.setUsageFormatter(usageFormatter);

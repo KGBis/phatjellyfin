@@ -26,30 +26,33 @@ import com.beust.jcommander.UnixStyleUsageFormatter;
 import com.beust.jcommander.WrappedParameter;
 import com.beust.jcommander.internal.Lists;
 import io.github.kgbis.phatjellyfin.output.Console;
+import io.github.kgbis.phatjellyfin.output.MessageManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-import static io.github.kgbis.phatjellyfin.output.MessageManager.LOGO;
-
 @Slf4j
 public class CliUsageFormatter extends UnixStyleUsageFormatter {
 
-	private static final String MAIN_PARAMETER_HELP = "Source folders. Quote the paths if they contain spaces.";
-
-	private static final String MAIN_PARAMETER_HELP_EXAMPLE = "i.e. \"C:\\Music\\Some Artist\" <- double quotes for Windows cmd";
-
-	private static final String[] MAIN_PARAMETER_ARRAY = { MAIN_PARAMETER_HELP, MAIN_PARAMETER_HELP_EXAMPLE };
+	// @formatter:off
+	private static final String[] MAIN_PARAMETER_ARRAY = {
+			"Source folders. Quote paths containing spaces and avoid final backslash.",
+			"Examples: \"C:\\Music\\Some Artist\" or 'C:\\Music\\Some Artist'"
+	};
+	// @formatter:on
 
 	private final JCommander commander;
 
 	private final Console console;
 
-	public CliUsageFormatter(JCommander commander, Console console) {
+	private final MessageManager messageManager;
+
+	public CliUsageFormatter(JCommander commander, Console console, MessageManager messageManager) {
 		super(commander);
 		this.commander = commander;
 		this.console = console;
+		this.messageManager = messageManager;
 	}
 
 	public void error(ParameterException exception) {
@@ -107,7 +110,7 @@ public class CliUsageFormatter extends UnixStyleUsageFormatter {
 
 	public void appendMainLine(StringBuilder out, String error, boolean hasOptions, boolean hasCommands,
 			int indentCount, String indent) {
-		out.append(LOGO).append("\n");
+		out.append(messageManager.buildLogo()).append("\n");
 		if (StringUtils.isNotBlank(error)) {
 			out.append(Console.RED).append("ERROR: ").append(error).append(Console.RESET).append("\n\n");
 		}

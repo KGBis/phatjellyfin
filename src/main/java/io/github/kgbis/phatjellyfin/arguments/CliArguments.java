@@ -41,9 +41,6 @@ public class CliArguments {
 	@Parameter(names = { "-r", "--recursive" }, description = "Scan folder(s) recursively")
 	private boolean recursive = false;
 
-	@Parameter(names = { "-c", "--console" }, description = "Log to console too. Log to file will still be used.")
-	private boolean logToConsole = false;
-
 	@Parameter(names = { "-l", "--logLevel" }, arity = 1, description = LEVELS, converter = LogLevelConverter.class,
 			validateWith = LogLevelValidator.class)
 	private Level logLevel = Level.INFO;
