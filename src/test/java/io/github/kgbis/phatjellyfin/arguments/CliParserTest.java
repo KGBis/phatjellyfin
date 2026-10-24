@@ -23,22 +23,33 @@ import ch.qos.logback.classic.Level;
 import com.beust.jcommander.JCommander;
 import com.ginsberg.junit.exit.ExpectSystemExitWithStatus;
 import io.github.kgbis.phatjellyfin.output.Console;
+import io.github.kgbis.phatjellyfin.output.MessageManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockitoExtension.class)
 class CliParserTest {
+
+	@Mock
+	private Console console;
+
+	@Mock
+	private MessageManager messageManager;
 
 	private CliParser cliParser;
 
 	@BeforeEach
 	void setUp() {
-		Console console = new Console();
-		cliParser = new CliParser(console);
+		// Console console = new Console();
+		cliParser = new CliParser(console, messageManager);
 	}
 
 	@Test

@@ -19,10 +19,23 @@
  */
 package io.github.kgbis.phatjellyfin.config;
 
+import org.jspecify.annotations.NonNull;
+
+import static io.github.kgbis.phatjellyfin.output.MessageManager.API_KEY_NOT_CONFIGURED;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.API_KEY_REGEX;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.API_KEY_REPLACEMENT;
+
 /**
  * Jellyfin Server Configuration
+ *
  * @param url Server URL
  * @param apiKey API key used to "talk" with server
  */
 public record JellyfinServerData(String url, String apiKey) {
+	@Override
+	public @NonNull String toString() {
+		String apiKey = apiKey() == null ? API_KEY_NOT_CONFIGURED
+				: apiKey().replaceAll(API_KEY_REGEX, API_KEY_REPLACEMENT);
+		return String.format("JellyfinServerData[url=%s, apiKey=%s]", url, apiKey);
+	}
 }
