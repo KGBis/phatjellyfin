@@ -48,7 +48,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static io.github.kgbis.phatjellyfin.output.Console.ANSI_DEL;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.NO_UPDATES;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.SCANNING_FOLDER;
 import static io.github.kgbis.phatjellyfin.output.MessageManager.SCAN_ERROR_SUMMARY;
 
 @Singleton
@@ -123,8 +124,6 @@ public class MusicScanner {
 	}
 
 	private OperationResult<ScanResult> scanFiles(Config config) {
-		String recursive = config.isRecursive() ? " recursively" : "";
-
 		// status and message (success unless exception is thrown)
 		boolean success = true;
 		String errorCause = null;
@@ -132,7 +131,7 @@ public class MusicScanner {
 		// jAudioTagger supported extensions
 		Set<String> supportedExtensions = getSupportedExtensions();
 
-		console.print(messageManager.buildStartScanMessage(config.getRootFolders(), recursive));
+		console.print(messageManager.startScanMsg(config.getRootFolders(), config.isRecursive()));
 
 		// to finetune the scanning message
 		AtomicReference<String> oldStrPath = new AtomicReference<>("");
@@ -145,7 +144,7 @@ public class MusicScanner {
 					musicFileReader.processFile(path);
 				});
 
-			console.print("\r" + ANSI_DEL);
+			console.clearCurrentLine();
 		}
 		catch (UncheckedIOException e) {
 			success = false;
@@ -175,7 +174,7 @@ public class MusicScanner {
 	private void printScanningProgress(Path path, AtomicReference<String> oldStrPath) {
 		String strPath = path.getParent() != null ? path.getParent().toString() : path.toString();
 		if (!strPath.equalsIgnoreCase(oldStrPath.get())) {
-			console.print("\r%sScanning music folder '%s'".formatted(ANSI_DEL, strPath));
+			console.printSameLine(SCANNING_FOLDER.formatted(strPath));
 			oldStrPath.set(strPath);
 		}
 	}
@@ -224,12 +223,12 @@ public class MusicScanner {
 			log.info("Files to update: {}, Skipped: {}, Failed to read: {}", result.scannedFiles().size(),
 					result.skippedFiles().size(), result.errorFiles().size());
 
-			String s = messageManager.buildScanSuccessMessage(result.scannedFiles().size(),
+			String s = messageManager.scanSuccessMsg(result.scannedFiles().size(),
 					result.skippedFiles().size(), result.errorFiles().size());
 			console.println(s);
 
 			if (result.scannedFiles().isEmpty()) {
-				console.println("No files to update, PhatJellyfin will now exit.");
+				console.println(NO_UPDATES);
 			}
 		}
 		else {

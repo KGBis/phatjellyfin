@@ -35,8 +35,61 @@ import static io.github.kgbis.phatjellyfin.Application.UNKNOWN_VERSION;
 @Singleton
 public class MessageManager {
 
+	public static final String API_KEY_NOT_CONFIGURED = "not configured";
+
+	public static final String API_KEY_REGEX = "^(.{4}).*(.{4})$";
+
+	public static final String API_KEY_REPLACEMENT = "$1************************$2";
+
+	public static final String APPLY_CHANGES = "Apply changes to Jellyfin? [Y/n]: ";
+
+	public static final String ERROR_READ_CONFIG = "Unable to read configuration file: %s";
+
+	public static final String ERROR_SERVER_UNREACHABLE = "Unable to reach Jellyfin server: %s";
+
+	public static final String FAILED_ITEM = "%s, reason: %s";
+
+	public static final String INCORRECT_ANSWER = "Please answer 'y' or 'n'.";
+
+	public static final String MATCHING_TRACKS = "⚙️ Matching Jellyfin tracks for %s";
+
+	public static final String NO_UPDATES = "❗ No files to update, PhatJellyfin will now exit.";
+
+	public static final String PROCESS_FINISHED = "\uD83C\uDFC1 Process finished in %s";
+
+	public static final String SCANNING_FOLDER = "⚙️ Scanning music folder '%s'";
+
+	public static final String SCAN_ERROR_SUMMARY = """
+			❌ Folder scan finished for '%s' with error: %s
+
+			PhatJellyfin will now exit.
+			""";
+
+	public static final String UPDATE_SUMMARY = """
+			✅ Jellyfin metadata update finished.
+
+			    📊 Update summary:
+			       Updated %s item%s
+			       Failed %s item%s
+			     %s
+			""";
+
+	public static final String UPDATING_TRACKS = "♻️ Updating Jellyfin metadata...";
+
+	// Configuration summary template. Uses Config and METADATA_MAPPING_TEMPLATE
+	static final String CONFIG_MESSAGE = """
+			📜 Runtime configuration:
+
+			    🖥️ Jellyfin configuration:
+			       Server URL: %s
+			       API Key: %s
+
+			    🏷️ Metadata mapping:
+			       %s
+			""";
+
 	// Application Logo
-	public static final String LOGO = """
+	static final String LOGO = """
 			   ___ _           _    __       _ _        __ _      \s
 			  / _ \\ |__   __ _| |_  \\ \\  ___| | |_   _ / _(_)_ __ \s
 			 / /_)/ '_ \\ / _` | __|  \\ \\/ _ \\ | | | | | |_| | '_ \\\s
@@ -47,80 +100,50 @@ public class MessageManager {
 			""";
 
 	// Metadata configuration line template
-	public static final String METADATA_MAPPING_TEMPLATE = "Using \"%s\" for Jellyfin %s";
-
-	// Configuration summary template. Uses Config and METADATA_MAPPING_TEMPLATE
-	public static final String CONFIG_MESSAGE = """
-			    Jellyfin configuration:
-			      Server URL: %s
-			      API Key: %s
-
-			    Metadata mapping:
-			      %s
-			""";
+	static final String METADATA_MAPPING_TEMPLATE = "Using \"%s\" for Jellyfin '%s'";
 
 	// No configuration template. Uses CONFIG_MESSAGE and
-	public static final String NO_CONFIG_MESSAGE = """
-			No configuration file was found. A default configuration has been created:
+	static final String NO_CONFIG_MESSAGE = """
+			❗ No configuration file was found. A default configuration has been created:
 
 			%s
-			Please review and edit the configuration file before running PhatJellyfin again.
-			Configuration file: %s
+			👉 Please review and edit the configuration file before running PhatJellyfin again.
+			   Configuration file: %s
 
 			PhatJellyfin will now exit.
 			""";
 
 	// Server info
-	public static final String SERVER_INFO_MESSAGE = """
-			    Jellyfin server found:
-			      Name: %s
-			      Version: %s
-			      Address: %s
+	static final String SERVER_INFO_MESSAGE = """
+			✅ Jellyfin server found:
+			       Name: %s
+			       Version: %s
+			       Address: %s
 			""";
-
-	public static final String API_KEY_REPLACEMENT = "$1************************$2";
-
-	public static final String API_KEY_NOT_CONFIGURED = "not configured";
-
-	public static final String SCAN_ERROR_SUMMARY = """
-			Folder scan finished for '%s' with error: %s
-
-			PhatJellyfin will now exit.
-			""";
-
-	public static final String UPDATE_SUMMARY = """
-			Jellyfin Metadata update finished.
-			    Update summary:
-			      Updated %s item%s
-			      Failed %s item%s
-			    %s
-			""";
-
-	public static final String FAILED_ITEM = "%s, reason: %s";
-
-	public static final String API_KEY_REGEX = "^(.{4}).*(.{4})$";
 
 	private static final String SCAN_SUCCESS_SUMMARY = """
-			Folder scan finished.
-			    Scan summary:
-			      Found %s file%s to update
-			      Found %s file%s to skip (no custom tags)
-			      Found %s file%s failed to read
+			✅ Folder scan finished.
+
+			    📊 Scan summary:
+			       To update: %s file%s
+			       Skipped: %s file%s (no custom tags)
+			       Failed to read: %s file%s
 			""";
 
 	private static final String MATCHING_SUMMARY = """
-			Library matching finished.
-			    Matching summary:
-			      Matched %s track%s
-			      Matched %s album%s
-			      Unmatched %s track%s
-			      Unmatched %s album%s
+			✅ Library matching finished.
+
+			    📊 Matching summary:
+			       Matched %s track%s
+			       Matched %s album%s
+			       Unmatched %s track%s
+			       Unmatched %s album%s
 			""";
 
 	private static final String SCAN_FOLDERS = """
-			Folders to scan:
+			📁 Folders to scan:
 			%s
-			Starting music scan%s...
+			🔍 Starting %smusic scan...
 			""";
 
 	private final ConfigManager configManager;
@@ -130,7 +153,7 @@ public class MessageManager {
 		this.configManager = configManager;
 	}
 
-	public String buildLogo() {
+	public String logo() {
 		String appversion = Application.getVersion();
 		String line;
 		if (appversion.equals(UNKNOWN_VERSION)) {
@@ -145,7 +168,7 @@ public class MessageManager {
 	}
 
 	@SneakyThrows
-	public String buildConfigMessage() {
+	public String configMsg() {
 		Config config = configManager.current();
 
 		// Build metadata section
@@ -155,7 +178,7 @@ public class MessageManager {
 			.stream()
 			.map(entry -> METADATA_MAPPING_TEMPLATE.formatted(entry.getValue(), entry.getKey().getDisplayName()))
 			.sorted()
-			.forEach(s -> stringBuilder.append(s).append("\n").append(spaces(6)));
+			.forEach(s -> stringBuilder.append(s).append("\n").append(spaces(7)));
 		String metadata = stringBuilder.toString();
 
 		String apiKey = config.getServerData().apiKey() == null ? API_KEY_NOT_CONFIGURED
@@ -164,15 +187,40 @@ public class MessageManager {
 		return CONFIG_MESSAGE.formatted(config.getServerData().url(), apiKey, metadata);
 	}
 
-	public String buildNoConfigMessage(String configFilePath) {
-		return NO_CONFIG_MESSAGE.formatted(buildConfigMessage(), configFilePath);
+	public String noConfigMsg(String configFilePath) {
+		return NO_CONFIG_MESSAGE.formatted(configMsg(), configFilePath);
 	}
 
-	public String buildUpdateResult(int success, int failures, String s) {
-		return UPDATE_SUMMARY.formatted(success, sOrBlank(success), failures, sOrBlank(failures), s);
+	public String serverInfoMsg(String name, String version, String address) {
+		return SERVER_INFO_MESSAGE.formatted(name, version, address);
 	}
 
-	public String buildFailedUpdates(List<String> failureItems) {
+	public String startScanMsg(Collection<Path> rootFolders, boolean recursive) {
+		StringBuilder s = new StringBuilder();
+		for (Path rootFolder : rootFolders) {
+			s.append(spaces(4)).append("\uD83D\uDCC2 ").append(rootFolder.toString()).append("\n");
+		}
+		String folders = s.toString();
+		return SCAN_FOLDERS.formatted(folders, recursive ? "recursive " : "");
+	}
+
+	public String scanSuccessMsg(int scanned, int skipped, int error) {
+		return SCAN_SUCCESS_SUMMARY.formatted(scanned, sOrBlank(scanned), skipped, sOrBlank(skipped), error,
+				sOrBlank(error));
+	}
+
+	public String matchingResultMsg(int tracksMatching, int albumsMatching, int tracksNotMatching,
+			int albumsNotMatching) {
+		return MATCHING_SUMMARY.formatted(tracksMatching, sOrBlank(tracksMatching), albumsMatching,
+				sOrBlank(albumsMatching), tracksNotMatching, sOrBlank(tracksNotMatching), albumsNotMatching,
+				sOrBlank(albumsNotMatching));
+	}
+
+	public String updateResultMsg(int success, int failures, String failedUpdates) {
+		return UPDATE_SUMMARY.formatted(success, sOrBlank(success), failures, sOrBlank(failures), failedUpdates);
+	}
+
+	public String failedUpdatesMsg(List<String> failureItems) {
 		if (failureItems.isEmpty()) {
 			return "";
 		}
@@ -186,33 +234,12 @@ public class MessageManager {
 		return s.toString();
 	}
 
-	public String buildStartScanMessage(Collection<Path> rootFolders, String recursive) {
-		StringBuilder s = new StringBuilder();
-		for (Path rootFolder : rootFolders) {
-			s.append(spaces(4)).append(rootFolder.toString()).append("\n");
-		}
-		String folders = s.toString();
-		return SCAN_FOLDERS.formatted(folders, recursive);
-	}
-
-	public String buildMatchingResult(int tracksMatching, int albumsMatching, int tracksNotMatching,
-			int albumsNotMatching) {
-		return MATCHING_SUMMARY.formatted(tracksMatching, sOrBlank(tracksMatching), albumsMatching,
-				sOrBlank(albumsMatching), tracksNotMatching, sOrBlank(tracksNotMatching), albumsNotMatching,
-				sOrBlank(albumsNotMatching));
-	}
-
-	private String spaces(int count) {
-		return " ".repeat(count);
-	}
-
 	private String sOrBlank(int value) {
 		return value == 1 ? "" : "s";
 	}
 
-	public String buildScanSuccessMessage(int scanned, int skipped, int error) {
-		return SCAN_SUCCESS_SUMMARY.formatted(scanned, sOrBlank(scanned), skipped, sOrBlank(skipped), error,
-				sOrBlank(error));
+	private String spaces(int count) {
+		return " ".repeat(count);
 	}
 
 }

@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static io.github.kgbis.phatjellyfin.output.Console.ANSI_DEL;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.UPDATING_TRACKS;
 
 @Singleton
 @Slf4j
@@ -66,7 +66,7 @@ public class JellyfinWriter {
 		}
 
 		// Update all
-		console.println("Updating Jellyfin metadata...");
+		console.println(UPDATING_TRACKS);
 		Map<OperationResult<Void>, List<UpdateItem>> result = new HashMap<>();
 
 		int size = itemsToUpdate.size();
@@ -76,7 +76,7 @@ public class JellyfinWriter {
 			addResultToMap(result, operationResult, updateItem);
 			console.progress(i + 1, size);
 		}
-		console.print("\r" + ANSI_DEL);
+		console.clearCurrentLine();
 
 		return result;
 	}
