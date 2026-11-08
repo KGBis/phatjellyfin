@@ -19,6 +19,7 @@
  */
 package io.github.kgbis.phatjellyfin.output;
 
+import com.sun.jna.Platform;
 import jakarta.annotation.Nonnull;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -28,34 +29,42 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.UncheckedIOException;
+
+import static io.github.kgbis.phatjellyfin.output.MessageManager.INCORRECT_ANSWER;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.PROCESS_FINISHED;
 
 @Singleton
 public class Console {
 
-	// ANSI Escape Codes for Colors
-	public static final String RESET = "\u001B[0m";
+	public static final String ANSI_DEL = "\033[2K";
 
 	public static final String RED = "\u001B[31m";
 
-	public static final String ANSI_DEL = "\033[2K";
+	public static final String RESET = "\u001B[0m";
 
 	private static final int BAR_LENGTH = 40;
 
-	private final PrintWriter out;
-
 	private final BufferedReader in;
+
+	private final PrintWriter out;
 
 	@Inject
 	public Console() {
-		this(System.in, System.out); // NOSONAR
+		PrintWriter writer = Platform.isWindows() ? new PrintWriter(new WindowsConsoleWriter(), true)
+				: new PrintWriter(System.out, true); // NOSONAR
+		this(System.in, writer);
+
 	}
 
-	Console(InputStream in, PrintStream out) {
+	Console(InputStream in, PrintWriter writer) {
 		this.in = new BufferedReader(new InputStreamReader(in));
-		this.out = new PrintWriter(out, true);
+		this.out = writer;
+	}
+
+	public void clearCurrentLine() {
+		out.print("\r" + ANSI_DEL);
 	}
 
 	public void print(String message) {
@@ -64,7 +73,8 @@ public class Console {
 	}
 
 	public void printSameLine(String message) {
-		out.print("\r" + ANSI_DEL + message);
+		clearCurrentLine();
+		print(message);
 		out.flush();
 	}
 
@@ -79,7 +89,7 @@ public class Console {
 
 	public void println(StopWatch stopWatch) {
 		stopWatch.stop();
-		out.println("Process finished in " + stopWatch.formatTime());
+		out.println(PROCESS_FINISHED.formatted(stopWatch.formatTime()));
 		out.flush();
 	}
 
@@ -89,15 +99,6 @@ public class Console {
 		println(stopWatch);
 	}
 
-	private String readLine() {
-		try {
-			return in.readLine();
-		}
-		catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
-	}
-
 	/**
 	 * Wait for user input. Yes as default if ENTER
 	 * @param message Question message
@@ -105,7 +106,7 @@ public class Console {
 	 */
 	public boolean confirm(String message) {
 		while (true) {
-			print(message + " [Y/n]: ");
+			print(message);
 
 			String answer = readLine();
 
@@ -121,7 +122,7 @@ public class Console {
 				return false;
 			}
 
-			println("Please answer 'y' or 'n'.");
+			println(INCORRECT_ANSWER);
 		}
 	}
 
@@ -135,6 +136,15 @@ public class Console {
 		bar.append("]");
 
 		printSameLine("%s %3d%%".formatted(bar, percentage));
+	}
+
+	private String readLine() {
+		try {
+			return in.readLine();
+		}
+		catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
 	}
 
 }
