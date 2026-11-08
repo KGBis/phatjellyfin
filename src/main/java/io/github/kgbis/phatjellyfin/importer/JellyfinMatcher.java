@@ -47,6 +47,7 @@ import java.util.stream.Collectors;
 
 import static io.github.kgbis.phatjellyfin.client.JellyfinClient.ITEMS_ARTIST_ALBUM_QUERYPARAMS;
 import static io.github.kgbis.phatjellyfin.client.JellyfinClient.ITEMS_TRACKS_QUERYPARAMS;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.MATCHING_TRACKS;
 
 @Singleton
 @Slf4j
@@ -103,7 +104,7 @@ public class JellyfinMatcher {
 			}
 		}
 
-		console.printSameLine("");
+		console.clearCurrentLine();
 		printMatchingSummary(albumsToUpdateMap, unmatchedAlbumsToDiscard);
 
 		return albumsToUpdateMap;
@@ -136,7 +137,7 @@ public class JellyfinMatcher {
 		// Print the things
 		int tracksNotMatching = atomicTracksNotMatching.get();
 		int tracksMatching = atomicTracksMatching.get();
-		String s = messageManager.buildMatchingResult(tracksMatching, albumsMatching, tracksNotMatching,
+		String s = messageManager.matchingResultMsg(tracksMatching, albumsMatching, tracksNotMatching,
 				albumsNotMatching);
 		console.println(s);
 	}
@@ -151,7 +152,7 @@ public class JellyfinMatcher {
 	private AlbumMatchingResult getMatchingAlbumAndTracks(MusicKey musicKey, List<ScannedFile> scannedFiles) {
 		try {
 			// Find either album or artist
-			console.printSameLine("Getting Jellyfin tracks for %s".formatted(musicKey.toDisplayString()));
+			console.printSameLine(MATCHING_TRACKS.formatted(musicKey.toDisplayString()));
 			Optional<Item> optionalAlbum = findJellyfinAlbum(musicKey);
 
 			// No results

@@ -78,9 +78,11 @@ public class JellyfinClient {
 
 	private static final String VIRTUAL_FOLDERS = "Library/VirtualFolders";
 
-	private final HttpClient httpClient;
+	private static final String BLANK_OR_NULL_VALUE = "Server %s is not set. Blank or null value.";
 
 	private final ConfigManager configManager;
+
+	private final HttpClient httpClient;
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -197,6 +199,14 @@ public class JellyfinClient {
 	}
 
 	private void ensureConfigured() throws IOException {
+		if (StringUtils.isBlank(configManager.current().getServerData().url())) {
+			throw new IllegalArgumentException(BLANK_OR_NULL_VALUE.formatted("URL"));
+		}
+
+		if (StringUtils.isBlank(configManager.current().getServerData().apiKey())) {
+			throw new IllegalArgumentException(BLANK_OR_NULL_VALUE.formatted("API key"));
+		}
+
 		if (headers == null || baseUrl == null) {
 			// Store base URL without final forward slash, if any
 			this.baseUrl = Strings.CI.removeEnd(configManager.current().getServerData().url(), "/");

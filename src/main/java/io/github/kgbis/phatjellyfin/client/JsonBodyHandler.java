@@ -21,11 +21,15 @@ package io.github.kgbis.phatjellyfin.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.InputStream;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodySubscriber;
 import java.net.http.HttpResponse.BodySubscribers;
+import java.nio.charset.StandardCharsets;
 
+@Slf4j
 public class JsonBodyHandler {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -35,11 +39,25 @@ public class JsonBodyHandler {
 	}
 
 	public static <T> HttpResponse.BodyHandler<T> ofJson(Class<T> targetType) {
-		return _ -> {
-			// Convert the network byte stream into an input stream
-			BodySubscriber<InputStream> upstream = BodySubscribers.ofInputStream();
+		return responseInfo -> {
+			logStatus(responseInfo.statusCode());
 
-			// Map inputstream to the java class type
+			return BodySubscribers.mapping(BodySubscribers.ofString(StandardCharsets.UTF_8), body -> {
+				try {
+					return objectMapper.readValue(body, targetType);
+				}
+				catch (Exception e) {
+					throw new RuntimeException("Error parsing JSON", e);
+				}
+			});
+		};
+	}
+
+	public static <T> HttpResponse.BodyHandler<T> ofJson(TypeReference<T> targetType) {
+		return responseInfo -> {
+			logStatus(responseInfo.statusCode());
+
+			BodySubscriber<InputStream> upstream = BodySubscribers.ofInputStream();
 			return BodySubscribers.mapping(upstream, inputStream -> {
 				try (inputStream) {
 					return objectMapper.readValue(inputStream, targetType);
@@ -51,18 +69,11 @@ public class JsonBodyHandler {
 		};
 	}
 
-	public static <T> HttpResponse.BodyHandler<T> ofJson(TypeReference<T> targetType) {
-		return _ -> {
-			BodySubscriber<InputStream> upstream = BodySubscribers.ofInputStream();
-			return BodySubscribers.mapping(upstream, inputStream -> {
-				try (inputStream) {
-					return objectMapper.readValue(inputStream, targetType);
-				}
-				catch (Exception e) {
-					throw new RuntimeException("Error parsing JSON", e);
-				}
-			});
-		};
+	private static void logStatus(int statusCode) {
+		log.debug("HTTP/{} {}", statusCode, HttpStatus.getDescription(statusCode));
+		if (statusCode < 200 || statusCode >= 300) {
+			throw new JellyfinClientException(statusCode);
+		}
 	}
 
 }
