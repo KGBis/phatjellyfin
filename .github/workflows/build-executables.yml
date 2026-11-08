@@ -51,7 +51,6 @@ jobs:
       INSTALLERS_APP_PATH: installers/app
       RELEASE_PATH: release
       PACKAGING_PATH: .packaging
-      ICONS_PATH: .packaging/icons
     needs: create-release
     strategy:
       fail-fast: false
@@ -114,6 +113,8 @@ jobs:
             --app-version $APP_VERSION
             --copyright "Copyright © 2026 Enrique García (KGBis)"
             --vendor "Enrique García (KGBis)"
+            --java-options "--enable-native-access=ALL-UNNAMED"
+            --java-options "-Dguice_custom_class_loading=CHILD"
           )
           
           # Windows flags 

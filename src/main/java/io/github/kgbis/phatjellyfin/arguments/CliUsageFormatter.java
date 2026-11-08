@@ -27,12 +27,10 @@ import com.beust.jcommander.WrappedParameter;
 import com.beust.jcommander.internal.Lists;
 import io.github.kgbis.phatjellyfin.output.Console;
 import io.github.kgbis.phatjellyfin.output.MessageManager;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-@Slf4j
 public class CliUsageFormatter extends UnixStyleUsageFormatter {
 
 	// @formatter:off
@@ -110,7 +108,7 @@ public class CliUsageFormatter extends UnixStyleUsageFormatter {
 
 	public void appendMainLine(StringBuilder out, String error, boolean hasOptions, boolean hasCommands,
 			int indentCount, String indent) {
-		out.append(messageManager.buildLogo()).append("\n");
+		out.append(messageManager.logo()).append("\n");
 		if (StringUtils.isNotBlank(error)) {
 			out.append(Console.RED).append("ERROR: ").append(error).append(Console.RESET).append("\n\n");
 		}

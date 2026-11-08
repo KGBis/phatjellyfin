@@ -42,25 +42,26 @@ import org.apache.commons.lang3.time.StopWatch;
 import java.io.IOException;
 import java.util.List;
 
-import static io.github.kgbis.phatjellyfin.output.MessageManager.SERVER_INFO_MESSAGE;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.ERROR_READ_CONFIG;
+import static io.github.kgbis.phatjellyfin.output.MessageManager.ERROR_SERVER_UNREACHABLE;
 
 @Singleton
 @Slf4j
 public class PhatJellyfin {
 
-	private final Console console;
-
-	private final MessageManager messageManager;
-
 	private final CliParser cliParser;
 
 	private final ConfigManager configManager;
 
-	private final LogbackConfiguration logbackConfiguration;
+	private final Console console;
 
 	private final Importer importer;
 
 	private final JellyfinClient jellyfinClient;
+
+	private final LogbackConfiguration logbackConfiguration;
+
+	private final MessageManager messageManager;
 
 	private StopWatch stopWatch;
 
@@ -77,7 +78,7 @@ public class PhatJellyfin {
 		this.jellyfinClient = jellyfinClient;
 	}
 
-	public void initialize(String[] args) {
+	private void initialize(String[] args) {
 		// start stopwatch
 		stopWatch = StopWatch.createStarted();
 
@@ -96,17 +97,21 @@ public class PhatJellyfin {
 
 	private void start() {
 		// print logo on console
-		console.println(messageManager.buildLogo());
+		console.println(messageManager.logo());
 
 		try {
 			checkRootFolders();
 			showConfig();
 			checkJellyfinServer();
-			importer.run(stopWatch);
+			importer.run();
+		}
+		catch (IllegalArgumentException e) {
+			log.error(e.getMessage());
+			abort(e.getMessage());
 		}
 		catch (IOException | InterruptedException e) { // NOSONAR
 			log.error(e.getMessage());
-			abort("Unable to read configuration file: " + configManager.getConfigFile());
+			abort(ERROR_READ_CONFIG.formatted(configManager.getConfigFile()));
 		}
 		catch (ConfigException e) {
 			log.warn(e.getMessage());
@@ -116,16 +121,25 @@ public class PhatJellyfin {
 		console.println(stopWatch);
 	}
 
+	/**
+	 * Utility method to show error message to console and exit
+	 * @param message Message to show
+	 */
+	private void abort(String message) {
+		console.printErrorAndStopWatch(message, stopWatch);
+		System.exit(-1);
+	}
+
 	private void checkJellyfinServer() {
 		try {
 			SystemInfo info = jellyfinClient.getServerBasicInfo();
-			console.println(SERVER_INFO_MESSAGE.formatted(info.serverName(), info.version(), info.localAddress()));
+			console.println(messageManager.serverInfoMsg(info.serverName(), info.version(), info.localAddress()));
 
 			List<Library> libraries = jellyfinClient.getLibraries();
 			configManager.addServerLibraries(libraries);
 		}
 		catch (IOException | InterruptedException e) { // NOSONAR
-			abort("Unable to reach Jellyfin server: " + e.getMessage());
+			abort(ERROR_SERVER_UNREACHABLE.formatted(e.getMessage()));
 		}
 
 	}
@@ -140,22 +154,12 @@ public class PhatJellyfin {
 		}
 	}
 
-	/**
-	 * Utility method to show error message to console and exit
-	 * @param message Message to show
-	 */
-	private void abort(String message) {
-		console.printErrorAndStopWatch(message, stopWatch);
-		System.exit(-1);
-	}
-
 	private void showConfig() {
-		console.print(messageManager.buildConfigMessage());
+		console.print(messageManager.configMsg());
 	}
 
 	private void showConfigAndExit() {
-		console.printAndStopWatch(messageManager.buildNoConfigMessage(configManager.getConfigFile().toString()),
-				stopWatch);
+		console.printAndStopWatch(messageManager.noConfigMsg(configManager.getConfigFile().toString()), stopWatch);
 		System.exit(0);
 	}
 
