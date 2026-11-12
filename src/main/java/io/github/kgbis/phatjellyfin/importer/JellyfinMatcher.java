@@ -296,7 +296,7 @@ public class JellyfinMatcher {
 
 	private boolean sameAlbum(MusicKey musicKey, Item item) {
 		log.debug("sameAlbum() -> {}, {}", Matcher.normalize(musicKey.getAlbum()), Matcher.normalize(item.name()));
-		return Matcher.normalize(musicKey.getAlbum()).equals(Matcher.normalize(item.name()));
+		return Matcher.normalizeToLowercase(musicKey.getAlbum()).equals(Matcher.normalizeToLowercase(item.name()));
 	}
 
 	private boolean isVariousArtist(MusicKey musicKey) {

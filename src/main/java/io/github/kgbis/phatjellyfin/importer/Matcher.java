@@ -36,7 +36,7 @@ public interface Matcher {
 					.trim();
 	}
 
-	default String normalizeToLowercase(String value) {
+	static String normalizeToLowercase(String value) {
 		return value == null ? null : Matcher.normalize(value).toLowerCase(Locale.ROOT);
 	}
 

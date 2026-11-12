@@ -82,8 +82,8 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 	 * @return true if matches or false if not
 	 */
 	private boolean albumNameMatches(Item item, ScannedFile scannedFile) {
-		String scannedAlbum = normalizeToLowercase(scannedFile.metadata().get(JellyfinMetadata.ALBUM));
-		String itemAlbum = normalizeToLowercase(item.album());
+		String scannedAlbum = Matcher.normalizeToLowercase(scannedFile.metadata().get(JellyfinMetadata.ALBUM));
+		String itemAlbum = Matcher.normalizeToLowercase(item.album());
 
 		return isFuzzyMatch(scannedAlbum, itemAlbum, LevenshteinDistanceMatcherImpl.STRICT_THRESHOLD);
 	}
@@ -102,7 +102,7 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		if (item.albumArtists() != null) {
 			boolean matchAlbumArtists = item.albumArtists()
 				.stream()
-				.map(artist -> normalizeToLowercase(artist.getName()))
+				.map(artist -> Matcher.normalizeToLowercase(artist.getName()))
 				.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
 			if (matchAlbumArtists)
 				return true;
@@ -112,7 +112,7 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		if (item.artistItems() != null) {
 			boolean matchArtistItems = item.artistItems()
 				.stream()
-				.map(artist -> normalizeToLowercase(artist.getName()))
+				.map(artist -> Matcher.normalizeToLowercase(artist.getName()))
 				.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
 			if (matchArtistItems)
 				return true;
@@ -120,7 +120,7 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 
 		// field AlbumArtist
 		if (item.albumArtist() != null) {
-			String itemAlbumArtist = normalizeToLowercase(item.albumArtist());
+			String itemAlbumArtist = Matcher.normalizeToLowercase(item.albumArtist());
 			return matchesAnyArtist(threshold, itemAlbumArtist, scannedArtists, scannedAlbumArtists);
 		}
 
@@ -132,7 +132,7 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		return artistHelper.toArtists(fieldValue)
 			.stream()
 			.map(Artist::getName)
-			.map(this::normalizeToLowercase)
+			.map(Matcher::normalizeToLowercase)
 			.toList();
 	}
 
