@@ -36,7 +36,9 @@ import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -53,17 +55,17 @@ import static io.github.kgbis.phatjellyfin.output.MessageManager.MATCHING_TRACKS
 @Slf4j
 public class JellyfinMatcher {
 
+	private final ArtistHelper artistHelper;
+
 	private final ConfigManager configManager;
 
 	private final Console console;
-
-	private final MessageManager messageManager;
 
 	private final JellyfinClient jellyfinClient;
 
 	private final Matcher matcher;
 
-	private final ArtistHelper artistHelper;
+	private final MessageManager messageManager;
 
 	private List<String> libraryPaths; // NOSONAR
 
@@ -92,7 +94,18 @@ public class JellyfinMatcher {
 		// Jellyfin library paths
 		libraryPaths = configManager.current().getLibraryPaths();
 
-		for (Map.Entry<MusicKey, List<ScannedFile>> entry : preparedLibrary.entrySet()) {
+		// Sort data for cute displaying
+		Set<Map.Entry<MusicKey, List<ScannedFile>>> sortedAlbums = preparedLibrary.entrySet()
+			.stream()
+			.sorted(Comparator.comparing(entry -> entry.getValue()
+				.stream()
+				.map(ScannedFile::year)
+				.filter(Objects::nonNull)
+				.findFirst()
+				.orElse(null), Comparator.nullsLast(Comparator.naturalOrder())))
+			.collect(Collectors.toCollection(LinkedHashSet::new));
+
+		for (Map.Entry<MusicKey, List<ScannedFile>> entry : sortedAlbums) {
 			// Get tracks from Jellyfin
 			AlbumMatchingResult albumToUpdate = getMatchingAlbumAndTracks(entry.getKey(), entry.getValue());
 
@@ -151,8 +164,16 @@ public class JellyfinMatcher {
 	 */
 	private AlbumMatchingResult getMatchingAlbumAndTracks(MusicKey musicKey, List<ScannedFile> scannedFiles) {
 		try {
+			// Get the year from any of the album's tracks
+			String albumYear = scannedFiles.stream()
+				.map(ScannedFile::year)
+				.filter(Objects::nonNull)
+				.findFirst()
+				.map("(%s) "::formatted)
+				.orElse("");
+
 			// Find either album or artist
-			console.printSameLine(MATCHING_TRACKS.formatted(musicKey.toDisplayString()));
+			console.printSameLine(MATCHING_TRACKS.formatted(musicKey.toDisplayString(albumYear)));
 			Optional<Item> optionalAlbum = findJellyfinAlbum(musicKey);
 
 			// No results

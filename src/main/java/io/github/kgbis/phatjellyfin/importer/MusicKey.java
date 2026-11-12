@@ -34,10 +34,10 @@ public class MusicKey implements Comparable<MusicKey> {
 
 	private String album;
 
-	public String toDisplayString() {
+	public String toDisplayString(String year) {
 		String[] array = albumArtists.stream().map(Artist::getName).toArray(String[]::new);
 		String artists = StringUtils.join(array, ",");
-		return "album '" + album + "' by " + artists + "...";
+		return "album '" + album + "' " + year + "by " + artists + "...";
 	}
 
 	public int compareTo(MusicKey other) {
@@ -53,7 +53,7 @@ public class MusicKey implements Comparable<MusicKey> {
 		}
 
 		int result = Integer.compare(albumArtists.size(), other.albumArtists.size());
-		return result != 0 ? result : album.compareToIgnoreCase(other.album);
+		return result == 0 ? album.compareToIgnoreCase(other.album) : result;
 	}
 
 }
