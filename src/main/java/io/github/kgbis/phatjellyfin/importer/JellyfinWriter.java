@@ -40,9 +40,9 @@ import static io.github.kgbis.phatjellyfin.output.MessageManager.UPDATING_TRACKS
 @Slf4j
 public class JellyfinWriter {
 
-	private final JellyfinClient jellyfinClient;
-
 	private final Console console;
+
+	private final JellyfinClient jellyfinClient;
 
 	@Inject
 	public JellyfinWriter(JellyfinClient jellyfinClient, Console console) {
