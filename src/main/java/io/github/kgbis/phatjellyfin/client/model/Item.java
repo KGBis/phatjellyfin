@@ -24,9 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * Thin Jellyfin Item object with just the needed fields
+ * Thin Jellyfin Item object with the needed fields to do our stuff
  */
 // @formatter:off
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -56,6 +58,12 @@ public record Item(
 
 		@JsonProperty("ProductionYear") Integer productionYear,
 
+		@JsonProperty("Genres") Set<String> genres,
+
+		@JsonProperty("Tags") List<String> tags,
+
+		@JsonProperty("ProviderIds") Map<String, String> providerIds,
+
 		@JsonProperty("Path") String path) {
 
 	public Item withPath(String path) {
@@ -72,6 +80,9 @@ public record Item(
 				albumArtists,
 				artistItems,
 				productionYear,
+				genres,
+				tags,
+				providerIds,
 				path
 		);
 	}

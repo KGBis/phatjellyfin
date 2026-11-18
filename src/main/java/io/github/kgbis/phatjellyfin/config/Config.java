@@ -21,6 +21,7 @@ package io.github.kgbis.phatjellyfin.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.github.kgbis.phatjellyfin.importer.JellyfinMetadata;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

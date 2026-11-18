@@ -17,7 +17,7 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package io.github.kgbis.phatjellyfin.config;
+package io.github.kgbis.phatjellyfin.importer;
 
 import lombok.Getter;
 

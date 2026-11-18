@@ -52,6 +52,7 @@ public class JellyfinClient {
 	// @formatter:off
 	public static final Map<String, String> ITEMS_ARTIST_ALBUM_QUERYPARAMS = Map.of(
 			"IncludeItemTypes", "MusicAlbum,MusicArtist,Artist",
+			"fields", "Path,ParentId,Tags,ProviderIds,Genres",
 			"recursive", "true"
 			// then "searchTerm", "<album>|<artist>"
 	);
@@ -59,7 +60,7 @@ public class JellyfinClient {
 	public static final Map<String, String> ITEMS_TRACKS_QUERYPARAMS = Map.of(
 			"IncludeItemTypes", "Audio",
 			"recursive", "true",
-			"Fields", "Album,Path,AlbumArtist,AlbumArtists,Artists,ProviderIds,IndexNumber"
+			"Fields", "Album,Path,AlbumArtist,AlbumArtists,Artists,IndexNumber,Tags,ProviderIds,Genres"
 			// then "ParentId, "<id>"
 	);
 	// @formatter:on

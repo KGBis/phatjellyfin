@@ -22,6 +22,7 @@ package io.github.kgbis.phatjellyfin.config;
 import io.github.kgbis.phatjellyfin.arguments.CliArguments;
 import io.github.kgbis.phatjellyfin.client.model.Folder;
 import io.github.kgbis.phatjellyfin.client.model.Library;
+import io.github.kgbis.phatjellyfin.importer.JellyfinMetadata;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
