@@ -25,7 +25,6 @@ import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.Items;
 import io.github.kgbis.phatjellyfin.config.Config;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
 import io.github.kgbis.phatjellyfin.output.MessageManager;
 import org.junit.jupiter.api.Test;
@@ -38,8 +37,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.when;
 
@@ -82,6 +83,12 @@ class JellyfinMatcherTest {
 
 		assertEquals(1, toUpdateMap.size());
 		assertEquals(2, toUpdateMap.get(toUpdateMap.keySet().iterator().next()).getTracks().size());
+
+		// Album / Tracks have one (1) genre "Rock" and library has "Rock" and "Hard Rock"
+		Set<String> genres = toUpdateMap.get(toUpdateMap.keySet().iterator().next()).getGenres();
+		assertEquals(2, genres.size());
+		assertTrue(genres.contains("Rock"));
+		assertTrue(genres.contains("Hard Rock"));
 	}
 
 	@Test
@@ -156,6 +163,7 @@ class JellyfinMatcherTest {
 					.path(Matcher.normalize("/Leño/1980 - Más Madera/02 - Donde esta la salvacion.mp3"))
 					.track(2)
 					.year(1980)
+					.genres(Set.of("Rock", "Hard Rock"))
 					.metadata(Map.of(JellyfinMetadata.ALBUM, album, JellyfinMetadata.ALBUM_ARTIST, artist,
 							JellyfinMetadata.ARTIST, artist, JellyfinMetadata.TITLE, "¿Dónde está la salvación?"))
 					.build(),
@@ -163,6 +171,7 @@ class JellyfinMatcherTest {
 					.path(Matcher.normalize("/Leño/1980 - Más Madera/06 - Si senor, si senor.mp3"))
 					.track(6)
 					.year(1980)
+					.genres(Set.of("Rock"))
 					.metadata(Map.of(JellyfinMetadata.ALBUM, album, JellyfinMetadata.ALBUM_ARTIST, artist,
 							JellyfinMetadata.ARTIST, artist, JellyfinMetadata.TITLE, "Sí señor, sí señor"))
 					.build());
@@ -179,6 +188,7 @@ class JellyfinMatcherTest {
 					.path(Matcher.normalize("/Rosendo/1985 - Loco Por Incordiar/01 - Agradecido.mp3"))
 					.track(1)
 					.year(1985)
+					.genres(Set.of("Rock"))
 					.metadata(Map.of(JellyfinMetadata.ALBUM, album, JellyfinMetadata.ALBUM_ARTIST, artist,
 							JellyfinMetadata.ARTIST, artist, JellyfinMetadata.TITLE, "Agradecido"))
 					.build(),
@@ -186,6 +196,7 @@ class JellyfinMatcherTest {
 					.path(Matcher.normalize("/Rosendo/1985 - Loco Por Incordiar/02 - Corazon.mp3"))
 					.track(2)
 					.year(1985)
+					.genres(Set.of("Rock"))
 					.metadata(Map.of(JellyfinMetadata.ALBUM, album, JellyfinMetadata.ALBUM_ARTIST, artist,
 							JellyfinMetadata.ARTIST, artist, JellyfinMetadata.TITLE, "Corazón"))
 					.build());
@@ -202,6 +213,7 @@ class JellyfinMatcherTest {
 					"/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/01 - You can't always get what you want.mp3"))
 			.track(2)
 			.year(2008)
+			.genres(Set.of("Rock"))
 			.metadata(Map.of(JellyfinMetadata.ALBUM, album, JellyfinMetadata.ALBUM_ARTIST, albumArtist,
 					JellyfinMetadata.ARTIST, "The Rolling Stones", JellyfinMetadata.TITLE,
 					"You can't always get what you want"))
@@ -211,6 +223,7 @@ class JellyfinMatcherTest {
 							"/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/04 - L.A. Woman.mp3"))
 					.track(4)
 					.year(2008)
+					.genres(Set.of("Psychedelic Rock"))
 					.metadata(Map.of(JellyfinMetadata.ALBUM, album, JellyfinMetadata.ALBUM_ARTIST, albumArtist,
 							JellyfinMetadata.ARTIST, "The Doors\0Paul Oakenfold", JellyfinMetadata.TITLE, "L.A. Woman"))
 					.build());
@@ -227,7 +240,7 @@ class JellyfinMatcherTest {
 				ScannedFile.builder()
 						.path(Matcher.normalize(
 								"/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/01 - Paint it black.mp3")
-						).track(1).year(2008)
+						).track(1).year(2008).genres(Set.of("Rock"))
 						.metadata(Map.of(
 								JellyfinMetadata.ALBUM, album,
 								JellyfinMetadata.ALBUM_ARTIST, albumArtist,
@@ -237,7 +250,7 @@ class JellyfinMatcherTest {
 				ScannedFile.builder()
 					.path(Matcher.normalize(
 							"/Soundtracks/2008 - Temptation (Music From The Showtime Series Californication)/04 - L.A. Woman.mp3"))
-					.track(4).year(2008).metadata(Map.of(
+					.track(4).year(2008).genres(Set.of("Psychedelic Rock")).metadata(Map.of(
 							JellyfinMetadata.ALBUM, album,
 								JellyfinMetadata.ALBUM_ARTIST, albumArtist,
 								JellyfinMetadata.ARTIST, "The Doors\0Paul Oakenfold",

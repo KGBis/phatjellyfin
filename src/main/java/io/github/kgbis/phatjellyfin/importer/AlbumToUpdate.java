@@ -24,21 +24,24 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Data
 @Builder
 public class AlbumToUpdate implements AlbumMatchingResult {
 
-	private final String jellyfinId;
-
-	private final String title;
-
 	private final List<Artist> albumArtists;
-
-	private final List<TrackToUpdate> tracks;
-
+	private final String jellyfinId;
 	private final Integer productionYear;
-
+	private final String title;
+	private final List<TrackToUpdate> tracks;
 	private List<ScannedFile> unmatchedTracks;
+
+	private Set<String> genres;
+
+	private List<String> tags;
+
+	private Map<String, String> providerIds;
 
 }

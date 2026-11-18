@@ -55,15 +55,8 @@ public class JellyfinWriter {
 		// Gather all tracks and albums to update as a single list of ID+DATA
 		List<UpdateItem> itemsToUpdate = buildDataToUpdate(toUpdateMap);
 
-		if (log.isEnabledForLevel(Level.INFO)) {
-			itemsToUpdate.forEach(item -> {
-				if (item.getTrackNumber() != null)
-					log.info("Track to update: {}, disc {}, track {} - {}", item.getAlbum(),
-							item.getDisc() == null ? "-" : item.getDisc(), item.getTrackNumber(), item.getTitle());
-				else
-					log.info("Album to update: {}", item.getTitle());
-			});
-		}
+		// Log items
+		logItemsToUpdate(itemsToUpdate);
 
 		// Update all
 		console.println(UPDATING_TRACKS);
@@ -79,6 +72,18 @@ public class JellyfinWriter {
 		console.clearCurrentLine();
 
 		return result;
+	}
+
+	private void logItemsToUpdate(List<UpdateItem> itemsToUpdate) {
+		if (log.isEnabledForLevel(Level.INFO)) {
+			itemsToUpdate.forEach(item -> {
+				if (item.getTrackNumber() != null)
+					log.info("Track to update: {}, disc {}, track {} - {}", item.getAlbum(),
+							item.getDisc() == null ? "-" : item.getDisc(), item.getTrackNumber(), item.getTitle());
+				else
+					log.info("Album to update: {}", item.getTitle());
+			});
+		}
 	}
 
 	private void addResultToMap(Map<OperationResult<Void>, List<UpdateItem>> result,
@@ -99,6 +104,9 @@ public class JellyfinWriter {
 				.albumArtists(album.getAlbumArtists())
 				.artistItems(album.getAlbumArtists())
 				.productionYear(album.getProductionYear())
+				.genres(album.getGenres())
+				.tags(album.getTags())
+				.providerIds(album.getProviderIds())
 				.build();
 			return Stream.concat(Stream.of(albumToUpdate),
 					album.getTracks()
@@ -112,6 +120,8 @@ public class JellyfinWriter {
 							.albumArtists(track.getAlbumArtists())
 							.artistItems(track.getTrackArtists())
 							.productionYear(track.getYear())
+							.genres(track.getGenres())
+							.tags(track.getTags())
 							.build()));
 
 		}).toList();

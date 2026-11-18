@@ -32,7 +32,7 @@ public class CliArguments {
 
 	private static final String LEVELS = "Logging levels. OFF, TRACE, DEBUG, INFO, WARN, ERROR";
 
-	@Parameter(names = { "-h", "--help", "-u", "--usage" }, help = true, description = "Show this usage help")
+	@Parameter(names = { "-h", "--help" }, help = true, description = "Show this usage help")
 	private boolean help;
 
 	@Parameter(names = { "-a", "--apply" }, description = "Apply changes to Jellyfin without asking")

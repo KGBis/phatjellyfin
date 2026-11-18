@@ -24,6 +24,7 @@ import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.Item;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ import java.util.Optional;
 
 import static io.github.kgbis.phatjellyfin.client.JellyfinClient.ITEMS_ARTIST_ALBUM_QUERYPARAMS;
 
+@Slf4j
 @Singleton
 public class ArtistHelper {
 
@@ -64,8 +66,6 @@ public class ArtistHelper {
 		if (value == null) {
 			return List.of();
 		}
-
-
 
 		// Trim is needed as the last artist seems to end with '\n'
 		return Arrays.stream(StringUtils.split(value, getSeparators()))
@@ -111,12 +111,15 @@ public class ArtistHelper {
 		return artists.computeIfAbsent(key, k -> {
 			Artist.ArtistBuilder builder = Artist.builder().name(name);
 			try {
+				log.warn("Accessing Jellyfin to get missing artist '{}'", name);
 				Optional<Item> optionalItem = findArtist(k);
 				if (optionalItem.isPresent()) {
 					Item item = optionalItem.get();
+					log.warn("Got Jellyfin missing artist id: {}", item.id());
                     return builder.id(item.id()).build();
 				}
 				else {
+					log.warn("Got nothing in Jellyfin...");
 					return builder.build();
 				}
 			}
