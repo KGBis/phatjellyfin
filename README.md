@@ -102,7 +102,7 @@ phatjellyfin [options] <folders>
 | `-a`, `--apply`                 | Apply changes to Jellyfin without asking for confirmation.                                      |
 | `-l`, `--logLevel`              | Set the logging level: `OFF`, `TRACE`, `DEBUG`, `INFO`, `WARN`, or `ERROR`. Defaults to `INFO`. |
 | `-r`, `--recursive`             | Scan source folders recursively, including their subfolders.                                    |
-| `-h`, `--help` | Display the command-line help.                                                                  |
+| `-h`, `--help`                  | Display the command-line help.                                                                  |
 
 #### Examples
 
