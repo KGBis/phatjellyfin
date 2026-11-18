@@ -24,6 +24,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -44,5 +45,9 @@ public class TrackToUpdate {
 	private final List<Artist> trackArtists;
 
 	private final Integer year;
+
+	private final Set<String> genres;
+
+	private final List<String> tags;
 
 }

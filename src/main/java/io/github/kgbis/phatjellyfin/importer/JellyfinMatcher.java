@@ -23,7 +23,6 @@ import io.github.kgbis.phatjellyfin.client.JellyfinClient;
 import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.Item;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
 import io.github.kgbis.phatjellyfin.output.MessageManager;
 import jakarta.inject.Inject;
@@ -36,9 +35,8 @@ import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -94,18 +92,7 @@ public class JellyfinMatcher {
 		// Jellyfin library paths
 		libraryPaths = configManager.current().getLibraryPaths();
 
-		// Sort data for cute displaying
-		Set<Map.Entry<MusicKey, List<ScannedFile>>> sortedAlbums = preparedLibrary.entrySet()
-			.stream()
-			.sorted(Comparator.comparing(entry -> entry.getValue()
-				.stream()
-				.map(ScannedFile::year)
-				.filter(Objects::nonNull)
-				.findFirst()
-				.orElse(null), Comparator.nullsLast(Comparator.naturalOrder())))
-			.collect(Collectors.toCollection(LinkedHashSet::new));
-
-		for (Map.Entry<MusicKey, List<ScannedFile>> entry : sortedAlbums) {
+		for (Map.Entry<MusicKey, List<ScannedFile>> entry : preparedLibrary.entrySet()) {
 			// Get tracks from Jellyfin
 			AlbumMatchingResult albumToUpdate = getMatchingAlbumAndTracks(entry.getKey(), entry.getValue());
 
@@ -165,12 +152,7 @@ public class JellyfinMatcher {
 	private AlbumMatchingResult getMatchingAlbumAndTracks(MusicKey musicKey, List<ScannedFile> scannedFiles) {
 		try {
 			// Get the year from any of the album's tracks
-			String albumYear = scannedFiles.stream()
-				.map(ScannedFile::year)
-				.filter(Objects::nonNull)
-				.findFirst()
-				.map("(%s) "::formatted)
-				.orElse("");
+			String albumYear = getAlbumYear(scannedFiles);
 
 			// Find either album or artist
 			console.printSameLine(MATCHING_TRACKS.formatted(musicKey.toDisplayString(albumYear)));
@@ -185,16 +167,7 @@ public class JellyfinMatcher {
 			Item jellyfinAlbum = optionalAlbum.get();
 
 			// fill artists with their ids
-			jellyfinAlbum.artistItems()
-				.forEach(artistItem -> musicKey.getAlbumArtists()
-					.stream()
-					.filter(artist -> Matcher.normalize(artist.getName())
-						.equals(Matcher.normalize(artistItem.getName())))
-					.findFirst()
-					.ifPresent(artist -> {
-						artist.setId(artistItem.getId());
-						artistHelper.addArtist(artist);
-					}));
+			storeArtistsInMap(musicKey, jellyfinAlbum);
 
 			// get tracks with normalized paths (no library prefix)
 			List<Item> jellyfinTracks = normalizeJellyfinTracks(jellyfinAlbum);
@@ -203,48 +176,115 @@ public class JellyfinMatcher {
 			List<TrackMetadata> matchingTracks = matchTracks(jellyfinTracks, scannedFiles);
 
 			// get a list of non-matching (always on the same position -track and disc-)
-			List<ScannedFile> unmatched = new ArrayList<>();
-			if (matchingTracks.size() != scannedFiles.size()) {
-				unmatched.addAll(scannedFiles.stream()
+			List<ScannedFile> unmatchedTracks = unmatchedTracks(matchingTracks, scannedFiles);
+
+			// transform the list of TrackMetadata to the Album-Tracks structure
+			List<TrackToUpdate> tracksToUpdate = transformMatchingToUpdateTracks(musicKey, matchingTracks);
+
+			// return either an album to update or an album to discard
+			return getAlbumMatchingResult(musicKey, scannedFiles, tracksToUpdate, jellyfinAlbum, unmatchedTracks);
+		}
+		catch (IOException | InterruptedException e) { // NOSONAR
+			throw new RuntimeException("Unable to export album: " + musicKey.getAlbum(), e);
+		}
+	}
+
+	/*
+	 * Get a string in the '(yyyy)' format from the first available track year or an empty
+	 * string if none
+	 */
+	private @NonNull String getAlbumYear(List<ScannedFile> scannedFiles) {
+		return scannedFiles.stream()
+			.map(ScannedFile::year)
+			.filter(Objects::nonNull)
+			.findFirst()
+			.map("(%s) "::formatted)
+			.orElse("");
+	}
+
+	/*
+	 * Return an AlbumToUpdate object if there were tracks to update or an
+	 * UnmatchedAlbumToDiscard if none
+	 */
+	private AlbumMatchingResult getAlbumMatchingResult(MusicKey musicKey, List<ScannedFile> scannedFiles,
+			List<TrackToUpdate> tracksToUpdate, Item jellyfinAlbum, List<ScannedFile> unmatchedTracks) {
+		if (!tracksToUpdate.isEmpty()) {
+			// collect track genres into a set
+			Set<String> genres = tracksToUpdate.stream()
+				.flatMap(trackToUpdate -> trackToUpdate.getGenres().stream())
+				.collect(Collectors.toSet());
+
+			if (genres.isEmpty()) {
+				genres = new HashSet<>(jellyfinAlbum.genres());
+			}
+
+			TrackToUpdate sampleTrack = tracksToUpdate.getFirst();
+			return AlbumToUpdate.builder()
+				.jellyfinId(jellyfinAlbum.id())
+				.title(sampleTrack.getAlbum())
+				.albumArtists(musicKey.getAlbumArtists())
+				.tracks(tracksToUpdate)
+				.productionYear(sampleTrack.getYear())
+				.genres(genres)
+				.tags(jellyfinAlbum.tags())
+				.providerIds(jellyfinAlbum.providerIds())
+				.unmatchedTracks(unmatchedTracks)
+				.build();
+		}
+
+		return UnmatchedAlbumToDiscard.builder().musicKey(musicKey).unmatchedTracks(scannedFiles).build();
+	}
+
+	/*
+	 * Transforms the matching tracks to TrackToUpdate objects
+	 */
+	private @NonNull List<TrackToUpdate> transformMatchingToUpdateTracks(MusicKey musicKey,
+			List<TrackMetadata> matchingTracks) {
+		return matchingTracks.stream()
+			.map(tm -> TrackToUpdate.builder()
+				.jellyfinId(tm.jellyfinId())
+				.disc(tm.disc())
+				.number(tm.track())
+				.title(tm.metadata().get(JellyfinMetadata.TITLE))
+				.album(tm.metadata().get(JellyfinMetadata.ALBUM))
+				.albumArtists(musicKey.getAlbumArtists())
+				.trackArtists(artistHelper.toArtists(tm.metadata().get(JellyfinMetadata.ARTIST)))
+				.year(tm.year())
+				.genres(tm.genres())
+				.tags(tm.tags())
+				.build())
+			.toList();
+	}
+
+	/*
+	 * Return an empty list if matching tracks is equal to scanned tracks in size, else
+	 * return the scanned tracks that didn't match
+	 */
+	private List<ScannedFile> unmatchedTracks(List<TrackMetadata> matchingTracks, List<ScannedFile> scannedFiles) {
+		return (matchingTracks.size() == scannedFiles.size()) ? List.of()
+				: scannedFiles.stream()
 					.filter(sf -> matchingTracks.stream()
 						.filter(matched -> !(Objects.equals(matched.track(), sf.track())
 								&& Objects.equals(matched.disc(), sf.disc())))
 						.findFirst()
 						.isEmpty())
-					.toList());
-			}
+					.toList();
+	}
 
-			// transform the list of TrackMetadata to the Album-Tracks structure
-			List<TrackToUpdate> tracksToUpdate = matchingTracks.stream()
-				.map(tm -> TrackToUpdate.builder()
-					.jellyfinId(tm.jellyfinId())
-					.disc(tm.disc())
-					.number(tm.track())
-					.title(tm.metadata().get(JellyfinMetadata.TITLE))
-					.album(tm.metadata().get(JellyfinMetadata.ALBUM))
-					.albumArtists(musicKey.getAlbumArtists())
-					.trackArtists(artistHelper.toArtists(tm.metadata().get(JellyfinMetadata.ARTIST)))
-					.year(tm.year())
-					.build())
-				.toList();
-
-			if (!tracksToUpdate.isEmpty()) {
-				TrackToUpdate sampleTrack = tracksToUpdate.getFirst();
-				return AlbumToUpdate.builder()
-					.jellyfinId(jellyfinAlbum.id())
-					.title(sampleTrack.getAlbum())
-					.albumArtists(musicKey.getAlbumArtists())
-					.tracks(tracksToUpdate)
-					.productionYear(sampleTrack.getYear())
-					.unmatchedTracks(unmatched)
-					.build();
-			}
-
-			return UnmatchedAlbumToDiscard.builder().musicKey(musicKey).unmatchedTracks(scannedFiles).build();
-		}
-		catch (IOException | InterruptedException e) { // NOSONAR
-			throw new RuntimeException("Unable to export album: " + musicKey.getAlbum(), e);
-		}
+	/*
+	 * Store in the artistHelper object andy of the album artist that matches between
+	 * scanned (MusicKey) and the one in the Jellyfin server for later use, if needed
+	 */
+	private void storeArtistsInMap(MusicKey musicKey, Item jellyfinAlbum) {
+		jellyfinAlbum.artistItems()
+			.forEach(artistItem -> musicKey.getAlbumArtists()
+				.stream()
+				.filter(artist -> Matcher.normalize(artist.getName()).equals(Matcher.normalize(artistItem.getName())))
+				.findFirst()
+				.ifPresent(artist -> {
+					artist.setId(artistItem.getId());
+					artistHelper.addArtist(artist);
+				}));
 	}
 
 	/**
@@ -260,7 +300,13 @@ public class JellyfinMatcher {
 
 		if (album.isPresent()) {
 			log.info("Album found: {}", album.get().name());
-			album.get().artistItems().forEach(artistHelper::addArtist);
+			album.get()
+				.artistItems()
+				.forEach(/* artistHelper::addArtist */
+						artist -> {
+							artistHelper.addArtist(artist);
+							log.warn("findJellyfinAlbum() add artist '{}'", artist);
+						});
 			return album;
 		}
 

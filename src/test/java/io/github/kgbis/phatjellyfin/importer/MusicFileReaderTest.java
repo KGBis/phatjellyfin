@@ -20,7 +20,6 @@
 package io.github.kgbis.phatjellyfin.importer;
 
 import ch.qos.logback.classic.Level;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

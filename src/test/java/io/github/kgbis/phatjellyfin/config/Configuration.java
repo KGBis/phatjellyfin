@@ -19,6 +19,8 @@
  */
 package io.github.kgbis.phatjellyfin.config;
 
+import io.github.kgbis.phatjellyfin.importer.JellyfinMetadata;
+
 import java.util.Map;
 import java.util.UUID;
 

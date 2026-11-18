@@ -21,7 +21,6 @@ package io.github.kgbis.phatjellyfin.importer;
 
 import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.Item;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -32,6 +31,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,6 +43,12 @@ class LevenshteinDistanceMatcherImplTest {
 	Artist jellyfinArtist;
 
 	String jellyfinAlbum;
+
+	Set<String> genres = Set.of("Hard Rock");
+
+	List<String> tags = List.of();
+
+	Map<String, String> providerIds = Map.of();
 
 	@Mock
 	private ArtistHelper artistHelper;
@@ -59,12 +65,12 @@ class LevenshteinDistanceMatcherImplTest {
 	@Test
 	void whenTrackNumberDoesNotMatch_thenThereIsNoMatch() {
 		Item item = new Item("name", "serverId", "id", "audio", false, 1, null, jellyfinAlbum, jellyfinArtist.getName(),
-				List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, "any/path");
+				List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, genres, tags, providerIds, "any/path");
 
 		Map<JellyfinMetadata, String> metadata = Map.of(JellyfinMetadata.ALBUM, "Whatever Album",
 				JellyfinMetadata.ALBUM_ARTIST, "An Artist", JellyfinMetadata.ARTIST, "An Artist",
 				JellyfinMetadata.TITLE, "Track title");
-		ScannedFile scannedFile = new ScannedFile("any/path", 10, 1, 2026, metadata);
+		ScannedFile scannedFile = new ScannedFile("any/path", 10, 1, 2026, genres, metadata);
 
 		boolean match = underTest.fallbackMatch(item, scannedFile);
 		assertFalse(match);
@@ -73,12 +79,13 @@ class LevenshteinDistanceMatcherImplTest {
 	@Test
 	void whenAlbumAndArtistMatch_thenThereIsMatch() {
 		Item item = new Item("Jellyfin track name", "serverId", "id", "audio", false, 10, null, jellyfinAlbum,
-				jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, "any/path");
+				jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, genres, tags,
+				providerIds, "any/path");
 
 		Map<JellyfinMetadata, String> metadata = Map.of(JellyfinMetadata.ALBUM, jellyfinAlbum,
 				JellyfinMetadata.ALBUM_ARTIST, jellyfinArtist.getName(), JellyfinMetadata.ARTIST,
 				jellyfinArtist.getName(), JellyfinMetadata.TITLE, "Track title");
-		ScannedFile scannedFile = new ScannedFile("any/path", 10, 1, 2026, metadata);
+		ScannedFile scannedFile = new ScannedFile("any/path", 10, 1, 2026, genres, metadata);
 
 		when(artistHelper.toArtists(jellyfinArtist.getName())).thenReturn(List.of(jellyfinArtist));
 		boolean match = underTest.fallbackMatch(item, scannedFile);
@@ -102,8 +109,8 @@ class LevenshteinDistanceMatcherImplTest {
 			// @formatter:on
 			for (Map.Entry<String, String> entry : albums.entrySet()) {
 				Item item = new Item("Jellyfin track name", "serverId", "id", "audio", false, 10, null, entry.getKey(),
-						jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026,
-						"any/path/in/jellyfin/server/10 - Jellyfin track name.mp3");
+						jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, genres, tags,
+						providerIds, "any/path/in/jellyfin/server/10 - Jellyfin track name.mp3");
 
 				// @formatter:off
 				Map<JellyfinMetadata, String> metadata = Map.of(
@@ -114,7 +121,7 @@ class LevenshteinDistanceMatcherImplTest {
 				// @formatter:on
 
 				ScannedFile scannedFile = new ScannedFile("any/path/in/music/library/10 - Track title.mp3", 10, 1, 2026,
-						metadata);
+						genres, metadata);
 				when(artistHelper.toArtists(jellyfinArtist.getName())).thenReturn(List.of(jellyfinArtist));
 				boolean match = underTest.fallbackMatch(item, scannedFile);
 				assertTrue(match, "Album mismatch: " + entry.getKey() + " vs " + entry.getValue());
@@ -134,8 +141,8 @@ class LevenshteinDistanceMatcherImplTest {
 			// @formatter:on
 			for (Map.Entry<String, String> entry : albums.entrySet()) {
 				Item item = new Item("Jellyfin track name", "serverId", "id", "audio", false, 10, null, entry.getKey(),
-						jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026,
-						"any/path/in/jellyfin/server/10 - Jellyfin track name.mp3");
+						jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, genres, tags,
+						providerIds, "any/path/in/jellyfin/server/10 - Jellyfin track name.mp3");
 
 				// @formatter:off
 				Map<JellyfinMetadata, String> metadata = Map.of(
@@ -146,7 +153,7 @@ class LevenshteinDistanceMatcherImplTest {
 				// @formatter:on
 
 				ScannedFile scannedFile = new ScannedFile("any/path/in/music/library/10 - Track title.mp3", 10, 1, 2026,
-						metadata);
+						genres, metadata);
 				boolean match = underTest.fallbackMatch(item, scannedFile);
 				assertFalse(match, "Album mismatch: " + entry.getKey() + " vs " + entry.getValue());
 			}
@@ -176,8 +183,8 @@ class LevenshteinDistanceMatcherImplTest {
 				Artist albumArtist = Artist.builder().name(entry.getKey()).build();
 				Artist dummyArtist = Artist.builder().name("Dummy Track Artist").build();
 				item = new Item("Jellyfin track name", "serverId", "id", "audio", false, null, null, jellyfinAlbum,
-						entry.getKey(), List.of(albumArtist), List.of(albumArtist, dummyArtist), 2026,
-						"any/path/in/jellyfin/Jellyfin track name.mp3");
+						entry.getKey(), List.of(albumArtist), List.of(albumArtist, dummyArtist), 2026, genres, tags,
+						providerIds, "any/path/in/jellyfin/Jellyfin track name.mp3");
 
 				// @formatter:off
 				metadata = Map.of(JellyfinMetadata.ALBUM, jellyfinAlbum,
@@ -186,7 +193,8 @@ class LevenshteinDistanceMatcherImplTest {
 						JellyfinMetadata.TITLE, "Track title");
 				// @formatter:on
 
-				scannedFile = new ScannedFile("any/path/in user library/25 - Track title.mp3", 25, 1, 2026, metadata);
+				scannedFile = new ScannedFile("any/path/in user library/25 - Track title.mp3", 25, 1, 2026, genres,
+						metadata);
 
 				when(artistHelper.toArtists(entry.getValue())).thenAnswer(onMock -> {
 					if (onMock.getArgument(0, String.class).equals(twinArtists))
@@ -221,8 +229,8 @@ class LevenshteinDistanceMatcherImplTest {
 				Artist albumArtist = Artist.builder().name(entry.getKey()).build();
 				Artist dummyArtist = Artist.builder().name("Dummy Track Artist").build();
 				item = new Item("Jellyfin track name", "serverId", "id", "audio", false, null, null, jellyfinAlbum,
-						entry.getKey(), List.of(albumArtist), List.of(albumArtist, dummyArtist), 2026,
-						"any/path/in/jellyfin/Jellyfin track name.mp3");
+						entry.getKey(), List.of(albumArtist), List.of(albumArtist, dummyArtist), 2026, genres, tags,
+						providerIds, "any/path/in/jellyfin/Jellyfin track name.mp3");
 
 				// @formatter:off
 				metadata = Map.of(JellyfinMetadata.ALBUM, jellyfinAlbum,
@@ -231,7 +239,8 @@ class LevenshteinDistanceMatcherImplTest {
 						JellyfinMetadata.TITLE, "Track title");
 				// @formatter:on
 
-				scannedFile = new ScannedFile("any/path/in user library/25 - Track title.mp3", 25, 1, 2026, metadata);
+				scannedFile = new ScannedFile("any/path/in user library/25 - Track title.mp3", 25, 1, 2026, genres,
+						metadata);
 
 				when(artistHelper.toArtists(entry.getValue())).thenAnswer(onMock -> {
 					if (onMock.getArgument(0, String.class).equals(twinArtists))
@@ -264,8 +273,8 @@ class LevenshteinDistanceMatcherImplTest {
 				Artist albumArtist = Artist.builder().name(entry.getKey()).build();
 				Artist dummyArtist = Artist.builder().name("Dummy Track Artist").build();
 				item = new Item("Jellyfin track name", "serverId", "id", "audio", false, 25, null, jellyfinAlbum,
-						entry.getKey(), List.of(albumArtist), List.of(albumArtist, dummyArtist), 2026,
-						"any/path/in/jellyfin/25 - Jellyfin track name.mp3");
+						entry.getKey(), List.of(albumArtist), List.of(albumArtist, dummyArtist), 2026, genres, tags,
+						providerIds, "any/path/in/jellyfin/25 - Jellyfin track name.mp3");
 
 				// @formatter:off
 				metadata = Map.of(JellyfinMetadata.ALBUM, jellyfinAlbum,
@@ -274,9 +283,11 @@ class LevenshteinDistanceMatcherImplTest {
 						JellyfinMetadata.TITLE, "Track title");
 				// @formatter:on
 
-				scannedFile = new ScannedFile("any/path/in user library/25 - Track title.mp3", 25, 1, 2026, metadata);
+				scannedFile = new ScannedFile("any/path/in user library/25 - Track title.mp3", 25, 1, 2026, genres,
+						metadata);
 
-				when(artistHelper.toArtists(entry.getValue())).thenReturn(List.of(Artist.builder().name(entry.getValue()).build()));
+				when(artistHelper.toArtists(entry.getValue()))
+					.thenReturn(List.of(Artist.builder().name(entry.getValue()).build()));
 				match = underTest.fallbackMatch(item, scannedFile);
 
 				assertTrue(match, () -> "Album Artist mismatch: " + entry.getKey() + " vs " + entry.getValue());
@@ -289,16 +300,17 @@ class LevenshteinDistanceMatcherImplTest {
 			String artistName = "Óscar Avendaño y Reposado";
 
 			Item item = new Item("Jellyfin track name", "serverId", "id", "audio", false, 10, null, jellyfinAlbum,
-					jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, "any/path");
+					jellyfinArtist.getName(), List.of(jellyfinArtist), List.of(jellyfinArtist), 2026, genres, tags,
+					providerIds, "any/path");
 
 			Map<JellyfinMetadata, String> metadata = Map.of(JellyfinMetadata.ALBUM, jellyfinAlbum,
 					JellyfinMetadata.ALBUM_ARTIST, artistName, JellyfinMetadata.ARTIST, artistName,
 					JellyfinMetadata.TITLE, "Track title");
-			ScannedFile scannedFile = new ScannedFile("any/path", 10, 1, 2026, metadata);
+			ScannedFile scannedFile = new ScannedFile("any/path", 10, 1, 2026, genres, metadata);
 
 			when(artistHelper.toArtists(artistName)).thenReturn(List.of(Artist.builder().name(artistName).build()));
 			boolean match = underTest.fallbackMatch(item, scannedFile);
-			assertFalse(match, "Artist " + jellyfinArtist.getName()  + " vs " + artistName);
+			assertFalse(match, "Artist " + jellyfinArtist.getName() + " vs " + artistName);
 		}
 
 	}
