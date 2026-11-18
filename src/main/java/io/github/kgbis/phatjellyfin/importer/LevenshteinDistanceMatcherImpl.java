@@ -21,13 +21,14 @@ package io.github.kgbis.phatjellyfin.importer;
 
 import io.github.kgbis.phatjellyfin.client.model.Artist;
 import io.github.kgbis.phatjellyfin.client.model.Item;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Singleton
 public class LevenshteinDistanceMatcherImpl implements Matcher {
@@ -52,8 +53,7 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		}
 
 		double currentThreshold = getCurrentThreshold(item, scannedFile);
-		return albumNameMatches(item, scannedFile)
-				&& artistMatches(item, scannedFile, currentThreshold);
+		return albumNameMatches(item, scannedFile) && artistMatches(item, scannedFile, currentThreshold);
 	}
 
 	/**
@@ -75,9 +75,9 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 	}
 
 	/**
-	 * Check if there's a match for ALBUM name. It always uses {@linkplain STRICT_THRESHOLD}
-	 *
-	 * @param item        Previously unmatched item
+	 * Check if there's a match for ALBUM name. It always uses
+	 * {@linkplain STRICT_THRESHOLD}
+	 * @param item Previously unmatched item
 	 * @param scannedFile scanned file metadata
 	 * @return true if matches or false if not
 	 */
@@ -98,34 +98,10 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 		List<String> scannedAlbumArtists = getArtistList(scannedFile.metadata().get(JellyfinMetadata.ALBUM_ARTIST));
 		List<String> scannedArtists = getArtistList(scannedFile.metadata().get(JellyfinMetadata.ARTIST));
 
-		// Main list: albumArtists
-		if (item.albumArtists() != null) {
-			boolean matchAlbumArtists = item.albumArtists()
-				.stream()
-				.map(artist -> Matcher.normalizeToLowercase(artist.getName()))
-				.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
-			if (matchAlbumArtists)
-				return true;
-		}
-
-		// Secondary list: artistItems
-		if (item.artistItems() != null) {
-			boolean matchArtistItems = item.artistItems()
-				.stream()
-				.map(artist -> Matcher.normalizeToLowercase(artist.getName()))
-				.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
-			if (matchArtistItems)
-				return true;
-		}
-
-		// field AlbumArtist
-		if (item.albumArtist() != null) {
-			String itemAlbumArtist = Matcher.normalizeToLowercase(item.albumArtist());
-			return matchesAnyArtist(threshold, itemAlbumArtist, scannedArtists, scannedAlbumArtists);
-		}
-
-		// No fuzzy match at all
-		return false;
+		// Main list: albumArtists, Secondary list: artistItems, field AlbumArtist
+		return matchesArtistList(item.albumArtists(), threshold, scannedArtists, scannedAlbumArtists)
+				|| matchesArtistList(item.artistItems(), threshold, scannedArtists, scannedAlbumArtists)
+				|| matchesSingleArtist(item.albumArtist(), threshold, scannedArtists, scannedAlbumArtists);
 	}
 
 	private List<String> getArtistList(String fieldValue) {
@@ -134,6 +110,21 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 			.map(Artist::getName)
 			.map(Matcher::normalizeToLowercase)
 			.toList();
+	}
+
+	private boolean matchesArtistList(Collection<Artist> artists, double threshold, List<String> scannedArtists,
+			List<String> scannedAlbumArtists) {
+		return collectionAsStream(artists).map(artist -> Matcher.normalizeToLowercase(artist.getName()))
+			.anyMatch(itemArtist -> matchesAnyArtist(threshold, itemArtist, scannedArtists, scannedAlbumArtists));
+	}
+
+	private boolean matchesSingleArtist(String artistName, double threshold, List<String> scannedArtists,
+			List<String> scannedAlbumArtists) {
+		if (artistName == null) {
+			return false;
+		}
+		String normalized = Matcher.normalizeToLowercase(artistName);
+		return matchesAnyArtist(threshold, normalized, scannedArtists, scannedAlbumArtists);
 	}
 
 	private boolean matchesAnyArtist(double threshold, String itemArtist, List<String> scannedArtists,
@@ -174,6 +165,10 @@ public class LevenshteinDistanceMatcherImpl implements Matcher {
 
 	private double getCurrentThreshold(Item item, ScannedFile scannedFile) {
 		return (item.indexNumber() == null || scannedFile.track() == null) ? STRICT_THRESHOLD : RELAXED_THRESHOLD;
+	}
+
+	private <T> Stream<T> collectionAsStream(Collection<T> collection) {
+		return collection == null ? Stream.empty() : collection.stream();
 	}
 
 }

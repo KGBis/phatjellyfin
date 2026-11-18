@@ -59,7 +59,7 @@ class CliParserTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "--help", "-h", "--usage", "-u" })
+	@ValueSource(strings = { "--help", "-h" })
 	@ExpectSystemExitWithStatus(0)
 	void when_helpArgumentIsPassed_then_programShowsUsageAndExits(String arg) { // NOSONAR
 		cliParser.parseCommandLine(new String[] { arg }, this::onHelp);

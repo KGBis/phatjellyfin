@@ -1,6 +1,24 @@
+/*
+ * PhatJellyfin
+ * Copyright (C) 2026 Enrique García (https://github.com/KGBis)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package io.github.kgbis.phatjellyfin.importer;
 
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import jakarta.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +38,10 @@ import java.time.Year;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 @Singleton
@@ -65,6 +85,7 @@ public class MusicFileReader {
 			Integer trackNumber = null;
 			Integer discNumber = null;
 			Integer productionYear = null;
+			Set<String> genres = new HashSet<>();
 
 			// It's a MP3
 			if (file.getExt().equals(SupportedFileFormat.MP3.getFilesuffix())) {
@@ -75,8 +96,7 @@ public class MusicFileReader {
 				trackNumber = tag.getAll(FieldKey.TRACK).stream().findFirst().map(Integer::parseInt).orElse(null);
 				discNumber = tag.getAll(FieldKey.DISC_NO).stream().findFirst().map(Integer::parseInt).orElse(null);
 				productionYear = tag.getAll(FieldKey.YEAR).stream().findFirst().map(this::parseYear).orElse(null);
-
-				// If genre would be processed -> tag.getAll(FieldKey.GENRE)
+    			genres.addAll(tag.getAll(FieldKey.GENRE));
 
 				// The map with the custom tags should be filled if the TXXX frame exists
 				extractMetadata(tag, scannedMetadata);
@@ -87,11 +107,11 @@ public class MusicFileReader {
 			} // end of file tag extraction
 
 			if (scannedMetadata.isEmpty()) {
-				skippableFiles.add(new ScannedFile(path.toString(), null, null, null, Map.of()));
+				skippableFiles.add(new ScannedFile(path.toString(), null, null, null, Set.of(), Map.of()));
 			}
 			else {
 				processableFiles
-					.add(new ScannedFile(path.toString(), trackNumber, discNumber, productionYear, scannedMetadata));
+					.add(new ScannedFile(path.toString(), trackNumber, discNumber, productionYear, genres, scannedMetadata));
 			}
 		}
 		catch (CannotReadException _) {
