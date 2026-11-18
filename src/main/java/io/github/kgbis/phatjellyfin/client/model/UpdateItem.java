@@ -28,6 +28,7 @@ import lombok.ToString;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Minimum payload needed to update a Jellyfin Item. In this case to update an album or a
@@ -56,7 +57,7 @@ public class UpdateItem {
 
 	@JsonProperty("Genres")
 	@Builder.Default
-	private List<String> genres = List.of();
+	private Set<String> genres = Set.of();
 
 	@JsonProperty("Tags")
 	@Builder.Default

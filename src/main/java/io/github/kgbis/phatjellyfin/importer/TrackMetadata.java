@@ -20,15 +20,20 @@
 package io.github.kgbis.phatjellyfin.importer;
 
 import io.github.kgbis.phatjellyfin.client.model.Item;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public record TrackMetadata(String jellyfinId, String path, Integer track, Integer disc, Integer year,
-		Map<JellyfinMetadata, String> metadata) {
+                            Set<String> genres, List<String> tags, Map<JellyfinMetadata, String> metadata) {
 
 	public static TrackMetadata from(Item item, ScannedFile scannedFile) {
+		// get genre(s) from scanned library file if has value or from Jellyfin as fallback
+		Set<String> genres = scannedFile.genres().isEmpty() ? new HashSet<>(item.genres()) : scannedFile.genres();
+
 		return new TrackMetadata(item.id(), item.path(), scannedFile.track(), scannedFile.disc(), scannedFile.year(),
-				scannedFile.metadata());
+				genres, item.tags(), scannedFile.metadata());
 	}
 }

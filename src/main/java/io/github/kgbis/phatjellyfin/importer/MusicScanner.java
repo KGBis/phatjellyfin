@@ -22,7 +22,6 @@ package io.github.kgbis.phatjellyfin.importer;
 import io.github.kgbis.phatjellyfin.config.Config;
 import io.github.kgbis.phatjellyfin.config.ConfigException;
 import io.github.kgbis.phatjellyfin.config.ConfigManager;
-import io.github.kgbis.phatjellyfin.config.JellyfinMetadata;
 import io.github.kgbis.phatjellyfin.output.Console;
 import io.github.kgbis.phatjellyfin.output.MessageManager;
 import jakarta.inject.Inject;
@@ -39,11 +38,11 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -56,13 +55,13 @@ import static io.github.kgbis.phatjellyfin.output.MessageManager.SCAN_ERROR_SUMM
 @Slf4j
 public class MusicScanner {
 
+	private final ArtistHelper artistHelper;
+
 	private final ConfigManager configManager;
 
 	private final Console console;
 
 	private final MessageManager messageManager;
-
-	private final ArtistHelper artistHelper;
 
 	private final MusicFileReader musicFileReader;
 
@@ -105,7 +104,7 @@ public class MusicScanner {
 		return preparedScannedData.entrySet()
 			.stream()
 			.collect(Collectors.toMap(Map.Entry::getKey, entry -> getNormalizedScanned(rootFolders, entry.getValue()),
-					(a, _) -> a, TreeMap::new));
+					(a, _) -> a, LinkedHashMap::new));
 	}
 
 	/**
@@ -209,10 +208,11 @@ public class MusicScanner {
 	 */
 	private Map<MusicKey, List<ScannedFile>> prepareScannedData(List<ScannedFile> scannedFiles) {
 		return scannedFiles.stream()
-			.collect(Collectors
-				.groupingBy(sf -> new MusicKey(artistHelper.toArtists(sf.metadata().get(JellyfinMetadata.ALBUM_ARTIST)),
-						sf.metadata().get(JellyfinMetadata.ALBUM))));
-
+			.collect(
+					Collectors.groupingBy(
+							sf -> new MusicKey(artistHelper.toArtists(sf.metadata().get(JellyfinMetadata.ALBUM_ARTIST)),
+									sf.metadata().get(JellyfinMetadata.ALBUM)),
+							LinkedHashMap::new, Collectors.toList()));
 	}
 
 	private void showSummary() throws IOException {
@@ -223,8 +223,8 @@ public class MusicScanner {
 			log.info("Files to update: {}, Skipped: {}, Failed to read: {}", result.scannedFiles().size(),
 					result.skippedFiles().size(), result.errorFiles().size());
 
-			String s = messageManager.scanSuccessMsg(result.scannedFiles().size(),
-					result.skippedFiles().size(), result.errorFiles().size());
+			String s = messageManager.scanSuccessMsg(result.scannedFiles().size(), result.skippedFiles().size(),
+					result.errorFiles().size());
 			console.println(s);
 
 			if (result.scannedFiles().isEmpty()) {

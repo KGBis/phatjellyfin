@@ -102,7 +102,7 @@ phatjellyfin [options] <folders>
 | `-a`, `--apply`                 | Apply changes to Jellyfin without asking for confirmation.                                      |
 | `-l`, `--logLevel`              | Set the logging level: `OFF`, `TRACE`, `DEBUG`, `INFO`, `WARN`, or `ERROR`. Defaults to `INFO`. |
 | `-r`, `--recursive`             | Scan source folders recursively, including their subfolders.                                    |
-| `-h`, `--help`, `-u`, `--usage` | Display the command-line help.                                                                  |
+| `-h`, `--help`                  | Display the command-line help.                                                                  |
 
 #### Examples
 
@@ -130,7 +130,7 @@ Apply the changes to Jellyfin without asking for confirmation:
 phatjellyfin --recursive --apply "D:\Music"
 ```
 
-**Warning:** The `--apply` option applies changes directly to Jellyfin without prompting for confirmation. Run PhatJellyfin without this option first if you want to review the proposed changes.
+**Warning:** The `--apply` (or `-a`) option applies changes directly to Jellyfin without prompting for confirmation. Run PhatJellyfin without this option first if you want to review the proposed changes.
 
 **Note:** 
 When `--recursive` (or `-r`) is enabled, if one of the specified folders is a subfolder of another specified folder, only the parent folder is scanned. This prevents the same files from being scanned more than once.
